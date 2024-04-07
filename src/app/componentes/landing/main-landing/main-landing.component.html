@@ -1,0 +1,69 @@
+<app-header-landing></app-header-landing>
+<!-- SECCIÓN INICIO ALUMNOS, EMPRESAS, PROFESORES-->
+<section class="bg-primary">
+    <div class="container-xxl">
+        <div class="col text-center p-5 text-white">
+            <h1 class="display-5">¿A qué esperas para unirte?</h1>
+            <p class="p-3">Conectado talento, forjando futuros</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="assets/img/student.jpg" class="card-img-top" alt="Inicio alumnos">
+                        <div routerLinkActive="active" class="card-img-overlay d-flex align-items-end justify-content-center">  
+                        <a [routerLink]="['/login-alumno']" class="btn btn-info text-white">Soy alumno</a>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="assets/img/empresa.jpg" class="card-img-top" alt="Inicio empresas">
+                        <div routerLinkActive="active" class="card-img-overlay d-flex align-items-end justify-content-center">  
+                        <a [routerLink]="['/login-empresa']" class="btn btn-info text-white">Soy empresa</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="assets/img/profesor.jpg" class="card-img-top" alt="Inicio profesores">
+                        <div routerLinkActive="active" class="card-img-overlay d-flex align-items-end justify-content-center">  
+                        <a [routerLink]="['/login-profesor']" class="btn btn-info text-white">Soy profesor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</section>
+
+<!-- SECCIÓN CONECTANDO AMBICIONES -->
+<section class="bg-info">
+    <div class="container-xl">
+        <div class="row text-center d-flex align-items-center justify-content-center">
+            <div class="col-md-6">
+                <h1 class="display-5">Conectando ambiciones</h1>
+                <p class="p-3">Los alumnos encuentran prácticas y las empresas encuentran talento</p>
+            </div>
+
+            <div class="col-md-6">
+                <img src="assets/img/connect.jpg" alt="conecta puzle" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN QUIÉNES SOMOS -->
+<section id="quienesSomos" class="d-flex align-items-center">
+  <div class="container-xl d-flex justify-content-center">
+    <div class="col-md-5 text-center">
+        <div class="card bg-white bg-opacity-75" >
+        <div class="card-body">
+          <h5 class="card-title">¿Qué es FCT-connect?</h5>
+          <p class="card-title">FCT connect es un proyecto llevado a cabo por el IES Vega de Mijas, en el cual se busca conectar la Formación en Centros de Trabajo (FCT) de los alumnos de Ciclos Formativos con las empresas que mejor se adapten a su perfil</p>
+        </div>
+      </div>  
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

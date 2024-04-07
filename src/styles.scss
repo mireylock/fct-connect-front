@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import 'bootstrap/scss/bootstrap';
+
+
+@font-face {
+    font-family: 'ElMessiri';
+    src: url('assets/fonts/ElMessiri-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'tahoma';
+    src: url('assets/fonts/Tahoma\ Gras\ 700.ttf') format('truetype');
+}
+.navbar {
+    font-family: 'ElMessiri';
+}
+
+
+
+
+
+

@@ -29,18 +29,23 @@ export class AuthService {
     );
   }
 
-  register(email: string, password: string, rol: string): Observable<any> {
+  register(email: string, password: string, rol: string, nombre:string, apellido1:string, apellido2:string, dni:string): Observable<any> {
     let registerRequest = { 
       "email": email,
       "password": password,
-      "rol": rol
+      "rol": rol, 
+      "nombre":nombre,
+      "apellido1":apellido1,
+      "apellido2":apellido2, 
+      "dni":dni
     };
 
     return this.httpClient.post(
-      this.apiAuthURL + 'register',
+      this.apiAuthURL + 'register-alumno',
       JSON.stringify(registerRequest),
       this.httpOptions
     );
+    
   }
 
   logout() {

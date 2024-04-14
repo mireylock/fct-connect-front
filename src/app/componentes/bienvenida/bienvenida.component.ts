@@ -6,11 +6,12 @@ import { Administrador } from '../../interfaces/administrador';
 import { Empresa } from '../../interfaces/empresa';
 import { Profesor } from '../../interfaces/profesor';
 import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-bienvenida',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, RouterLink],
   templateUrl: './bienvenida.component.html',
   styleUrl: './bienvenida.component.scss'
 })

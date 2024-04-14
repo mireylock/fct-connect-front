@@ -5,6 +5,17 @@
             <h1 class="display-5" *ngIf="empresa">¡Bienvenid&#64;, {{empresa.nombre}}!</h1>
             <h1 class="display-5" *ngIf="profesor">¡Bienvenid&#64;, {{profesor.nombre}} {{profesor.apellido1}} {{profesor.apellido2}}!</h1>
             <h1 class="display-5" *ngIf="administrador">¡Bienvenid&#64;, {{administrador.nombre}} {{administrador.apellido1}} {{administrador.apellido2}}!</h1>
+       
+            <div class="col text-center" *ngIf="administrador">
+                <ul class="list-unstyled">
+                    <li><a [routerLink]="['/register-alumno']" class="btn btn-warning text-white m-2">Registrar alumno</a></li>
+                    <li><a [routerLink]="['/register-profesor']" class="btn btn-warning text-white m-2">Registrar profesor</a></li>
+                    <li><a [routerLink]="['/register-empresa']" class="btn btn-warning text-white m-2">Aceptar solicitudes de registro de empresas</a></li>
+                    <li><a [routerLink]="['/register-admin']" class="btn btn-warning text-white mt-2">Registrar otro administrador</a></li>
+                </ul>
+            </div>
         </div>
+
+       
     </div>
 </section>

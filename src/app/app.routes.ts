@@ -7,6 +7,10 @@ import { PoliticaPrivacidadComponent } from './componentes/politica-privacidad/p
 import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
 import { canActivate } from './security/authguard';
 import { IndexComponent } from './componentes/index/index.component';
+import { RegisterAlumnoComponent } from './componentes/registers/register-alumno/register-alumno.component';
+import { RegisterEmpresaComponent } from './componentes/registers/register-empresa/register-empresa.component';
+import { RegisterProfesorComponent } from './componentes/registers/register-profesor/register-profesor.component';
+import { RegisterAdminComponent } from './componentes/registers/register-admin/register-admin.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -15,5 +19,8 @@ export const routes: Routes = [
     {path:'login-profesor', component:LoginProfesorComponent}, 
     {path:'politica-privacidad', component:PoliticaPrivacidadComponent}, 
     {path:'index', component:IndexComponent,  canActivate: [canActivate]}, 
-
+    {path:'register-alumno', component:RegisterAlumnoComponent,  canActivate: [canActivate]}, 
+    {path:'register-empresa', component:RegisterEmpresaComponent,  canActivate: [canActivate]}, 
+    {path:'register-profesor', component:RegisterProfesorComponent,  canActivate: [canActivate]}, 
+    {path:'register-admin', component:RegisterAdminComponent,  canActivate: [canActivate]}, 
 ];

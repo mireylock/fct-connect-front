@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
 const URL_PROFESORES="http://localhost:8080/v1/api/profesores";
 const URL_ADMINISTRADORES="http://localhost:8080/v1/api/administradores";
+const URL_REQUEST_EMPRESAS="http://localhost:8080/v1/api/auth/request-empresa";
+
 
 
 const HTTPOPTIONS = {
@@ -46,6 +48,8 @@ export class UserService {
     return this.http.get(URL_EMPRESAS+'/'+id);
   }
 
+
+
   getProfesor(id:number):Observable<Object>{
     return this.http.get(URL_PROFESORES+'/'+id);
   }
@@ -53,6 +57,20 @@ export class UserService {
   getAdministrador(id:number):Observable<Object>{
     return this.http.get(URL_ADMINISTRADORES+'/'+id);
   }
+
+  getRequestEmpresas():Observable<Object>{
+    return this.http.get(URL_REQUEST_EMPRESAS);
+  }
+
+  deleteRequestEmpresa(id:number):Observable<Object> {
+    const url = `${URL_REQUEST_EMPRESAS}/${id}`
+    return this.http.delete(url, HTTPOPTIONS)
+      .pipe(catchError(this.handleError));
+  }
+
+
+  
+
 
 
   

@@ -1,5 +1,5 @@
 <app-header-landing></app-header-landing>
-<section id="signInEmpr" class="d-flex align-items-center">
+<section class="bg-empresa d-flex align-items-center">
     <div class="container-xl d-flex justify-content-center">
       <div class="col-md-5">
           <div class="card bg-white bg-opacity-75" >
@@ -21,8 +21,12 @@
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPoliticaPrivacidad">
                     Iniciar sesión
                   </button>
-              </div>
-              <!-- Modal -->
+                </div>
+                <div>
+                  <small class="p-2">¿Aún no eres miembro? <a [routerLink]="['/request-empresa']">Regístrate</a></small>
+                </div>
+              
+                <!-- Modal -->
               <div class="modal fade" id="modalPoliticaPrivacidad" tabindex="-1" aria-labelledby="modalPoliticaPrivacidadLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">

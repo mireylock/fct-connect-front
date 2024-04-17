@@ -1,1 +1,20 @@
-<p>register-empresa works!</p>
+<app-header-administrador></app-header-administrador>
+<section class="d-flex align-items-center bg-info p-5">
+  <div class="container-xl d-flex justify-content-center">
+    <div class="col-md-5 text-center">
+        <h2>Solicitudes de registro de empresas</h2>
+      <div class="card bg-white bg-opacity-75 m-2" *ngFor="let er of empresasRequest">
+        <div class="card-body">
+            <p> Nombre: {{ er.nombre }} </p>
+            <p> Email: {{ er.email }}</p>
+            <div class="d-flex justify-content-around">
+                <button (click)="cancelarSolicitud(er)" class="btn bg-white btn-block">Cancelar solicitud</button>
+                <button (click)="aceptarSolicitud(er)"class="btn btn-primary btn-block">Aceptar solicitud</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

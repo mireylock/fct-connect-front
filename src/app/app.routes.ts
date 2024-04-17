@@ -11,6 +11,7 @@ import { RegisterAlumnoComponent } from './componentes/registers/register-alumno
 import { RegisterEmpresaComponent } from './componentes/registers/register-empresa/register-empresa.component';
 import { RegisterProfesorComponent } from './componentes/registers/register-profesor/register-profesor.component';
 import { RegisterAdminComponent } from './componentes/registers/register-admin/register-admin.component';
+import { RequestEmpresaComponent } from './componentes/registers/request-empresa/request-empresa.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -23,4 +24,6 @@ export const routes: Routes = [
     {path:'register-empresa', component:RegisterEmpresaComponent,  canActivate: [canActivate]}, 
     {path:'register-profesor', component:RegisterProfesorComponent,  canActivate: [canActivate]}, 
     {path:'register-admin', component:RegisterAdminComponent,  canActivate: [canActivate]}, 
+    {path:'request-empresa', component:RequestEmpresaComponent}, 
+
 ];

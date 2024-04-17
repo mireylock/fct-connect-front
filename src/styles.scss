@@ -16,6 +16,13 @@
     font-family: 'ElMessiri';
 }
 
+.bg-empresa {
+    background-image: url(../src/assets/img/empresa.jpg);
+    background-size: cover;
+    background-position: center;    
+    min-height: calc(100vh - 176px);
+}
+
 
 
 

@@ -41,11 +41,41 @@ export class AuthService {
     };
 
     return this.httpClient.post(
-      this.apiAuthURL + 'register-alumno',
+      this.apiAuthURL + 'register',
       JSON.stringify(registerRequest),
       this.httpOptions
     );
     
+  }
+
+  requestEmpresa(email:string, password:string, nombre:string) {
+    let requestEmpresa = {
+      "email": email, 
+      "password": password, 
+      "nombre": nombre
+    };
+
+    return this.httpClient.post(
+      this.apiAuthURL + 'request', 
+      JSON.stringify(requestEmpresa), 
+      this.httpOptions 
+    );
+  }
+
+  registerEmpresa(email:string, password:string, nombre:string): Observable<any> {
+    let empresa = { 
+      "email": email,
+      "password": password,
+      "rol":"empresa",
+      "nombre":nombre
+    };
+
+    return this.httpClient.post(
+        this.apiAuthURL + 'register',
+        JSON.stringify(empresa),
+        this.httpOptions
+    );
+
   }
 
   logout() {

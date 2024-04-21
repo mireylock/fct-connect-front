@@ -33,7 +33,8 @@ export class RequestEmpresaComponent {
         window.location.reload();
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        // this.errorMessage = err.error.message;
+        this.errorMessage = "Ha ocurrido un error"
       }
     });
   }

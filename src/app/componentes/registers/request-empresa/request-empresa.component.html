@@ -76,6 +76,9 @@
                   La password debe ser de al menos 6 caracteres
                 </div>
               </div>
+              <div *ngIf="errorMessage" style="color:#F10F0F">
+                {{ errorMessage }}
+              </div>
             </div>
 
             <div class="text-center py-4 px-2">

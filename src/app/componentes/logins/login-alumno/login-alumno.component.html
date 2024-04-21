@@ -43,7 +43,15 @@
                       La password debe ser de al menos 6 caracteres
                     </div>
                   </div>
+                  
+                  <div *ngIf="errorMessage" style="color:#F10F0F">
+                    {{ errorMessage }}
+                  </div>
                 </div>
+
+               
+
+         
                 
                 <div>
                     <small class="p-2"><a href="#">¿Has olvidado tu contraseña?</a></small>

@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { Observable, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class AuthService {
         password,
       },
       this.httpOptions
-    );
+    )
   }
 
   register(email: string, password: string, rol: string, nombre:string, apellido1:string, apellido2:string, dni:string): Observable<any> {
@@ -56,7 +56,7 @@ export class AuthService {
     };
 
     return this.httpClient.post(
-      this.apiAuthURL + 'request', 
+      this.apiAuthURL + 'request-empresa', 
       JSON.stringify(requestEmpresa), 
       this.httpOptions 
     );

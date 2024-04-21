@@ -51,7 +51,11 @@ export class LoginAlumnoComponent implements OnInit {
           this.reloadPage();
         },
         error: err => {
-          this.errorMessage = err.error.message;
+          if (err.status === 401) {
+            this.errorMessage = 'Email o contraseña incorrectos'; 
+          } else {
+            this.errorMessage = "Ha ocurrido un error";
+          }
           this.isLoginFailed = true;
         }
       });

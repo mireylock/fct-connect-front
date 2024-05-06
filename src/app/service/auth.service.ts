@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class AuthService {
 
   private apiAuthURL = "http://localhost:8080/v1/api/auth/";
+  private apiMailURL = "http://localhost:8080/v1/api/"
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -74,9 +75,17 @@ export class AuthService {
         this.apiAuthURL + 'register',
         JSON.stringify(empresa),
         this.httpOptions
-    );
-
+    )
   }
+
+  mailRegisterEmpresa(email:string): Observable<any> {
+    return this.httpClient.post(
+      this.apiMailURL,
+      JSON.stringify(email),
+      this.httpOptions
+    );
+  }
+
 
   logout() {
     this.storageService.clean();

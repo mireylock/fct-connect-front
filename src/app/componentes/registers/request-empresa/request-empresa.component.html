@@ -5,48 +5,23 @@
       <div class="card bg-white bg-opacity-75">
         <div class="card-body">
           <h5 class="card-title text-center">Registro empresas</h5>
-          <form
-            name="form"
-            (ngSubmit)="f.form.valid && onSubmit()"
-            #f="ngForm"
-            novalidate
-          >
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
             <div class="form-group p-2">
               <label for="inputEmail1">Nombre:</label>
-              <input
-                class="form-control"
-                aria-describedby="nombreHelp"
-                id="nombre"
-                type="text"
-                name="nombre"
-                [(ngModel)]="form.nombre"
-                required
-                #nombre="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && nombre.errors }"
-              />
-              <div
-                *ngIf="nombre.errors && f.submitted"
-                class="invalid-feedback"
-              >
+              <input class="form-control" aria-describedby="nombreHelp" id="nombre" type="text" name="nombre"
+                [(ngModel)]="form.nombre" required #nombre="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && nombre.errors }" />
+              <div *ngIf="nombre.errors && f.submitted" class="invalid-feedback">
                 El nombre es requerido
               </div>
             </div>
 
             <div class="form-group p-2">
               <label for="inputEmail">Email:</label>
-              <input
-                type="email"
-                class="form-control"
-                aria-describedby="emailHelp"
-                id="email"
-                type="text"
-                name="email"
-                [(ngModel)]="form.email"
-                required
-                #email="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-              />
+              <input type="email" class="form-control" aria-describedby="emailHelp" id="email" type="text" name="email"
+                [(ngModel)]="form.email" required #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && email.errors }" />
               <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
                 El email es requerido
               </div>
@@ -54,21 +29,10 @@
 
             <div class="form-group p-2">
               <label for="inputPassword">Contraseña:</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                [(ngModel)]="form.password"
-                required
-                minlength="6"
-                #password="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-              />
-              <div
-                *ngIf="password.errors && f.submitted"
-                class="invalid-feedback"
-              >
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="form.password"
+                required minlength="6" #password="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+              <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
                 <div *ngIf="password.errors['required']">
                   La password es requerida
                 </div>
@@ -82,9 +46,54 @@
             </div>
 
             <div class="text-center py-4 px-2">
-              <button class="btn btn-primary btn-block">
+              <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal"
+                data-bs-target="#modalPoliticaPrivacidad">
                 Enviar
               </button>
+            </div>
+
+            <div class="modal fade" id="modalPoliticaPrivacidad" tabindex="-1"
+              aria-labelledby="modalPoliticaPrivacidadLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <p>Para crear tu cuenta, necesitas aceptar nuestra política de privacidad y tratamiento de datos.
+                    </p>
+                    <p data-bs-dismiss="modal">Al hacer clic en "Aceptar", confirmas que aceptas el uso de tus datos
+                      para los fines descritos en
+                      nuestra <a [routerLink]="['/politica-privacidad']">Política de privacidad</a></p>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-around">
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="solicitudEnviada" class="modal fade" id="modalSolicitudEnviada" tabindex="-1"
+              aria-labelledby="modalSolicitudEnviada" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">¡Solicitud enviada!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                      <p>En breve recibirás un email para confirmar tu cuenta y poder hacer login</p>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <small class="p-2">¿Ya eres miembro? <a [routerLink]="['/login-empresa']">Inicia sesión</a></small>
             </div>
           </form>
         </div>

@@ -5,26 +5,12 @@
       <div class="card bg-white bg-opacity-75">
         <div class="card-body">
           <h5 class="card-title text-center">Registro de adminisitradores</h5>
-          <form
-            name="form"
-            (ngSubmit)="f.form.valid && onSubmit()"
-            #f="ngForm"
-            novalidate
-          >
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group p-2">
               <label for="rol">Rol:</label>
-              <input
-                class="form-control"
-                aria-describedby="dniHelp"
-                id="rol"
-                type="text"
-                name="rol"
-                [(ngModel)]="form.rol"
-                required
-                #rol="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && rol.errors }"
-                disabled
-              />
+              <input class="form-control" aria-describedby="dniHelp" id="rol" type="text" name="rol"
+                [(ngModel)]="form.rol" required #rol="ngModel" [ngClass]="{ 'is-invalid': f.submitted && rol.errors }"
+                disabled />
               <div *ngIf="rol.errors && f.submitted" class="invalid-feedback">
                 El rol es requerido
               </div>
@@ -32,17 +18,9 @@
 
             <div class="form-group p-2">
               <label for="inputEmail1">DNI:</label>
-              <input
-                class="form-control"
-                aria-describedby="dniHelp"
-                id="dni"
-                type="text"
-                name="dni"
-                [(ngModel)]="form.dni"
-                required
-                #dni="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && dni.errors }"
-              />
+              <input class="form-control" aria-describedby="dniHelp" id="dni" type="text" name="dni"
+                [(ngModel)]="form.dni" required #dni="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && dni.errors }" />
               <div *ngIf="dni.errors && f.submitted" class="invalid-feedback">
                 El dni es requerido
               </div>
@@ -50,74 +28,35 @@
 
             <div class="form-group p-2">
               <label for="inputEmail1">Nombre:</label>
-              <input
-                class="form-control"
-                aria-describedby="nombreHelp"
-                id="nombre"
-                type="text"
-                name="nombre"
-                [(ngModel)]="form.nombre"
-                required
-                #nombre="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && nombre.errors }"
-              />
-              <div
-                *ngIf="nombre.errors && f.submitted"
-                class="invalid-feedback"
-              >
+              <input class="form-control" aria-describedby="nombreHelp" id="nombre" type="text" name="nombre"
+                [(ngModel)]="form.nombre" required #nombre="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && nombre.errors }" />
+              <div *ngIf="nombre.errors && f.submitted" class="invalid-feedback">
                 El nombre es requerido
               </div>
             </div>
 
             <div class="form-group p-2">
               <label for="inputEmail1">Primer apellido:</label>
-              <input
-                class="form-control"
-                aria-describedby="apellido1Help"
-                id="apellido1"
-                type="text"
-                name="apellido1"
-                [(ngModel)]="form.apellido1"
-                required
-                #apellido1="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && apellido1.errors }"
-              />
-              <div
-                *ngIf="apellido1.errors && f.submitted"
-                class="invalid-feedback"
-              >
+              <input class="form-control" aria-describedby="apellido1Help" id="apellido1" type="text" name="apellido1"
+                [(ngModel)]="form.apellido1" required #apellido1="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && apellido1.errors }" />
+              <div *ngIf="apellido1.errors && f.submitted" class="invalid-feedback">
                 El apellido es requerido
               </div>
             </div>
 
             <div class="form-group p-2">
               <label for="inputEmail1">Segundo apellido:</label>
-              <input
-                class="form-control"
-                aria-describedby="apellido2Help"
-                id="apellido2"
-                type="text"
-                name="apellido2"
-                [(ngModel)]="form.apellido2"
-                required
-                #apellido1="ngModel"
-              />
+              <input class="form-control" aria-describedby="apellido2Help" id="apellido2" type="text" name="apellido2"
+                [(ngModel)]="form.apellido2" required #apellido1="ngModel" />
             </div>
 
             <div class="form-group p-2">
               <label for="inputEmail">Email:</label>
-              <input
-                type="email"
-                class="form-control"
-                aria-describedby="emailHelp"
-                id="email"
-                type="text"
-                name="email"
-                [(ngModel)]="form.email"
-                required
-                #email="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
-              />
+              <input type="email" class="form-control" aria-describedby="emailHelp" id="email" type="text" name="email"
+                [(ngModel)]="form.email" required #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && email.errors }" />
               <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
                 El email es requerido
               </div>
@@ -125,21 +64,10 @@
 
             <div class="form-group p-2">
               <label for="inputPassword">Contraseña:</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                [(ngModel)]="form.password"
-                required
-                minlength="6"
-                #password="ngModel"
-                [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-              />
-              <div
-                *ngIf="password.errors && f.submitted"
-                class="invalid-feedback"
-              >
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="form.password"
+                required minlength="6" #password="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+              <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
                 <div *ngIf="password.errors['required']">
                   La password es requerida
                 </div>
@@ -148,11 +76,9 @@
                 </div>
               </div>
             </div>
-
             <div class="text-center py-4 px-2">
               <button class="btn btn-primary btn-block">Registrar Administrador</button>
             </div>
-
           </form>
         </div>
       </div>

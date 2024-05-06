@@ -4,11 +4,14 @@ import { FooterComponent } from '../../footer/footer.component';
 import { NgClass, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
+import { RouterLink } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal'; 
+
 
 @Component({
   selector: 'app-request-empresa',
   standalone: true,
-  imports: [HeaderLandingComponent, FooterComponent, NgClass, NgIf, FormsModule],
+  imports: [HeaderLandingComponent, FooterComponent, NgClass, NgIf, FormsModule, RouterLink],
   templateUrl: './request-empresa.component.html',
   styleUrl: './request-empresa.component.scss'
 })
@@ -21,6 +24,7 @@ export class RequestEmpresaComponent {
   };
 
   errorMessage: any;
+  solicitudEnviada:boolean=false;
 
   constructor(private authService:AuthService){}
 
@@ -29,7 +33,7 @@ export class RequestEmpresaComponent {
 
     this.authService.requestEmpresa(email, password, nombre).subscribe({
       next: data => {
-        alert("Solicitud enviada!");
+        this.solicitudEnviada = true;
         window.location.reload();
       },
       error: err => {

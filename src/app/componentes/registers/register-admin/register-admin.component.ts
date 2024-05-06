@@ -30,7 +30,8 @@ export class RegisterAdminComponent {
 
     this.authService.register(email, password, rol, nombre, apellido1, apellido2, dni).subscribe({
       next: data => {
-        alert("Alumno registrado!");
+
+
         window.location.reload();
       },
       error: err => {

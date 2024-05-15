@@ -30,7 +30,7 @@ export class AuthService {
     )
   }
 
-  register(email: string, password: string, rol: string, nombre:string, apellido1:string, apellido2:string, dni:string): Observable<any> {
+  register(email: string, password: string, rol: string, nombre:string, apellido1:string, apellido2:string, dni:string, pathFoto:string): Observable<any> {
     let registerRequest = { 
       "email": email,
       "password": password,
@@ -38,7 +38,8 @@ export class AuthService {
       "nombre":nombre,
       "apellido1":apellido1,
       "apellido2":apellido2, 
-      "dni":dni
+      "dni":dni, 
+      "pathFoto": pathFoto
     };
 
     return this.httpClient.post(
@@ -49,11 +50,12 @@ export class AuthService {
     
   }
 
-  requestEmpresa(email:string, password:string, nombre:string) {
+  requestEmpresa(email:string, password:string, nombre:string, pathFoto:string) {
     let requestEmpresa = {
       "email": email, 
       "password": password, 
-      "nombre": nombre
+      "nombre": nombre, 
+      "pathFoto": pathFoto
     };
 
     return this.httpClient.post(
@@ -63,12 +65,13 @@ export class AuthService {
     );
   }
 
-  registerEmpresa(email:string, password:string, nombre:string): Observable<any> {
+  registerEmpresa(email:string, password:string, nombre:string, pathFoto:string): Observable<any> {
     let empresa = { 
       "email": email,
       "password": password,
       "rol":"empresa",
-      "nombre":nombre
+      "nombre":nombre, 
+      "pathFoto": pathFoto
     };
 
     return this.httpClient.post(

@@ -17,6 +17,7 @@ export class RegisterEmpresaComponent {
 
   empresasRequest:EmpresaRequest[]=[];
   errorMessage: any;
+  pathFoto:string = "../../../../assets/img/profile.png";
   
   constructor(private userService:UserService, private authService:AuthService){
     this.userService.getRequestEmpresas().subscribe({
@@ -30,7 +31,7 @@ export class RegisterEmpresaComponent {
   }
 
   aceptarSolicitud(empresaRequest:EmpresaRequest) {
-    this.authService.registerEmpresa(empresaRequest.email, empresaRequest.password, empresaRequest.nombre).subscribe({
+    this.authService.registerEmpresa(empresaRequest.email, empresaRequest.password, empresaRequest.nombre, this.pathFoto).subscribe({
       next: data => {
         
         this.userService.deleteRequestEmpresa(empresaRequest.id).subscribe({

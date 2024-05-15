@@ -3,4 +3,5 @@ export interface Empresa {
     email: string;
     password: string;
     nombre: string;
+    pathFoto:string;
 }

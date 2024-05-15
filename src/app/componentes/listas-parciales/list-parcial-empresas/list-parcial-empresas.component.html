@@ -5,7 +5,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-md-4" *ngFor="let empresa of empresas">
                     <div class="d-flex align-items-center justify-content-center my-3">
-                        <img width="50" src="../../../../assets/img/profile.png">
+                        <img width="50" src={{empresa.pathFoto}}>
                         <h3 class="text-white m-1">{{empresa.nombre}}</h3>
                     </div>
                 </div>

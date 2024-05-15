@@ -8,6 +8,7 @@ export interface Alumno {
     nombre: string;
     apellido1: string;
     apellido2?: string;
+    pathFoto:string;
     telefono?: string;
     direccion?: string;
     pathCV?: string;

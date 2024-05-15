@@ -19,6 +19,7 @@ export class RegisterAdminComponent {
     apellido2:null,
     email: null,
     password: null, 
+    pathFoto: "../../../../assets/img/profile.png",
     rol:"administrador"
   };
   errorMessage: any;
@@ -26,9 +27,9 @@ export class RegisterAdminComponent {
   constructor(private authService:AuthService){}
   
   onSubmit(): void {
-    const { email, password, rol, nombre, apellido1, apellido2, dni } = this.form;
+    const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
 
-    this.authService.register(email, password, rol, nombre, apellido1, apellido2, dni).subscribe({
+    this.authService.register(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
       next: data => {
 
 

@@ -21,6 +21,7 @@ export class RequestEmpresaComponent {
     nombre:null, 
     email: null,
     password: null, 
+    pathFoto: "../../../../assets/img/profile.png"
   };
 
   errorMessage: any;
@@ -29,9 +30,9 @@ export class RequestEmpresaComponent {
   constructor(private authService:AuthService){}
 
   onSubmit(): void {
-    const { email, password, nombre } = this.form;
+    const { email, password, nombre, pathFoto } = this.form;
 
-    this.authService.requestEmpresa(email, password, nombre).subscribe({
+    this.authService.requestEmpresa(email, password, nombre, pathFoto).subscribe({
       next: data => {
         this.solicitudEnviada = true;
         window.location.reload();

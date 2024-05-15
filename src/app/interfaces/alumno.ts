@@ -1,3 +1,5 @@
+import { Formacion } from "./formacion";
+
 export interface Alumno {
     id: number;
     email: string;
@@ -5,11 +7,12 @@ export interface Alumno {
     dni: string;
     nombre: string;
     apellido1: string;
-    apellido2: string;
-    telefono: string;
-    direccion: string;
+    apellido2?: string;
+    telefono?: string;
+    direccion?: string;
     pathCV?: string;
     pathExpediente?: string;
     carnetConducir?: number;
     vehiculoPropio?: number;
+    formacion?: Formacion;
 }

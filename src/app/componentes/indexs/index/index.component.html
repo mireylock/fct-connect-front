@@ -10,6 +10,17 @@
 <div *ngIf="administrador">
     <app-header-administrador></app-header-administrador>
 </div>
-<app-bienvenida></app-bienvenida>
+<div *ngIf="alumno">
+    <app-header-alumno></app-header-alumno>
+</div>
+<div *ngIf="empresa">
+    <app-index-empresa></app-index-empresa>
+</div>
+<div *ngIf="profesor">
+    <app-index-profesor></app-index-profesor>
+</div>
+<div *ngIf="administrador">
+    <app-index-admin></app-index-admin>
+</div>
 <app-footer></app-footer>
 

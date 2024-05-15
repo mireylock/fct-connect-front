@@ -1,0 +1,18 @@
+<section class="bg-primary">
+    <div class="container-xxl">
+        <div class="col text-center p-5">
+            <h1 class="text-white">Empresas</h1>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4" *ngFor="let empresa of empresas">
+                    <div class="d-flex align-items-end justify-content-center">
+                        <img width="50" src="../../../../assets/img/profile.png">
+                        <h3 class="text-white m-1">{{empresa.nombre}}</h3>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <button class="btn btn-warning text-white m-2" [routerLink]="['/empresas']">Ver Todos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

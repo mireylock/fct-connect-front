@@ -1,0 +1,22 @@
+<section class="bg-info">
+    <div class="container-xxl">
+        <div class="col text-center p-5">
+            <h1>Alumnos</h1>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4" *ngFor="let alumno of alumnos">
+                    <div class="card p-3 m-1 bg-primary text-white" >
+                        <div class="text-center">
+                            <img width="50" src="../../../../assets/img/profile.png">
+                            <p>{{alumno.nombre}} {{alumno.apellido1}} {{alumno.apellido2}}</p>
+                            <p class="fst-italic">{{alumno.formacion?.nombre}}</p>
+                            <a class="btn btn-warning text-white m-2">Ver perfil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <button class="btn btn-primary text-white m-2" [routerLink]="['/alumnos']">Ver Todos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

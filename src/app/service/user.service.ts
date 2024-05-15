@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, catchError, map, take, throwError } from 'rxjs';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
@@ -39,16 +39,49 @@ export class UserService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
+  getAllAlumnos():Observable<Object>{
+    return this.http.get(URL_ALUMNOS);
+  }
+
+  getSeisAlumnos(): Observable<Object[]> { 
+    return this.http.get<Object[]>(URL_ALUMNOS) 
+      .pipe(
+        map(alumnos => alumnos.slice(0, 6)), 
+        take(1)
+      );
+  }
 
   getAlumno(id:number):Observable<Object>{
     return this.http.get(URL_ALUMNOS+'/'+id);
   }
 
+  getAllEmpresas():Observable<Object>{
+    return this.http.get(URL_EMPRESAS);
+  }
+
+  getTresEmpresas(): Observable<Object[]> { 
+    return this.http.get<Object[]>(URL_EMPRESAS) 
+      .pipe(
+        map(empresas => empresas.slice(0, 3)), 
+        take(1)
+      );
+  }
+
+  getAllProfesores():Observable<Object>{
+    return this.http.get(URL_PROFESORES);
+  }
+
+  getSeisProfesores(): Observable<Object[]> { 
+    return this.http.get<Object[]>(URL_PROFESORES) 
+      .pipe(
+        map(profesores => profesores.slice(0, 6)), 
+        take(1)
+      );
+  }
+
   getEmpresa(id:number):Observable<Object>{
     return this.http.get(URL_EMPRESAS+'/'+id);
   }
-
-
 
   getProfesor(id:number):Observable<Object>{
     return this.http.get(URL_PROFESORES+'/'+id);

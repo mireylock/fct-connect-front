@@ -2,15 +2,14 @@ import { Component } from '@angular/core';
 import { HeaderAdministradorComponent } from '../../headers/header-administrador/header-administrador.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { UserService } from '../../../service/user.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { EmpresaRequest } from '../../../interfaces/empresaRequest';
-import { Empresa } from '../../../interfaces/empresa';
 import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-register-empresa',
   standalone: true,
-  imports: [HeaderAdministradorComponent, FooterComponent, NgFor],
+  imports: [HeaderAdministradorComponent, FooterComponent, NgFor, NgIf],
   templateUrl: './register-empresa.component.html',
   styleUrl: './register-empresa.component.scss'
 })

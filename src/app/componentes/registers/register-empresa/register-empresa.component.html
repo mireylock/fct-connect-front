@@ -6,15 +6,56 @@
       <div *ngIf="!empresasRequest || empresasRequest.length === 0">
         <p class="fst-italic">No hay solicitudes de registro pendientes.</p>
       </div>
-      <div class="card bg-white bg-opacity-75 m-2" *ngFor="let er of empresasRequest">       
+      <div class="card bg-white bg-opacity-75 m-2" *ngFor="let er of empresasRequest">
         <div class="card-body">
-            <p> Nombre: {{ er.nombre }} </p>
-            <p> Email: {{ er.email }}</p>
-            <div class="d-flex justify-content-around">
-                <button (click)="cancelarSolicitud(er)" class="btn bg-white btn-block">Cancelar solicitud</button>
-                <button (click)="aceptarSolicitud(er)"class="btn btn-primary btn-block">Aceptar solicitud</button>
+          <p> Nombre: {{ er.nombre }} </p>
+          <p> Email: {{ er.email }}</p>
+          <div class="d-flex justify-content-around">
+
+            <button class="btn bg-white btn-block" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar solicitud</button>
+            
+            <div class="modal fade" id="modalCancelar" tabindex="-1"
+              aria-labelledby="modalCancelarLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <p>¿Está seguro de que desea eliminar la solicitud de {{ er.nombre }}?</p>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-around">
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="cancelarSolicitud(er)">Aceptar</button>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#modalAceptar">Aceptar solicitud</button>
+
+            <div class="modal fade" id="modalAceptar" tabindex="-1"
+              aria-labelledby="modalAceptarLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <p>¿Está seguro de que desea aceptar la solicitud de {{ er.nombre }}?</p>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-around">
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="aceptarSolicitud(er)">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
+
+        
+
+
       </div>
     </div>
   </div>

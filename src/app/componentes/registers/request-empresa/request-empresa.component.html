@@ -67,14 +67,19 @@
                   </div>
                   <div class="modal-footer d-flex justify-content-around">
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Aceptar</button>
+                    <!-- <button class="btn btn-primary btn-block" data-bs-dismiss="modal" data-bs-toggle="modal"
+                    data-bs-target="#modalSolicitudEnviada">Aceptar</button> -->
+
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal" data-bs-toggle="modal">
+                      Aceptar</button>
+
                   </div>
                 </div>
               </div>
             </div>
 
-            <div *ngIf="solicitudEnviada" class="modal fade" id="modalSolicitudEnviada" tabindex="-1"
-              aria-labelledby="modalSolicitudEnviada" aria-hidden="true">
+            <div class="modal fade" id="modalSolicitudEnviada" tabindex="-1" aria-labelledby="modalSolicitudEnviada"
+              aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -82,7 +87,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body text-center">
-                      <p>En breve recibirás un email para confirmar tu cuenta y poder hacer login</p>
+                    <p>En breve recibirás un email para confirmar tu cuenta y poder hacer login</p>
                   </div>
                   <div class="modal-footer d-flex justify-content-center">
                     <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Aceptar</button>

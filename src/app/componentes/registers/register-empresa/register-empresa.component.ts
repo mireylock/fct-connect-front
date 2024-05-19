@@ -18,6 +18,7 @@ export class RegisterEmpresaComponent {
   empresasRequest:EmpresaRequest[]=[];
   errorMessage: any;
   pathFoto:string = "../../../../assets/img/profile.png";
+  errorAceptar:boolean=false;
   
   constructor(private userService:UserService, private authService:AuthService){
     this.userService.getRequestEmpresas().subscribe({
@@ -48,11 +49,21 @@ export class RegisterEmpresaComponent {
       }, 
       error: err => {
         this.errorMessage = err.error.message;
+        alert('¡Solicitud incorrecta! No se puede aceptar')
       }    
     });
   }
 
   cancelarSolicitud(empresaRequest:EmpresaRequest) {
+    this.userService.deleteRequestEmpresa(empresaRequest.id).subscribe({
+      next: () => {
+        console.log('Empresa request eliminada'+empresaRequest);
+        window.location.reload();
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
 
   }
 

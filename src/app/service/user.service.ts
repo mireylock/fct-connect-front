@@ -23,7 +23,7 @@ const HTTPOPTIONS = {
 export class UserService {
 
   
-  constructor(private http:HttpClient, private StorageService:StorageService) { };
+  constructor(private http:HttpClient) { };
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -49,6 +49,10 @@ export class UserService {
         map(alumnos => alumnos.slice(0, 6)), 
         take(1)
       );
+  }
+
+  getAlumnosPaginacion(pagina:number, tamanio:number):Observable<Object>{
+    return this.http.get(URL_ALUMNOS+'?pagina='+pagina+'&tamanio='+tamanio);
   }
 
   getAlumno(id:number):Observable<Object>{

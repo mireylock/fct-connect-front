@@ -27,17 +27,15 @@ import { IndexAdminComponent } from '../index-admin/index-admin.component';
 })
 export class IndexComponent implements OnInit{
 
-  isLoggedIn = true;
+  constructor(private storageService:StorageService, private userService:UserService ){}
 
-  constructor(private storageService:StorageService, private router:Router, private userService:UserService) { }
-
+  isLoggedIn:boolean=true;
   idUser:number = 0;
   rolUser:string = '';
   alumno:Alumno | undefined;
   empresa:Empresa | undefined;
   profesor:Profesor | undefined;
   administrador:Administrador | undefined;
-
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -95,6 +93,6 @@ export class IndexComponent implements OnInit{
       }
 
     }
-  }
+  }  
 
 }

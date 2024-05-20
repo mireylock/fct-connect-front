@@ -1,1 +1,152 @@
-<p>list-total-alumnos works!</p>
+<div *ngIf="alumno">
+    <app-header-alumno></app-header-alumno>
+</div>
+<div *ngIf="profesor">
+    <app-header-profesor></app-header-profesor>
+</div>
+<div *ngIf="administrador">
+    <app-header-administrador></app-header-administrador>
+</div>
+<section class="bg-primary">
+    <div class="container-xxl py-5">
+        <div class="d-flex justify-content-around align-items-center flex-column flex-md-row">
+            <nav aria-label="Page navigation example" class="mb-3 mb-md-0">
+                <ul class="pagination m-0">
+                    <li class="page-item" (click)="retrocederPagina()">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let i of repeticionesArray" (click)="irAPagina(i)">
+                        <a class="page-link">{{i+1}}</a>
+                    </li>
+                    <li class="page-item" (click)="avanzarPagina()">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form class="row g-3 align-items-end mb-4">
+    <div class="col-12 col-md-3">
+        <label for="nombreAlumno" class="form-label text-white">Nombre</label>
+        <input type="text" class="form-control" id="nombreAlumno" placeholder="Nombre" (input)="filtrarAlumnos()">
+    </div>
+
+    <div class="col-12 col-md-3">
+        <label for="idiomaAlumno" class="form-label text-white">Idioma</label>
+        <select class="form-select" id="idiomaAlumno">
+            <option value="">Todos los idiomas</option>
+            <option *ngFor="let idioma of idiomas">{{idioma.nombre}}</option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-3">
+        <label for="vehiculoAlumno" class="form-label text-white">Vehículo propio</label>
+        <select class="form-select" id="vehiculoAlumno">
+            <option value="">Indiferente</option>
+            <option value="0">Sí</option>
+            <option value="1">No</option>
+        </select>
+    </div>
+
+    <div class="col-12 col-md-3">
+        <button type="button" class="btn btn-warning w-100 text-white">Buscar</button>
+    </div>
+</form>
+
+
+            <!-- <form class="d-flex flex-wrap align-items-center justify-content-center mb-4">
+                <div class="me-3 mb-2">
+                    <label for="nombreAlumno" class="form-label text-white">Nombre</label>
+                    <input type="text" class="form-control" id="nombreAlumno" placeholder="Buscar por nombre"
+                        (input)="filtrarAlumnos()">
+                </div>
+
+                <div class="me-3 mb-2">
+                    <label for="idiomaAlumno" class="form-label text-white">Idioma</label>
+                    <select class="form-select" id="idiomaAlumno">
+                        <option value="">Todos los idiomas</option>
+                        <option *ngFor="let idioma of idiomas">{{idioma.nombre}}</option>
+                    </select>
+                </div>
+
+                <div class="me-3 mb-2">
+                    <label for="vehiculoAlumno" class="form-label text-white">Vehículo propio</label>
+                    <select class="form-select" id="vehiculoAlumno">
+                        <option value="0">Sí</option>
+                        <option value="1">No</option>
+                    </select>
+                </div>
+
+                <div class="mb-2">
+                    <button class="btn bg-warning align-self-end">Buscar</button>
+                </div>
+            </form> -->
+
+
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-container my-4" *ngFor="let alumno of alumnos">
+                    <div class="card-body text-center bg-info">
+                        <div class="d-flex align-items-center justify-content-center my-3">
+                            <img width="50" class="me-2" src={{alumno.pathFoto}} alt="Foto del alumno">
+                            <h5 class="card-title mt-3">{{alumno.nombre}} {{alumno.apellido1}} {{alumno.apellido2}}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush text-start">
+                            <li class="list-group-item my-1"><i
+                                    class="fa-solid fa-graduation-cap me-2 text-primary"></i>{{alumno.formacion?.nivel}}:
+                                <em>{{alumno.formacion?.nombre}}</em>
+                            </li>
+
+                            <li *ngIf="alumno.idiomas?.length" class="list-group-item my-1"><i
+                                    class="fa-solid fa-language me-2 text-primary"></i>
+                                Idiomas:
+                                <ul *ngFor="let idioma of alumno.idiomas">
+                                    <em>{{idioma.nombre}}</em>
+                                </ul>
+                            </li>
+
+                            <li class="list-group-item my-1"><i class="fa-solid fa-car me-2 text-primary"></i>Vehículo
+                                propio: <em>{{alumno.vehiculoPropio==0?'Sí ':'No'}}</em>
+                                <i class="fa-solid ms-1"
+                                    [ngClass]="{'fa-square-check text-success': alumno.vehiculoPropio == 0, 'fa-square-xmark text-danger': alumno.vehiculoPropio != 0}">
+                                </i>
+                        </ul>
+                        <a class="btn btn-primary text-white m-2">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" (click)="retrocederPagina()">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item" *ngFor="let i of repeticionesArray" (click)="irAPagina(i)">
+                        <a class="page-link">{{i+1}}</a>
+                    </li>
+
+                    <li class="page-item" (click)="avanzarPagina()">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+
+
+
+<app-footer></app-footer>

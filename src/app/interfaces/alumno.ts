@@ -1,4 +1,6 @@
+import { AlumnoHablaIdioma } from "./alumno-habla-idioma";
 import { Formacion } from "./formacion";
+import { Idioma } from "./idioma";
 
 export interface Alumno {
     id: number;
@@ -16,4 +18,5 @@ export interface Alumno {
     carnetConducir?: number;
     vehiculoPropio?: number;
     formacion?: Formacion;
+    idiomas?:Idioma[];
 }

@@ -29,63 +29,33 @@
             </nav>
 
             <form class="row g-3 align-items-end mb-4">
-    <div class="col-12 col-md-3">
-        <label for="nombreAlumno" class="form-label text-white">Nombre</label>
-        <input type="text" class="form-control" id="nombreAlumno" placeholder="Nombre" (input)="filtrarAlumnos()">
-    </div>
-
-    <div class="col-12 col-md-3">
-        <label for="idiomaAlumno" class="form-label text-white">Idioma</label>
-        <select class="form-select" id="idiomaAlumno">
-            <option value="">Todos los idiomas</option>
-            <option *ngFor="let idioma of idiomas">{{idioma.nombre}}</option>
-        </select>
-    </div>
-
-    <div class="col-12 col-md-3">
-        <label for="vehiculoAlumno" class="form-label text-white">Vehículo propio</label>
-        <select class="form-select" id="vehiculoAlumno">
-            <option value="">Indiferente</option>
-            <option value="0">Sí</option>
-            <option value="1">No</option>
-        </select>
-    </div>
-
-    <div class="col-12 col-md-3">
-        <button type="button" class="btn btn-warning w-100 text-white">Buscar</button>
-    </div>
-</form>
-
-
-            <!-- <form class="d-flex flex-wrap align-items-center justify-content-center mb-4">
-                <div class="me-3 mb-2">
+                <div class="col-12 col-md-3">
                     <label for="nombreAlumno" class="form-label text-white">Nombre</label>
-                    <input type="text" class="form-control" id="nombreAlumno" placeholder="Buscar por nombre"
-                        (input)="filtrarAlumnos()">
+                    <input type="text" class="form-control" id="nombreAlumno" placeholder="Nombre" [(ngModel)]="nombre"
+                        name="nombre">
                 </div>
 
-                <div class="me-3 mb-2">
+                <div class="col-12 col-md-3">
                     <label for="idiomaAlumno" class="form-label text-white">Idioma</label>
-                    <select class="form-select" id="idiomaAlumno">
+                    <select class="form-select" id="idiomaAlumno" [(ngModel)]="idioma" name="idioma">
                         <option value="">Todos los idiomas</option>
-                        <option *ngFor="let idioma of idiomas">{{idioma.nombre}}</option>
+                        <option *ngFor="let idioma of idiomas" [value]="idioma.nombre">{{idioma.nombre}}</option>
                     </select>
                 </div>
 
-                <div class="me-3 mb-2">
+                <div class="col-12 col-md-3">
                     <label for="vehiculoAlumno" class="form-label text-white">Vehículo propio</label>
-                    <select class="form-select" id="vehiculoAlumno">
-                        <option value="0">Sí</option>
-                        <option value="1">No</option>
+                    <select class="form-select" id="vehiculoAlumno" [(ngModel)]="vehiculoPropio" name="vehiculoPropio">
+                        <option value="">Indiferente</option>
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
                     </select>
                 </div>
 
-                <div class="mb-2">
-                    <button class="btn bg-warning align-self-end">Buscar</button>
+                <div class="col-12 col-md-3">
+                    <button type="button" class="btn btn-warning w-100 text-white" (click)="buscar()">Buscar</button>
                 </div>
-            </form> -->
-
-
+            </form>
         </div>
 
         <div class="row justify-content-center">

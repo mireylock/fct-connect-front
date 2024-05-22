@@ -55,6 +55,11 @@ export class UserService {
     return this.http.get(URL_ALUMNOS+'?pagina='+pagina+'&tamanio='+tamanio);
   }
 
+
+  getBusquedaAlumnos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number):Observable<Object> {
+    return this.http.get(URL_ALUMNOS+'?nombre='+nombre+'&idioma='+idioma+'&vehiculoPropio='+vehiculoPropio+'&pagina='+pagina+'&tamanio='+tamanio);
+  }
+  
   getAlumno(id:number):Observable<Object>{
     return this.http.get(URL_ALUMNOS+'/'+id);
   }

@@ -3,7 +3,6 @@ import { HeaderAdministradorComponent } from '../../headers/header-administrador
 import { HeaderAlumnoComponent } from '../../headers/header-alumno/header-alumno.component';
 import { HeaderProfesorComponent } from '../../headers/header-profesor/header-profesor.component';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { RolServiceService } from '../../../service/rol-service.service';
 import { Alumno } from '../../../interfaces/alumno';
 import { Empresa } from '../../../interfaces/empresa';
 import { Profesor } from '../../../interfaces/profesor';
@@ -15,11 +14,12 @@ import { ListParcialAlumnosComponent } from '../../listas-parciales/list-parcial
 import { AlumnosPaginacion } from '../../../interfaces/alumnos-paginacion';
 import { Idioma } from '../../../interfaces/idioma';
 import { IdiomaService } from '../../../service/idioma.service';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-list-total-alumnos',
   standalone: true,
-  imports: [NgClass, NgIf, NgFor, HeaderAdministradorComponent, HeaderAlumnoComponent, HeaderProfesorComponent, FooterComponent, ListParcialAlumnosComponent],
+  imports: [NgClass, NgIf, NgFor, FormsModule, HeaderAdministradorComponent, HeaderAlumnoComponent, HeaderProfesorComponent, FooterComponent, ListParcialAlumnosComponent],
   templateUrl: './list-total-alumnos.component.html',
   styleUrl: './list-total-alumnos.component.scss'
 })
@@ -39,10 +39,12 @@ throw new Error('Method not implemented.');
   hablaIngles:boolean = false;
   idiomas:Idioma[] | undefined;
 
+  nombre: string = '';
+  idioma: string = '';
+  vehiculoPropio: string = '';
   
   constructor(private storageService:StorageService, private userService:UserService, private idiomaService:IdiomaService){
-   this.getAlumnosPaginacion(0, this.tamanio);
-   this.getAllIdiomas();
+
   }
 
   getAllIdiomas() {
@@ -52,6 +54,29 @@ throw new Error('Method not implemented.');
       }, 
       error: (err) => {
         console.log(err+'ALUMNOS');
+      }
+    })
+  }
+
+  buscar() {
+    console.log('Nombre:', this.nombre);
+    console.log('Idioma:', this.idioma);
+    console.log('Vehículo propio:', this.vehiculoPropio);    
+    this.getBusquedaAlumnos(this.nombre, this.idioma, this.vehiculoPropio, this.pagina, this.tamanio);
+  }
+
+  getBusquedaAlumnos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number) {
+    this.userService.getBusquedaAlumnos(nombre, idioma, vehiculoPropio, pagina, tamanio).subscribe({
+      next: (data) => {
+        this.alumnosPaginacion = data as AlumnosPaginacion;
+        this.alumnos = this.alumnosPaginacion.alumnos;
+        this.totalItems = this.alumnosPaginacion.totalItems;
+        this.totalPages = this.alumnosPaginacion.totalPages;
+        this.currentPage = this.alumnosPaginacion.currentPage;
+        this.repeticionesArray = Array(this.totalPages).fill(0).map((x, i) => i);
+      }, 
+      error: (err) => {
+        console.log(err+'BÚSQUEDA ALUMNOS');
       }
     })
   }
@@ -105,6 +130,9 @@ throw new Error('Method not implemented.');
   dbError:boolean=false;
 
   ngOnInit(): void {
+    this.getAlumnosPaginacion(0, this.tamanio);
+    this.getAllIdiomas();
+
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.idUser = this.storageService.getUser().id;

@@ -58,8 +58,14 @@
             </form>
         </div>
 
+        <div class="d-flex justify-content-around align-items-center flex-column flex-md-row">
+            <em class="p-5 text-white" *ngIf="alumnos.length==0">No hay alumnos que mostrar</em>
+        </div>
+
+
         <div class="row justify-content-center">
-            <div class="col-md-6">
+
+            <div class="col-md-6">                
                 <div class="card card-container my-4" *ngFor="let alumno of alumnos">
                     <div class="card-body text-center bg-info">
                         <div class="d-flex align-items-center justify-content-center my-3">
@@ -81,9 +87,9 @@
                             </li>
 
                             <li class="list-group-item my-1"><i class="fa-solid fa-car me-2 text-primary"></i>Vehículo
-                                propio: <em>{{alumno.vehiculoPropio==0?'Sí ':'No'}}</em>
+                                propio: <em>{{alumno.vehiculoPropio==1?'Sí ':'No'}}</em>
                                 <i class="fa-solid ms-1"
-                                    [ngClass]="{'fa-square-check text-success': alumno.vehiculoPropio == 0, 'fa-square-xmark text-danger': alumno.vehiculoPropio != 0}">
+                                    [ngClass]="{'fa-square-check text-success': alumno.vehiculoPropio == 1, 'fa-square-xmark text-danger': alumno.vehiculoPropio != 1}">
                                 </i>
                         </ul>
                         <a class="btn btn-primary text-white m-2">Ver más</a>

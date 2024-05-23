@@ -1,12 +1,13 @@
-<div *ngIf="alumno">
-    <app-header-alumno></app-header-alumno>
+<div *ngIf="rol=='empresa'">
+    <app-header-empresa></app-header-empresa>
 </div>
-<div *ngIf="profesor">
+<div *ngIf="rol=='profesor'">
     <app-header-profesor></app-header-profesor>
 </div>
-<div *ngIf="administrador">
+<div *ngIf="rol=='administrador'">
     <app-header-administrador></app-header-administrador>
 </div>
+
 <section class="bg-primary">
     <div class="container-xxl py-5">
         <div class="d-flex justify-content-around align-items-center flex-column flex-md-row">
@@ -92,7 +93,7 @@
                                     [ngClass]="{'fa-square-check text-success': alumno.vehiculoPropio == 1, 'fa-square-xmark text-danger': alumno.vehiculoPropio != 1}">
                                 </i>
                         </ul>
-                        <a class="btn btn-primary text-white m-2">Ver más</a>
+                        <a class="btn btn-primary text-white m-2"  [routerLink]="['/alumnos/'+alumno.id]">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -121,8 +122,5 @@
         </div>
     </div>
 </section>
-
-
-
 
 <app-footer></app-footer>

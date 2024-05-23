@@ -15,19 +15,20 @@ import { AlumnosPaginacion } from '../../../interfaces/alumnos-paginacion';
 import { Idioma } from '../../../interfaces/idioma';
 import { IdiomaService } from '../../../service/idioma.service';
 import { FormsModule, NgModel } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../service/auth.service';
+import { HeaderEmpresaComponent } from '../../headers/header-empresa/header-empresa.component';
 
 @Component({
   selector: 'app-list-total-alumnos',
   standalone: true,
-  imports: [NgClass, NgIf, NgFor, FormsModule, HeaderAdministradorComponent, HeaderAlumnoComponent, HeaderProfesorComponent, FooterComponent, ListParcialAlumnosComponent],
+  imports: [RouterLink, NgClass, NgIf, NgFor, FormsModule, HeaderAdministradorComponent, HeaderEmpresaComponent, HeaderProfesorComponent, FooterComponent, ListParcialAlumnosComponent],
   templateUrl: './list-total-alumnos.component.html',
   styleUrl: './list-total-alumnos.component.scss'
 })
 export class ListTotalAlumnosComponent implements OnInit {
 
-  filtrarAlumnos() {
-throw new Error('Method not implemented.');
-}
+  rol: string | undefined;
 
   pagina:number=0;
   tamanio:number=5;
@@ -38,14 +39,22 @@ throw new Error('Method not implemented.');
   repeticionesArray: number[] | undefined;
   hablaIngles:boolean = false;
   idiomas:Idioma[] | undefined;
+  alumnos:Alumno[]=[];
 
   nombre: string = '';
   idioma: string = '';
   vehiculoPropio: string = '';
   
-  constructor(private storageService:StorageService, private userService:UserService, private idiomaService:IdiomaService){
+  constructor(private userService:UserService, private idiomaService:IdiomaService, public authService:AuthService){
 
   }
+
+  ngOnInit(): void {
+    this.rol = this.authService.getRol();
+    this.getAlumnosPaginacion(0, this.tamanio);
+    this.getAllIdiomas();
+  }
+
 
   getAllIdiomas() {
     this.idiomaService.getAllIdiomas().subscribe({
@@ -117,76 +126,66 @@ throw new Error('Method not implemented.');
     this.getAlumnosPaginacion(numeroPagina, this.tamanio);
   }
 
-  isLoggedIn:boolean=true;
-  idUser:number = 0;
-  rolUser:string = '';
-  alumno:Alumno | undefined;
-  empresa:Empresa | undefined;
-  profesor:Profesor | undefined;
-  administrador:Administrador | undefined;
 
-  alumnos:Alumno[]=[];
 
-  dbError:boolean=false;
+  // ngOnInit(): void {
+  //   this.getAlumnosPaginacion(0, this.tamanio);
+  //   this.getAllIdiomas();
 
-  ngOnInit(): void {
-    this.getAlumnosPaginacion(0, this.tamanio);
-    this.getAllIdiomas();
+  //   if (this.storageService.isLoggedIn()) {
+  //     this.isLoggedIn = true;
+  //     this.idUser = this.storageService.getUser().id;
+  //     this.rolUser = this.storageService.getUser().rol;
 
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.idUser = this.storageService.getUser().id;
-      this.rolUser = this.storageService.getUser().rol;
+  //     switch (this.rolUser) {
+  //       case "alumno":
+  //         this.userService.getAlumno(this.idUser).subscribe({
+  //           next: (data) => {
+  //             this.alumno = data as Alumno;
+  //             console.log(this.alumno);
+  //           }, 
+  //           error: (err) => {
+  //             console.log(err);
+  //           }
+  //         })
 
-      switch (this.rolUser) {
-        case "alumno":
-          this.userService.getAlumno(this.idUser).subscribe({
-            next: (data) => {
-              this.alumno = data as Alumno;
-              console.log(this.alumno);
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          })
+  //       break;
 
-        break;
+  //       case "empresa":
+  //         this.userService.getEmpresa(this.idUser).subscribe({
+  //           next: (data) => {
+  //             this.empresa = data as Empresa;
+  //             console.log(this.empresa);
+  //           }, 
+  //           error: (err) => {
+  //             console.log(err);
+  //           }
+  //         });
+  //         break;
 
-        case "empresa":
-          this.userService.getEmpresa(this.idUser).subscribe({
-            next: (data) => {
-              this.empresa = data as Empresa;
-              console.log(this.empresa);
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          });
-          break;
+  //       case "profesor":
+  //         this.userService.getProfesor(this.idUser).subscribe({
+  //           next: (data) => {
+  //             this.profesor = data as Profesor;
+  //           }, 
+  //           error: (err) => {
+  //             console.log(err);
+  //           }
+  //         });        
+  //       break;
 
-        case "profesor":
-          this.userService.getProfesor(this.idUser).subscribe({
-            next: (data) => {
-              this.profesor = data as Profesor;
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          });        
-        break;
+  //       case "administrador":
+  //         this.userService.getAdministrador(this.idUser).subscribe({
+  //           next: (data) => {
+  //             this.administrador = data as Administrador;
+  //           }, 
+  //           error: (err) => {
+  //             console.log(err);
+  //           }
+  //         });
+  //       break;
+  //     }
 
-        case "administrador":
-          this.userService.getAdministrador(this.idUser).subscribe({
-            next: (data) => {
-              this.administrador = data as Administrador;
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          });
-        break;
-      }
-
-    }
-  }  
+  //   }
+  // }  
 }

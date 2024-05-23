@@ -17,6 +17,7 @@ import { IndexAlumnoComponent } from '../index-alumno/index-alumno.component';
 import { IndexEmpresaComponent } from '../index-empresa/index-empresa.component';
 import { IndexProfesorComponent } from '../index-profesor/index-profesor.component';
 import { IndexAdminComponent } from '../index-admin/index-admin.component';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -27,72 +28,12 @@ import { IndexAdminComponent } from '../index-admin/index-admin.component';
 })
 export class IndexComponent implements OnInit{
 
-  constructor(private storageService:StorageService, private userService:UserService ){}
+  rol:string | undefined;
 
-  isLoggedIn:boolean=true;
-  idUser:number = 0;
-  rolUser:string = '';
-  alumno:Alumno | undefined;
-  empresa:Empresa | undefined;
-  profesor:Profesor | undefined;
-  administrador:Administrador | undefined;
+  constructor(private storageService:StorageService, private userService:UserService, private authService:AuthService ){}
 
   ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.idUser = this.storageService.getUser().id;
-      this.rolUser = this.storageService.getUser().rol;
-
-      switch (this.rolUser) {
-        case "alumno":
-          this.userService.getAlumno(this.idUser).subscribe({
-            next: (data) => {
-              this.alumno = data as Alumno;
-              console.log(this.alumno);
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          })
-
-        break;
-
-        case "empresa":
-          this.userService.getEmpresa(this.idUser).subscribe({
-            next: (data) => {
-              this.empresa = data as Empresa;
-              console.log(this.empresa);
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          });
-          break;
-
-        case "profesor":
-          this.userService.getProfesor(this.idUser).subscribe({
-            next: (data) => {
-              this.profesor = data as Profesor;
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          });        
-        break;
-
-        case "administrador":
-          this.userService.getAdministrador(this.idUser).subscribe({
-            next: (data) => {
-              this.administrador = data as Administrador;
-            }, 
-            error: (err) => {
-              console.log(err);
-            }
-          });
-        break;
-      }
-
-    }
-  }  
+    this.rol = this.authService.getRol();
+  }
 
 }

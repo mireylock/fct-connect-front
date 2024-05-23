@@ -1,7 +1,12 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
+import { Alumno } from '../interfaces/alumno';
+import { Empresa } from '../interfaces/empresa';
+import { Profesor } from '../interfaces/profesor';
+import { Administrador } from '../interfaces/administrador';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +22,14 @@ export class AuthService {
     })
   };
 
-  constructor(private httpClient: HttpClient, private storageService: StorageService) { }
+  constructor(private httpClient: HttpClient, private storageService: StorageService, private userService:UserService) { }
+
+  getRol(): string | undefined {
+    if (this.storageService.isLoggedIn()) {
+      return this.storageService.getUser().rol;
+    }
+    return undefined;
+  }
 
   login(email: string, password: string): Observable<any> {
     return this.httpClient.post(

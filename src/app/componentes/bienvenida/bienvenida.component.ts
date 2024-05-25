@@ -7,6 +7,7 @@ import { Empresa } from '../../interfaces/empresa';
 import { Profesor } from '../../interfaces/profesor';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-bienvenida',
@@ -17,8 +18,7 @@ import { RouterLink } from '@angular/router';
 })
 export class BienvenidaComponent implements OnInit{
 
-  constructor(private storageService:StorageService, private userService:UserService) { }
-  
+  rol:string | undefined;  
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -28,9 +28,12 @@ export class BienvenidaComponent implements OnInit{
   empresa:Empresa | undefined;
   profesor:Profesor | undefined;
   administrador:Administrador | undefined;
-
+  
+  constructor(private storageService:StorageService, private userService:UserService, private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.rol = this.authService.getRol();
+
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.idUser = this.storageService.getUser().id;

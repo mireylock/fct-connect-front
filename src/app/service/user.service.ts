@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map, take, throwError } from 'rxjs';
+import { AlumnoDTO } from '../interfaces/alumno-dto';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
@@ -62,6 +63,11 @@ export class UserService {
   
   getAlumno(id:number):Observable<Object>{
     return this.http.get(URL_ALUMNOS+'/'+id);
+  }
+
+  updateAlumno(alumnoDTO:AlumnoDTO):Observable<Object>{
+    const url = `${URL_ALUMNOS}/${alumnoDTO.id}`;
+    return this.http.put<AlumnoDTO>(url, alumnoDTO, HTTPOPTIONS);
   }
 
   getAllEmpresas():Observable<Object>{

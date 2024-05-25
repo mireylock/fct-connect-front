@@ -7,7 +7,7 @@ import { HeaderAdministradorComponent } from "../../headers/header-administrador
 import { FooterComponent } from "../../footer/footer.component";
 import { NgIf, NgClass } from '@angular/common';
 import { Alumno } from '../../../interfaces/alumno';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlumnoDTO } from '../../../interfaces/alumno-dto';
 
@@ -16,7 +16,7 @@ import { AlumnoDTO } from '../../../interfaces/alumno-dto';
     standalone: true,
     templateUrl: './perfil-alumno.component.html',
     styleUrl: './perfil-alumno.component.scss',
-    imports: [NgIf, NgClass, FormsModule, HeaderEmpresaComponent, HeaderProfesorComponent, HeaderAdministradorComponent, FooterComponent]
+    imports: [NgIf, NgClass, FormsModule, RouterLink, HeaderEmpresaComponent, HeaderProfesorComponent, HeaderAdministradorComponent, FooterComponent]
 })
 export class PerfilAlumnoComponent implements OnInit {
 
@@ -37,9 +37,7 @@ export class PerfilAlumnoComponent implements OnInit {
 
   onSubmit() {
     const { id, telefono, direccion, carnetConducir, vehiculoPropio } = this.formPersonalData;
-
-    console.log(this.formPersonalData);
-
+    
     const alumnoDTO:AlumnoDTO = {
       id,
       telefono, 

@@ -40,6 +40,7 @@ export class UserService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
+  /////// ALUMNOS /////////
   getAllAlumnos():Observable<Object>{
     return this.http.get(URL_ALUMNOS);
   }
@@ -70,6 +71,8 @@ export class UserService {
     return this.http.put<AlumnoDTO>(url, alumnoDTO, HTTPOPTIONS);
   }
 
+  
+  /////// EMPRESAS /////////
   getAllEmpresas():Observable<Object>{
     return this.http.get(URL_EMPRESAS);
   }
@@ -82,6 +85,23 @@ export class UserService {
       );
   }
 
+  getEmpresa(id:number):Observable<Object>{
+    return this.http.get(URL_EMPRESAS+'/'+id);
+  }
+
+  getRequestEmpresas():Observable<Object>{
+    return this.http.get(URL_REQUEST_EMPRESAS);
+  }
+
+  deleteRequestEmpresa(id:number):Observable<Object> {
+    const url = `${URL_REQUEST_EMPRESAS}/${id}`
+    return this.http.delete(url, HTTPOPTIONS)
+      .pipe(catchError(this.handleError));
+  }
+
+
+
+  /////// PROFESORES /////////
   getAllProfesores():Observable<Object>{
     return this.http.get(URL_PROFESORES);
   }
@@ -94,27 +114,18 @@ export class UserService {
       );
   }
 
-  getEmpresa(id:number):Observable<Object>{
-    return this.http.get(URL_EMPRESAS+'/'+id);
-  }
 
   getProfesor(id:number):Observable<Object>{
     return this.http.get(URL_PROFESORES+'/'+id);
   }
 
+
+  ////// ADMINISTRADOER //////
   getAdministrador(id:number):Observable<Object>{
     return this.http.get(URL_ADMINISTRADORES+'/'+id);
   }
 
-  getRequestEmpresas():Observable<Object>{
-    return this.http.get(URL_REQUEST_EMPRESAS);
-  }
 
-  deleteRequestEmpresa(id:number):Observable<Object> {
-    const url = `${URL_REQUEST_EMPRESAS}/${id}`
-    return this.http.delete(url, HTTPOPTIONS)
-      .pipe(catchError(this.handleError));
-  }
 
 
   

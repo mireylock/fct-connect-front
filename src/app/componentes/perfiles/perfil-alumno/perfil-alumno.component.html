@@ -81,10 +81,17 @@
                         [(ngModel)]="formPersonalData.direccion" [value]="alumno?.direccion" #direccion="ngModel">
                 </div>
             </div>
-            <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">Guardar
-                Cambios</button>
+            <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
+                Guardar Cambios
+            </button>
         </form>
     </div>
+
+    <button *ngIf="rol === 'empresa' || rol === 'administrador'" class="btn bg-primary text-white"
+        [routerLink]="['/solicitud/'+alumno?.id]">
+        Enviar Solicitud
+    </button>
+
 </div>
 
 <div class="bg-info text-center py-3 my-3">
@@ -93,7 +100,7 @@
     </div>
 
     <div class="d-flex justify-content-center align-items-center">
-        <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-white">
+        <button class="btn bg-white">
             <i class="fa-solid fa-eye"></i>
             Ver expediente
         </button>
@@ -106,7 +113,7 @@
     </div>
 
     <div class="d-flex justify-content-center align-items-center">
-        <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-white">
+        <button class="btn bg-white">
             <i class="fa-solid fa-eye"></i>
             Ver Currículum
         </button>
@@ -130,6 +137,7 @@
                         Carnet:
                     </span>
                     <select class="form-select" id="carnetConducir" name="carnetConducir"
+                        [disabled]="rol === 'empresa' || rol === 'profesor'"
                         [(ngModel)]="formPersonalData.carnetConducir">
                         <option [ngValue]="1">Sí</option>
                         <option [ngValue]="0">No</option>
@@ -146,7 +154,8 @@
                     <span class="input-group-text fw-bold">
                         Vehículo propio:
                     </span>
-                    <select class="form-select" id="vehiculoPropio" name="vehiculoPropio" *ngIf="rol === 'administrador'" disabled
+                    <select class="form-select" id="vehiculoPropio" name="vehiculoPropio"
+                        [disabled]="rol === 'empresa' || rol === 'profesor'"
                         [(ngModel)]="formPersonalData.vehiculoPropio">
                         <option [ngValue]="1">Sí</option>
                         <option [ngValue]="0">No</option>

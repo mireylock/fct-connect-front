@@ -18,6 +18,7 @@ import { ListTotalProfesoresComponent } from './componentes/listas-totales/list-
 import { ListParcialEmpresasComponent } from './componentes/listas-parciales/list-parcial-empresas/list-parcial-empresas.component';
 import { ListTotalEmpresasComponent } from './componentes/listas-totales/list-total-empresas/list-total-empresas.component';
 import { PerfilAlumnoComponent } from './componentes/perfiles/perfil-alumno/perfil-alumno.component';
+import { CrearSolicitudComponent } from './componentes/solicitudes/crear-solicitud/crear-solicitud.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'profesores', component:ListTotalProfesoresComponent}, 
     {path: 'empresas', component:ListTotalEmpresasComponent},
     {path: 'alumnos/:id', component:PerfilAlumnoComponent},
+    {path: 'solicitud/:id', component:CrearSolicitudComponent}
     
 
 ];

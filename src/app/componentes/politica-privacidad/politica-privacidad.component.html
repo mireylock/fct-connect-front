@@ -1,4 +1,15 @@
-<app-header-landing></app-header-landing>
+<div *ngIf="rol==undefined">
+    <app-header-landing></app-header-landing>
+</div>
+<div *ngIf="rol=='empresa'">
+    <app-header-empresa></app-header-empresa>
+</div>
+<div *ngIf="rol=='profesor'">
+    <app-header-profesor></app-header-profesor>
+</div>
+<div *ngIf="rol=='administrador'">
+    <app-header-administrador></app-header-administrador>
+</div>
 <div class="container-xxl bg-info p-5">
 
     <h1>Política de Privacidad</h1>

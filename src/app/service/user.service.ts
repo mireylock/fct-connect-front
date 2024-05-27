@@ -77,10 +77,10 @@ export class UserService {
     return this.http.get(URL_EMPRESAS);
   }
 
-  getTresEmpresas(): Observable<Object[]> { 
+  getSeisEmpresas(): Observable<Object[]> { 
     return this.http.get<Object[]>(URL_EMPRESAS) 
       .pipe(
-        map(empresas => empresas.slice(0, 3)), 
+        map(empresas => empresas.slice(0, 6)), 
         take(1)
       );
   }

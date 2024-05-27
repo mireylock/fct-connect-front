@@ -45,9 +45,7 @@ export class ListTotalAlumnosComponent implements OnInit {
   idioma: string = '';
   vehiculoPropio: string = '';
   
-  constructor(private userService:UserService, private idiomaService:IdiomaService, public authService:AuthService){
-
-  }
+  constructor(private userService:UserService, private idiomaService:IdiomaService, public authService:AuthService){}
 
   ngOnInit(): void {
     this.rol = this.authService.getRol();
@@ -127,65 +125,4 @@ export class ListTotalAlumnosComponent implements OnInit {
   }
 
 
-
-  // ngOnInit(): void {
-  //   this.getAlumnosPaginacion(0, this.tamanio);
-  //   this.getAllIdiomas();
-
-  //   if (this.storageService.isLoggedIn()) {
-  //     this.isLoggedIn = true;
-  //     this.idUser = this.storageService.getUser().id;
-  //     this.rolUser = this.storageService.getUser().rol;
-
-  //     switch (this.rolUser) {
-  //       case "alumno":
-  //         this.userService.getAlumno(this.idUser).subscribe({
-  //           next: (data) => {
-  //             this.alumno = data as Alumno;
-  //             console.log(this.alumno);
-  //           }, 
-  //           error: (err) => {
-  //             console.log(err);
-  //           }
-  //         })
-
-  //       break;
-
-  //       case "empresa":
-  //         this.userService.getEmpresa(this.idUser).subscribe({
-  //           next: (data) => {
-  //             this.empresa = data as Empresa;
-  //             console.log(this.empresa);
-  //           }, 
-  //           error: (err) => {
-  //             console.log(err);
-  //           }
-  //         });
-  //         break;
-
-  //       case "profesor":
-  //         this.userService.getProfesor(this.idUser).subscribe({
-  //           next: (data) => {
-  //             this.profesor = data as Profesor;
-  //           }, 
-  //           error: (err) => {
-  //             console.log(err);
-  //           }
-  //         });        
-  //       break;
-
-  //       case "administrador":
-  //         this.userService.getAdministrador(this.idUser).subscribe({
-  //           next: (data) => {
-  //             this.administrador = data as Administrador;
-  //           }, 
-  //           error: (err) => {
-  //             console.log(err);
-  //           }
-  //         });
-  //       break;
-  //     }
-
-  //   }
-  // }  
 }

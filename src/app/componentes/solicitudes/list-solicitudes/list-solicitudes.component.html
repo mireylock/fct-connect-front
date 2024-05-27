@@ -1,0 +1,75 @@
+<div *ngIf="rol=='empresa'">
+  <app-header-empresa></app-header-empresa>
+</div>
+<div *ngIf="rol=='alumno'">
+  <app-header-alumno></app-header-alumno>
+</div>
+
+<section class="bg-primary py-5">
+  <div class="row justify-content-center" *ngFor="let section of getSections()">
+    <div class="col-md-8 bg-info p-4 my-2">
+      <h3>{{section.title}}</h3>
+      <div class="card custom-card my-4">
+        <ul class="list-group list-group-flush text-start">
+          <li *ngIf="section.data.length === 0" class="list-group-item">
+            <em>No hay nada que mostrar</em>
+          </li>
+          <div *ngIf="section.data.length > 0">
+            <li *ngFor="let solicitud of section.data" class="list-group-item">
+              <div *ngIf="rol=='empresa'" class="d-flex align-items-center">
+                <img width="50px" [src]="solicitud.alumno.pathFoto" alt="foto perfil solicitante" class="me-2">
+                <h5 class="mb-0">{{solicitud.alumno.nombre}}</h5>
+              </div>
+
+              <div *ngIf="rol=='alumno'" class="d-flex align-items-center">
+                <img width="50px" [src]="solicitud.empresa.pathFoto" alt="foto perfil solicitante" class="me-2">
+                <h5 class="mb-0">{{solicitud.empresa.nombre}}</h5>
+              </div>
+              <p>{{solicitud.descripcion}}</p>
+
+              <div *ngIf="(rol=='alumno' && solicitud.tipo == 'EMPRESA_A_ALUMNO' && solicitud.estado == 'ENVIADA') 
+              || (rol=='empresa' && solicitud.tipo == 'ALUMNO_A_EMPRESA' && solicitud.estado == 'ENVIADA')"
+                class="mt-2 d-flex justify-content-end">
+                <button class="btn btn-primary me-2" (click)="aceptarSolicitud(solicitud.id)">Aceptar</button>
+                <button class="btn btn-outline-dark" (click)="rechazarSolicitud(solicitud.id)">Rechazar</button>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="modalSolicitudAceptada" tabindex="-1" aria-labelledby="modalSolicitudAceptada"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¡Solicitud Aceptada!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSolicitudRechazada" tabindex="-1" aria-labelledby="modalSolicitudRechazada"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¡Solicitud Aceptada!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

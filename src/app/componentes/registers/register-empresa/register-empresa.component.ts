@@ -5,11 +5,13 @@ import { UserService } from '../../../service/user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { EmpresaRequest } from '../../../interfaces/empresaRequest';
 import { AuthService } from '../../../service/auth.service';
+import { Modal } from 'bootstrap';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-empresa',
   standalone: true,
-  imports: [HeaderAdministradorComponent, FooterComponent, NgFor, NgIf],
+  imports: [HeaderAdministradorComponent, FooterComponent, NgFor, NgIf, RouterLink],
   templateUrl: './register-empresa.component.html',
   styleUrl: './register-empresa.component.scss'
 })
@@ -33,23 +35,20 @@ export class RegisterEmpresaComponent {
 
   aceptarSolicitud(empresaRequest:EmpresaRequest) {
     this.authService.registerEmpresa(empresaRequest.email, empresaRequest.password, empresaRequest.nombre, this.pathFoto).subscribe({
-      next: data => {
-        
+      next: () => {
         this.userService.deleteRequestEmpresa(empresaRequest.id).subscribe({
           next: () => {
             console.log('Empresa request eliminada'+empresaRequest);
+            this.abrirModalAceptada();
           },
           error: (error: any) => {
             console.log(error);
           }
         });
-        
-        alert("Solicitud aceptada!");
-        window.location.reload();
       }, 
       error: err => {
         this.errorMessage = err.error.message;
-        alert('¡Solicitud incorrecta! No se puede aceptar')
+        this.abrirModalErronea();
       }    
     });
   }
@@ -58,13 +57,41 @@ export class RegisterEmpresaComponent {
     this.userService.deleteRequestEmpresa(empresaRequest.id).subscribe({
       next: () => {
         console.log('Empresa request eliminada'+empresaRequest);
-        window.location.reload();
+        this.abrirModalRechazada();
       },
       error: (error: any) => {
         console.log(error);
       }
     });
 
+  }
+
+  abrirModalAceptada(): void {
+    const modalElement = document.getElementById('modalSolicitudAceptada');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  abrirModalErronea(): void {
+    const modalElement = document.getElementById('modalSolicitudErronea');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  abrirModalRechazada(): void {
+    const modalElement = document.getElementById('modalSolicitudRechazada');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  reload() {
+    window.location.reload();
   }
 
   

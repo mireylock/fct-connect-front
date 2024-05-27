@@ -12,10 +12,11 @@
           <p> Email: {{ er.email }}</p>
           <div class="d-flex justify-content-around">
 
-            <button class="btn bg-white btn-block" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar solicitud</button>
-            
-            <div class="modal fade" id="modalCancelar" tabindex="-1"
-              aria-labelledby="modalCancelarLabel" aria-hidden="true">
+            <button class="btn bg-white btn-block" data-bs-toggle="modal" [attr.data-bs-target]="'#modalCancelar' + er.id">Cancelar
+              solicitud</button>
+
+            <div class="modal fade" [id]="'modalCancelar' + er.id" tabindex="-1" aria-labelledby="modalCancelarLabel"
+              aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -25,16 +26,18 @@
                     <p>¿Está seguro de que desea eliminar la solicitud de {{ er.nombre }}?</p>
                   </div>
                   <div class="modal-footer d-flex justify-content-around">
-                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="cancelarSolicitud(er)">Aceptar</button>
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal"
+                      (click)="cancelarSolicitud(er)">Aceptar</button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#modalAceptar">Aceptar solicitud</button>
+            <button class="btn bg-primary text-white" data-bs-toggle="modal" [attr.data-bs-target]="'#modalAceptar' + er.id">Aceptar
+              solicitud</button>
 
-            <div class="modal fade" id="modalAceptar" tabindex="-1"
-              aria-labelledby="modalAceptarLabel" aria-hidden="true">
+            <div class="modal fade" [id]="'modalAceptar' + er.id" tabindex="-1" aria-labelledby="modalAceptarLabel"
+              aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -44,7 +47,8 @@
                     <p>¿Está seguro de que desea aceptar la solicitud de {{ er.nombre }}?</p>
                   </div>
                   <div class="modal-footer d-flex justify-content-around">
-                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="aceptarSolicitud(er)">Aceptar</button>
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal"
+                      (click)="aceptarSolicitud(er)">Aceptar</button>
                   </div>
                 </div>
               </div>
@@ -52,12 +56,60 @@
 
           </div>
         </div>
-
-        
-
-
       </div>
     </div>
+
+    <!-- Modal Solicitud Aceptada -->
+    <div class="modal fade" id="modalSolicitudAceptada" tabindex="-1" aria-labelledby="modalSolicitudAceptada"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">¡Solicitud Aceptada!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reload()"></button>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Solicitud Erronea -->
+    <div class="modal fade" id="modalSolicitudErronea" tabindex="-1" aria-labelledby="modalSolicitudErronea"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">¡Solicitud Errónea!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reload()"></button>
+          </div>
+          <div class="modal-body text-center">
+            <p>La solicitud es errónea y no se puede aceptar</p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Solicitud Rechazada -->
+    <div class="modal fade" id="modalSolicitudRechazada" tabindex="-1" aria-labelledby="modalSolicitudRechazada"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">¡Solicitud Rechazada!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reload()"></button>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 

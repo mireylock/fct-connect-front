@@ -7,6 +7,7 @@ import { AuthService } from '../../../service/auth.service';
 import { RouterLink } from '@angular/router';
 import { MailServiceService } from '../../../service/mail-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Modal } from 'bootstrap'; 
 
 
 @Component({
@@ -36,10 +37,10 @@ export class RequestEmpresaComponent {
     const { email, password, nombre, pathFoto } = this.form;
 
     this.authService.requestEmpresa(email, password, nombre, pathFoto).subscribe({
-      next: data => {
+      next: () => {
         this.solicitudEnviada = true;
         this.enviarMensaje();
-        window.location.reload();
+        this.abrirModal();
       },
       error: err => {
         // this.errorMessage = err.error.message;
@@ -47,6 +48,14 @@ export class RequestEmpresaComponent {
       }
     });
   } 
+
+  abrirModal(): void {
+    const modalElement = document.getElementById('modalSolicitudEnviada');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
 
   enviarMensaje() {
     this.mailService.sendMail(this.form).subscribe({

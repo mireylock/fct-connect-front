@@ -10,9 +10,9 @@ import { StorageService } from '../../../service/storage.service';
   styleUrl: './header-profesor.component.scss'
 })
 export class HeaderProfesorComponent {
-  constructor(private storageService:StorageService, private router:Router){}
-
   isLoggedIn = true;
+  
+  constructor(private storageService:StorageService, private router:Router){}
 
   logout(): void {
     this.storageService.clean();

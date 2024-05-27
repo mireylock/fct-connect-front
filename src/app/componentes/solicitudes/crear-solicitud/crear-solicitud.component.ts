@@ -8,6 +8,7 @@ import { Solicitud } from '../../../interfaces/solicitud';
 import { SolicitudService } from '../../../service/solicitud.service';
 import { Empresa } from '../../../interfaces/empresa';
 import { Alumno } from '../../../interfaces/alumno';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-crear-solicitud',
@@ -94,7 +95,7 @@ export class CrearSolicitudComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          window.location.reload();
+          this.abrirModal();
         },
         error: (err) => {
           console.log(err);
@@ -106,7 +107,15 @@ export class CrearSolicitudComponent implements OnInit {
     this.location.back();
   }
 
-  get caracteresRestantes(): number {
+  getCaracteresRestantes(): number {
     return 4000 - this.descripcion.length;
+  }
+
+  abrirModal(): void {
+    const modalElement = document.getElementById('modalSolicitudEnviada');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
   }
 }

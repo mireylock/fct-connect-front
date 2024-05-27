@@ -8,8 +8,12 @@ import { Observable, throwError } from 'rxjs';
 import { Solicitud } from '../interfaces/solicitud';
 import { Alumno } from '../interfaces/alumno';
 import { Empresa } from '../interfaces/empresa';
+import { SolicitudDTO } from '../interfaces/solicitud-dto';
 
-const URL_SOLICITUD = 'http://localhost:8080/v1/api/solicitudes';
+const URL_SOLICITUDES = 'http://localhost:8080/v1/api/solicitudes';
+const URL_SOLICITUDES_ALUMNO = 'http://localhost:8080/v1/api/solicitudes/alu';
+const URL_SOLICITUDES_EMPRESA = 'http://localhost:8080/v1/api/solicitudes/emp';
+
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({
@@ -57,9 +61,25 @@ export class SolicitudService {
     };
 
     return this.http.post<Solicitud>(
-      URL_SOLICITUD,
+      URL_SOLICITUDES,
       JSON.stringify(solicitudRecibida),
       HTTPOPTIONS
     );
+  }
+
+
+  //http://localhost:8080/v1/api/solicitudes/alu?estado=ENVIADA&tipo=EMPRESA_A_ALUMNO&idAlumno=4
+  getSolicitudesAlumno(estado:string, tipo:string, idAlumno:number):Observable<Object>{
+    return this.http.get(URL_SOLICITUDES_ALUMNO+'?estado='+estado+'&tipo='+tipo+'&id='+idAlumno);
+  }
+
+  getSolicitudesEmpresa(estado:string, tipo:string,idEmpresa:number):Observable<Object>{
+    return this.http.get(URL_SOLICITUDES_EMPRESA+'?estado='+estado+'&tipo='+tipo+'&id='+idEmpresa);
+  }
+
+  
+  updateSolicitud(solicitudDTO:SolicitudDTO):Observable<Object>{
+    const url = `${URL_SOLICITUDES}/${solicitudDTO.id}`;
+    return this.http.put<SolicitudDTO>(url, solicitudDTO, HTTPOPTIONS);
   }
 }

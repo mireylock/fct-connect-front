@@ -11,9 +11,9 @@ import { StorageService } from '../../../service/storage.service';
 })
 
 export class HeaderAdministradorComponent {
-  constructor(private storageService:StorageService, private router:Router){}
-
   isLoggedIn = true;
+  
+  constructor(private storageService:StorageService, private router:Router){}
 
   logout(): void {
     this.storageService.clean();

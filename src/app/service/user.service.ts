@@ -3,6 +3,7 @@ import { StorageService } from './storage.service';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map, take, throwError } from 'rxjs';
 import { AlumnoDTO } from '../interfaces/alumno-dto';
+import { Modal } from 'bootstrap';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
@@ -22,7 +23,6 @@ const HTTPOPTIONS = {
   providedIn: 'root'
 })
 export class UserService {
-
   
   constructor(private http:HttpClient) { };
 
@@ -99,6 +99,13 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  getBusquedaEmpresas(nombre: string, modadliadTrabajo:string, inglesSolicitado:string, tecnologia:string, pagina:number, tamanio:number):Observable<Object>  {
+    return this.http.get(URL_EMPRESAS+'?nombre='+nombre+'&modalidadTrabajo='+modadliadTrabajo+'&inglesSolicitado='+inglesSolicitado+'&tecnologia='+tecnologia+'&pagina='+pagina+'&tamanio='+tamanio);
+  }
+
+  getEmpresasPaginacion(pagina:number, tamanio:number):Observable<Object>{
+    return this.http.get(URL_EMPRESAS+'?pagina='+pagina+'&tamanio='+tamanio);
+  }
 
 
   /////// PROFESORES /////////

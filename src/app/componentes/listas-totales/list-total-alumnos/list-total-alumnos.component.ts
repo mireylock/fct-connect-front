@@ -65,10 +65,7 @@ export class ListTotalAlumnosComponent implements OnInit {
     })
   }
 
-  buscar() {
-    console.log('Nombre:', this.nombre);
-    console.log('Idioma:', this.idioma);
-    console.log('Vehículo propio:', this.vehiculoPropio);    
+  buscar() {  
     this.getBusquedaAlumnos(this.nombre, this.idioma, this.vehiculoPropio, this.pagina, this.tamanio);
   }
 

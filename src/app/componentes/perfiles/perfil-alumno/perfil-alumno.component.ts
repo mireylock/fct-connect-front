@@ -10,13 +10,14 @@ import { Alumno } from '../../../interfaces/alumno';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlumnoDTO } from '../../../interfaces/alumno-dto';
+import { HeaderAlumnoComponent } from '../../headers/header-alumno/header-alumno.component';
 
 @Component({
     selector: 'app-perfil-alumno',
     standalone: true,
     templateUrl: './perfil-alumno.component.html',
     styleUrl: './perfil-alumno.component.scss',
-    imports: [NgIf, NgClass, FormsModule, RouterLink, HeaderEmpresaComponent, HeaderProfesorComponent, HeaderAdministradorComponent, FooterComponent]
+    imports: [NgIf, NgClass, FormsModule, RouterLink, HeaderAlumnoComponent, HeaderEmpresaComponent, HeaderProfesorComponent, HeaderAdministradorComponent, FooterComponent]
 })
 export class PerfilAlumnoComponent implements OnInit {
 

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../../service/storage.service';
-import { UserService } from '../../service/user.service';
-import { Alumno } from '../../interfaces/alumno';
-import { Administrador } from '../../interfaces/administrador';
-import { Empresa } from '../../interfaces/empresa';
-import { Profesor } from '../../interfaces/profesor';
-import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
+import { NgIf } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { RouterLink } from "@angular/router";
+import { Alumno } from "../../../interfaces/alumno";
+import { Empresa } from "../../../interfaces/empresa";
+import { Profesor } from "../../../interfaces/profesor";
+import { Administrador } from "../../../interfaces/administrador";
+import { StorageService } from "../../../service/storage.service";
+import { UserService } from "../../../service/user.service";
+import { AuthService } from "../../../service/auth.service";
+
 
 @Component({
   selector: 'app-bienvenida',

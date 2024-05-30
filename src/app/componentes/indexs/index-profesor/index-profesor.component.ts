@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BienvenidaComponent } from "../../bienvenida/bienvenida.component";
+import { BienvenidaComponent } from '../bienvenida/bienvenida.component';
 
 @Component({
     selector: 'app-index-profesor',

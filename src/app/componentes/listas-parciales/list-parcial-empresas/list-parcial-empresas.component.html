@@ -1,28 +1,30 @@
-<section class="bg-primary">
+<section [ngClass]="{
+    'bg-primary': rol === 'administrador',
+    'bg-info': rol === 'alumno'}">
     <div class="container-xxl">
         <div class="col text-center p-5">
-            <h1 class="text-white">Empresas</h1>
-            <div id="empresasCarousel" class="carousel slide" data-bs-ride="carousel">
+            <h1 [ngClass]="{
+                'text-white': rol === 'administrador'}">Empresas</h1>
+            <div id="empresasCarousel" class="carousel" [ngClass]="{
+                'slide': rol === 'administrador',
+                'carousel-dark slide': rol === 'alumno'}" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item" *ngFor="let slide of slides; let i = index"
-                    [ngClass]="{'active': i === 0}">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-6 col-lg-4" *ngFor="let empresa of slide">
-                            <div class="card p-3 m-1 bg-info"  [routerLink]="['/empresas', empresa.id]">
-                                <div class="d-flex align-items-center justify-content-center my-3">
-                                    <img width="50" src={{empresa.pathFoto}}>
-                                    <h3 class="m-1">{{empresa.nombre}}</h3>
+                        [ngClass]="{'active': i === 0}">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-6 col-lg-4" *ngFor="let empresa of slide">
+                                <div class="card p-3 m-1" [ngClass]="{
+                                    'bg-primary': rol === 'alumno',
+                                    'bg-info': rol === 'administrador'}" [routerLink]="['/empresas', empresa.id]">
+                                    <div class="d-flex align-items-center justify-content-center my-3">
+                                        <img width="50" src={{empresa.pathFoto}}>
+                                        <h3 class="m-1" [ngClass]="{
+                                            'text-white': rol === 'alumno'}">{{empresa.nombre}}</h3>
+                                    </div>
                                 </div>
-                                <!-- <div class="text-center">
-                                    <img width="100" [src]="empresa.pathFoto" alt="{{empresa.nombre}}">
-                                    <h4>{{empresa.nombre}} {{empresa.apellido1}} {{empresa.apellido2}}</h4>
-                                    <a class="btn btn-warning text-white m-2"
-                                        [routerLink]="['/empresas', empresa.id]">Ver perfil</a>
-                                </div> -->
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <button class="carousel-control-prev text-primary" type="button" data-bs-target="#empresasCarousel"
                     data-bs-slide="prev">
@@ -36,9 +38,12 @@
                 </button>
             </div>
             <div class="p-3">
-                <a class="btn btn-warning text-white m-2" [routerLink]="['/empresas']">Ver Todas</a>
+                <a class='btn text-white m-2' [ngClass]="{
+                    'btn-warning': rol === 'administrador', 
+                    'btn-primary': rol === 'alumno'}" [routerLink]="['/empresas']">
+                    Ver Todas
+                </a>
             </div>
         </div>
     </div>
 </section>
-

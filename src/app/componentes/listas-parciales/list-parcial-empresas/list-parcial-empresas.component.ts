@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Empresa } from '../../../interfaces/empresa';
 import { UserService } from '../../../service/user.service';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-list-parcial-empresas',
@@ -15,11 +16,14 @@ export class ListParcialEmpresasComponent {
   empresas:Empresa[]=[];
   dbError:boolean=false;
   slides: any[][] = [];
+
+  rol:string | undefined;
   
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService, private authService:AuthService){}
 
   ngOnInit(): void {
     this.getEmpresasSlider();
+    this.rol = this.authService.getRol();
   }
 
   getEmpresasSlider() {

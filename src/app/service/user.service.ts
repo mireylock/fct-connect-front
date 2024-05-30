@@ -126,6 +126,10 @@ export class UserService {
     return this.http.get(URL_PROFESORES+'/'+id);
   }
 
+  getProfesoresTutoresAlumno(idAlumno:number):Observable<object> {
+    return this.http.get(URL_PROFESORES+'/alu/'+idAlumno);
+  }
+
 
   ////// ADMINISTRADOER //////
   getAdministrador(id:number):Observable<Object>{

@@ -1,4 +1,18 @@
-<app-header-landing></app-header-landing>
+<div *ngIf="rol==undefined">
+    <app-header-landing></app-header-landing>
+</div>
+<div *ngIf="rol=='alumno'">
+    <app-header-alumno></app-header-alumno>
+</div>
+<div *ngIf="rol=='empresa'">
+    <app-header-empresa></app-header-empresa>
+</div>
+<div *ngIf="rol=='profesor'">
+    <app-header-profesor></app-header-profesor>
+</div>
+<div *ngIf="rol=='administrador'">
+    <app-header-administrador></app-header-administrador>
+</div>
 <!-- SECCIÓN INICIO ALUMNOS, EMPRESAS, PROFESORES-->
 <section class="bg-primary">
     <div class="container-xxl">

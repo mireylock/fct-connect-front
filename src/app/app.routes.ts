@@ -33,7 +33,7 @@ export const routes: Routes = [
     {path: 'alumnos', component:ListTotalAlumnosComponent}, 
     {path: 'profesores', component:ListTotalProfesoresComponent}, 
     {path: 'empresas', component:ListTotalEmpresasComponent},
-    {path: 'alumnos/:id', component:PerfilAlumnoComponent},
+    {path: 'alumno/:id', component:PerfilAlumnoComponent},
     {path: 'solicitud/:id', component:CrearSolicitudComponent},
     {path: 'solicitudes', component:ListSolicitudesComponent},
 

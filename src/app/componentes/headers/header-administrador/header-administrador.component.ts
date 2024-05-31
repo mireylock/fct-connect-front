@@ -1,26 +1,43 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { StorageService } from '../../../service/storage.service';
+import { UserService } from '../../../service/user.service';
+import { Administrador } from '../../../interfaces/administrador';
+import { ProfileModalComponent } from '../../profile-modal/profile-modal.component';
 
 @Component({
   selector: 'app-header-administrador',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ProfileModalComponent],
   templateUrl: './header-administrador.component.html',
-  styleUrl: './header-administrador.component.scss'
+  styleUrl: './header-administrador.component.scss',
 })
+export class HeaderAdministradorComponent implements OnInit {
+  user: Administrador | undefined;
 
-export class HeaderAdministradorComponent {
-  isLoggedIn = true;
-  
-  constructor(private storageService:StorageService, private router:Router){}
+  @ViewChild(ProfileModalComponent) modalComponent!: ProfileModalComponent;
 
-  logout(): void {
-    this.storageService.clean();
-    this.isLoggedIn = false;
-    this.router.navigate(['/']).then(
-      () => {console.log('Logout OK, cargando página inicio...')}
-    )
+  constructor(
+    private storageService: StorageService,
+    private userService: UserService
+  ) {}
+
+  ngOnInit(): void {
+    const userId = this.storageService.getUser().id;
+    this.userService.getAdministrador(userId).subscribe({
+      next: (data) => {
+        this.user = data as Administrador;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
+
+  toggleModal(event: Event) {
+    const targetElement = event.target as HTMLElement;
+    this.modalComponent.toggleModal(targetElement);
+  }
+
 
 }

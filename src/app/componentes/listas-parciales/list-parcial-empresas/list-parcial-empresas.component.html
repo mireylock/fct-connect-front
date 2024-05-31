@@ -15,7 +15,7 @@
                             <div class="col-md-6 col-lg-4" *ngFor="let empresa of slide">
                                 <div class="card p-3 m-1" [ngClass]="{
                                     'bg-primary': rol === 'alumno',
-                                    'bg-info': rol === 'administrador'}" [routerLink]="['/empresas', empresa.id]">
+                                    'bg-info': rol === 'administrador'}" [routerLink]="['/empresa', empresa.id]">
                                     <div class="d-flex align-items-center justify-content-center my-3">
                                         <img width="50" src={{empresa.pathFoto}}>
                                         <h3 class="m-1" [ngClass]="{

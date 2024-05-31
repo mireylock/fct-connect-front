@@ -26,7 +26,7 @@ export class HeaderEmpresaComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.storageService.getUser().id;
-    this.userService.getAlumno(userId).subscribe({
+    this.userService.getEmpresa(userId).subscribe({
       next: (data) => {
         this.user = data as Empresa;
       },

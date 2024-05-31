@@ -17,6 +17,9 @@ import { ListTotalEmpresasComponent } from './componentes/listas-totales/list-to
 import { PerfilAlumnoComponent } from './componentes/perfiles/perfil-alumno/perfil-alumno.component';
 import { CrearSolicitudComponent } from './componentes/solicitudes/crear-solicitud/crear-solicitud.component';
 import { ListSolicitudesComponent } from './componentes/solicitudes/list-solicitudes/list-solicitudes.component';
+import { PerfilEmpresaComponent } from './componentes/perfiles/perfil-empresa/perfil-empresa.component';
+import { PerfilProfesorComponent } from './componentes/perfiles/perfil-profesor/perfil-profesor.component';
+import { PerfilAdministradorComponent } from './componentes/perfiles/perfil-administrador/perfil-administrador.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -36,6 +39,12 @@ export const routes: Routes = [
     {path: 'alumno/:id', component:PerfilAlumnoComponent},
     {path: 'solicitud/:id', component:CrearSolicitudComponent},
     {path: 'solicitudes', component:ListSolicitudesComponent},
+    {path: 'empresa/:id', component:PerfilEmpresaComponent},
+    {path: 'profesor/:id', component:PerfilProfesorComponent},
+    {path: 'administrador/:id', component:PerfilAdministradorComponent},
+
+
+
 
     
 

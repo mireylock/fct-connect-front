@@ -1,6 +1,7 @@
 import { AlumnoHablaIdioma } from "./alumno-habla-idioma";
 import { Formacion } from "./formacion";
 import { Idioma } from "./idioma";
+import { ProfesorTutorizaAlumno } from './profesor-tutoriza-alumno';
 
 export interface Alumno {
     id: number;
@@ -19,4 +20,5 @@ export interface Alumno {
     vehiculoPropio?: number;
     formacion?: Formacion;
     idiomas?:Idioma[];
+    profesorTutorizaAlumnos: ProfesorTutorizaAlumno[];
 }

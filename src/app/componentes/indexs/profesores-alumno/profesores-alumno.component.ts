@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { Profesor } from '../../../interfaces/profesor';
 import { StorageService } from '../../../service/storage.service';
+import { Alumno } from '../../../interfaces/alumno';
+import { ProfesorTutorizaAlumno } from '../../../interfaces/profesor-tutoriza-alumno';
 
 @Component({
   selector: 'app-profesores-alumno',
@@ -14,26 +16,25 @@ import { StorageService } from '../../../service/storage.service';
 })
 export class ProfesoresAlumnoComponent implements OnInit {
 
-  profesoresTutoresAlumno:Profesor[] | undefined;
+  alumno:Alumno | undefined;
+  profesorTutorizaAlumno:ProfesorTutorizaAlumno[] | undefined;
 
   constructor(private userService:UserService, private storageService:StorageService){}
 
   ngOnInit(): void {
     const idAlumno = this.storageService.getUser().id;
     this.getProfesoresTutoresAlumno(idAlumno);
-    
   }
 
   getProfesoresTutoresAlumno(idAlumno:number) {
-    this.userService.getProfesoresTutoresAlumno(idAlumno).subscribe({
+    this.userService.getAlumno(idAlumno).subscribe({
       next: (data) => {
-        this.profesoresTutoresAlumno = data as Profesor[];
-        console.log(this.profesoresTutoresAlumno)
+        this.alumno = data as Alumno;
+        this.profesorTutorizaAlumno = this.alumno.profesorTutorizaAlumnos;
       }, 
       error: (err) => {
         console.log(err);
       }
-
     })
   }
 

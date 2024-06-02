@@ -21,17 +21,19 @@ export class RegisterAlumnoComponent {
     email: null,
     password: null, 
     rol:"alumno", 
-    pathFoto:"../../../../assets/img/profile.png"
+    pathFoto:"../../../../assets/img/profile.png",
+    carnetConducir:0,
+    vehiculoPropio:0
   };
   errorMessage: any;
 
   constructor(private authService:AuthService){}
   
   onSubmit(): void {
-    const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
+    const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto, carnetConducir, vehiculoPropio } = this.form;
 
-    this.authService.register(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
-      next: data => {
+    this.authService.registerAlumno(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto, carnetConducir, vehiculoPropio).subscribe({
+      next: () => {
         alert("Alumno registrado!");
         window.location.reload();
       },

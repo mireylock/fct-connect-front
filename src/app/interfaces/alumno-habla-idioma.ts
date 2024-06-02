@@ -2,8 +2,9 @@ import { Alumno } from "./alumno";
 import { Idioma } from "./idioma";
 
 export interface AlumnoHablaIdioma {
+    nivel:string;
     pathDiploma:string;
     descripcion:string;
-    alumno:Alumno;
     idioma:Idioma;    
+    alumno:Alumno;
 }

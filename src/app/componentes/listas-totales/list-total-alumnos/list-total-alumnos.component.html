@@ -84,8 +84,8 @@
                             <li *ngIf="alumno.idiomas?.length" class="list-group-item my-1"><i
                                     class="fa-solid fa-language me-2 text-primary"></i>
                                 Idiomas:
-                                <ul *ngFor="let idioma of alumno.idiomas">
-                                    <em>{{idioma.nombre}}</em>
+                                <ul *ngFor="let idiomaALumno of alumno.idiomas">
+                                    <span>{{idiomaALumno.idioma.nombre}}: <em>{{returnNivelIdiomaLowerCase(idiomaALumno.nivel)}}</em></span>
                                 </ul>
                             </li>
 

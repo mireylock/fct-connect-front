@@ -20,6 +20,7 @@ import { ListSolicitudesComponent } from './componentes/solicitudes/list-solicit
 import { PerfilEmpresaComponent } from './componentes/perfiles/perfil-empresa/perfil-empresa.component';
 import { PerfilProfesorComponent } from './componentes/perfiles/perfil-profesor/perfil-profesor.component';
 import { PerfilAdministradorComponent } from './componentes/perfiles/perfil-administrador/perfil-administrador.component';
+import { AddIdiomaComponent } from './componentes/perfiles/perfil-alumno/add-idioma/add-idioma/add-idioma.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -42,6 +43,8 @@ export const routes: Routes = [
     {path: 'empresa/:id', component:PerfilEmpresaComponent},
     {path: 'profesor/:id', component:PerfilProfesorComponent},
     {path: 'administrador/:id', component:PerfilAdministradorComponent},
+    {path: 'addIdioma/:id', component:AddIdiomaComponent},
+
 
 
 

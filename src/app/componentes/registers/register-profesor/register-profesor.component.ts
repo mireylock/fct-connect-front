@@ -29,8 +29,8 @@ export class RegisterProfesorComponent {
   onSubmit(): void {
     const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
 
-    this.authService.register(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
-      next: data => {
+    this.authService.registerProfesor(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
+      next: () => {
         alert("Profesor registrado!");
         window.location.reload();
       },

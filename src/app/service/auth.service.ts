@@ -55,7 +55,7 @@ export class AuthService {
     );
   }
 
-  register(
+  registerAdmin(
     email: string,
     password: string,
     rol: string,
@@ -63,7 +63,7 @@ export class AuthService {
     apellido1: string,
     apellido2: string,
     dni: string,
-    pathFoto: string
+    pathFoto: string, 
   ): Observable<any> {
     let registerRequest = {
       email: email,
@@ -74,6 +74,66 @@ export class AuthService {
       apellido2: apellido2,
       dni: dni,
       pathFoto: pathFoto,
+    };
+
+    return this.httpClient.post(
+      this.apiAuthURL + 'register',
+      JSON.stringify(registerRequest),
+      this.httpOptions
+    );
+  }
+
+  registerProfesor(
+    email: string,
+    password: string,
+    rol: string,
+    nombre: string,
+    apellido1: string,
+    apellido2: string,
+    dni: string,
+    pathFoto: string, 
+  ): Observable<any> {
+    let registerRequest = {
+      email: email,
+      password: password,
+      rol: rol,
+      nombre: nombre,
+      apellido1: apellido1,
+      apellido2: apellido2,
+      dni: dni,
+      pathFoto: pathFoto,
+    };
+
+    return this.httpClient.post(
+      this.apiAuthURL + 'register',
+      JSON.stringify(registerRequest),
+      this.httpOptions
+    );
+  }
+
+  registerAlumno(
+    email: string,
+    password: string,
+    rol: string,
+    nombre: string,
+    apellido1: string,
+    apellido2: string,
+    dni: string,
+    pathFoto: string, 
+    carnetConducir:number,
+    vehiculoPropio:number
+  ): Observable<any> {
+    let registerRequest = {
+      email: email,
+      password: password,
+      rol: rol,
+      nombre: nombre,
+      apellido1: apellido1,
+      apellido2: apellido2,
+      dni: dni,
+      pathFoto: pathFoto,
+      carnetConducir: carnetConducir, 
+      vehiculoPropio: vehiculoPropio
     };
 
     return this.httpClient.post(

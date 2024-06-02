@@ -14,7 +14,6 @@ const URL_SOLICITUDES = 'http://localhost:8080/v1/api/solicitudes';
 const URL_SOLICITUDES_ALUMNO = 'http://localhost:8080/v1/api/solicitudes/alu';
 const URL_SOLICITUDES_EMPRESA = 'http://localhost:8080/v1/api/solicitudes/emp';
 
-
 const HTTPOPTIONS = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -67,18 +66,40 @@ export class SolicitudService {
     );
   }
 
-
   //http://localhost:8080/v1/api/solicitudes/alu?estado=ENVIADA&tipo=EMPRESA_A_ALUMNO&idAlumno=4
-  getSolicitudesAlumno(estado:string, tipo:string, idAlumno:number):Observable<Object>{
-    return this.http.get(URL_SOLICITUDES_ALUMNO+'?estado='+estado+'&tipo='+tipo+'&id='+idAlumno);
+  getSolicitudesAlumno(
+    estado: string,
+    tipo: string,
+    idAlumno: number
+  ): Observable<Object> {
+    return this.http.get(
+      URL_SOLICITUDES_ALUMNO +
+        '?estado=' +
+        estado +
+        '&tipo=' +
+        tipo +
+        '&id=' +
+        idAlumno
+    );
   }
 
-  getSolicitudesEmpresa(estado:string, tipo:string,idEmpresa:number):Observable<Object>{
-    return this.http.get(URL_SOLICITUDES_EMPRESA+'?estado='+estado+'&tipo='+tipo+'&id='+idEmpresa);
+  getSolicitudesEmpresa(
+    estado: string,
+    tipo: string,
+    idEmpresa: number
+  ): Observable<Object> {
+    return this.http.get(
+      URL_SOLICITUDES_EMPRESA +
+        '?estado=' +
+        estado +
+        '&tipo=' +
+        tipo +
+        '&id=' +
+        idEmpresa
+    );
   }
 
-  
-  updateSolicitud(solicitudDTO:SolicitudDTO):Observable<Object>{
+  updateSolicitud(solicitudDTO: SolicitudDTO): Observable<Object> {
     const url = `${URL_SOLICITUDES}/${solicitudDTO.id}`;
     return this.http.put<SolicitudDTO>(url, solicitudDTO, HTTPOPTIONS);
   }

@@ -29,8 +29,8 @@ export class RegisterAdminComponent {
   onSubmit(): void {
     const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
 
-    this.authService.register(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
-      next: data => {
+    this.authService.registerAdmin(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
+      next: () => {
 
 
         window.location.reload();

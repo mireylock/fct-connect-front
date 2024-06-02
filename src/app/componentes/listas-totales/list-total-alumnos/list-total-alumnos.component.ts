@@ -50,19 +50,6 @@ export class ListTotalAlumnosComponent implements OnInit {
   ngOnInit(): void {
     this.rol = this.authService.getRol();
     this.getAlumnosPaginacion(0, this.tamanio);
-    this.getAllIdiomas();
-  }
-
-
-  getAllIdiomas() {
-    this.idiomaService.getAllIdiomas().subscribe({
-      next: (data) => {
-        this.idiomas = data as Idioma[];  
-      }, 
-      error: (err) => {
-        console.log(err+'ALUMNOS');
-      }
-    })
   }
 
   buscar() {  
@@ -121,5 +108,9 @@ export class ListTotalAlumnosComponent implements OnInit {
     this.getAlumnosPaginacion(numeroPagina, this.tamanio);
   }
 
+  returnNivelIdiomaLowerCase(nivelIdioma:string) {
+    if (!nivelIdioma) return "";
+    return nivelIdioma[0].toUpperCase() + nivelIdioma.slice(1).toLowerCase();
+  }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Profesor } from '../../../interfaces/profesor';
 import { StorageService } from '../../../service/storage.service';
 import { Alumno } from '../../../interfaces/alumno';
@@ -10,7 +10,7 @@ import { ProfesorTutorizaAlumno } from '../../../interfaces/profesor-tutoriza-al
 @Component({
   selector: 'app-profesores-alumno',
   standalone: true,
-  imports: [RouterLink, NgFor],
+  imports: [RouterLink, NgFor, NgIf],
   templateUrl: './profesores-alumno.component.html',
   styleUrl: './profesores-alumno.component.scss'
 })

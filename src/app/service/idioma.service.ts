@@ -1,8 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { AlumnoHablaIdiomaDTO } from '../interfaces/alumno-habla-idioma-dto';
+
 
 const URL_IDIOMAS="http://localhost:8080/v1/api/idiomas";
+
+const HTTPOPTIONS = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +35,30 @@ export class IdiomaService {
 
   getAllIdiomas():Observable<Object>{
     return this.http.get(URL_IDIOMAS);
+  }
+
+  crearAlumnoHablaIdioma (
+    nivel:string,
+    pathDiploma:string,
+    descripcion:string,
+    idiomaId:number, 
+    alumnoId:number
+  ): Observable<any> {
+    let creado = {
+      pathDiploma:pathDiploma,
+      descripcion:descripcion,
+      nivel:nivel, 
+      idiomaId:idiomaId, 
+      alumnoId:alumnoId
+    };
+
+    console.log('creado json'+JSON.stringify(creado))
+
+    return this.http.post<AlumnoHablaIdiomaDTO>(
+      URL_IDIOMAS,
+      JSON.stringify(creado),
+      HTTPOPTIONS
+    );
   }
 
 

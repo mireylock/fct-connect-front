@@ -11,165 +11,222 @@
     <app-header-alumno></app-header-alumno>
 </div>
 
-<div class="bg-primary p-3">
-    <div class="d-flex align-items-center justify-content-center my-3 text-white">
-        <img width="150" class="me-2 profile-photo" src="{{alumno?.pathFoto}}" alt="Foto del alumno">
-        <div class="profile-info">
-            <h2 class="profile-name">{{alumno?.nombre}} {{alumno?.apellido1}} {{alumno?.apellido2}}</h2>
-            <h5 class="profile-education">{{alumno?.formacion?.nivel}}, {{alumno?.formacion?.nombre}}</h5>
+<div class="container">
+    <div class="bg-primary p-3">
+        <div class="d-flex align-items-center justify-content-center my-3 text-white">
+            <img width="150" class="me-2 profile-photo" src="{{alumno?.pathFoto}}" alt="Foto del alumno">
+            <div class="profile-info">
+                <h2 class="profile-name">{{alumno?.nombre}} {{alumno?.apellido1}} {{alumno?.apellido2}}</h2>
+                <h5 class="profile-education">{{alumno?.formacion?.nivel}}, {{alumno?.formacion?.nombre}}</h5>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="bg-info text-center py-3 my-3">
-    <div class="d-flex justify-content-center align-items-center">
-        <h2>Datos Personales</h2>
+    <div class="bg-info text-center py-3 my-3">
+        <div class="d-flex justify-content-center align-items-center">
+            <h2>Datos Personales</h2>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+            <form class="col-md-6" name="formPersonalData" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                novalidate>
+
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-id-card text-primary"></i>
+                        </span>
+                        <span class="input-group-text fw-bold">
+                            DNI:
+                        </span>
+                        <input type="dni" class="form-control" id="dni" name="dni" [(ngModel)]="formPersonalData.dni"
+                            disabled [value]="alumno?.dni" #dni="ngModel">
+                    </div>
+                </div>
+
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                        </span>
+                        <span class="input-group-text fw-bold">
+                            Email:
+                        </span>
+                        <input type="email" class="form-control" id="email" name="email"
+                            [(ngModel)]="formPersonalData.email" disabled [value]="alumno?.email">
+                    </div>
+                </div>
+
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                        </span>
+                        <span class="input-group-text fw-bold">
+                            Tlf:
+                        </span>
+                        <input type="telefono" class="form-control" id="telefono" name="telefono"
+                            [(ngModel)]="formPersonalData.telefono" [value]="alumno?.telefono" #telefono="ngModel">
+                    </div>
+                </div>
+
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                        </span>
+                        <span class="input-group-text fw-bold">
+                            Dirección:
+                        </span>
+                        <input type="direccion" class="form-control" id="direccion" name="direccion"
+                            [(ngModel)]="formPersonalData.direccion" [value]="alumno?.direccion" #direccion="ngModel">
+                    </div>
+                </div>
+                <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
+                    Guardar Cambios
+                </button>
+            </form>
+        </div>
+
+        <button *ngIf="rol === 'empresa' || rol === 'administrador'" class="btn bg-primary text-white"
+            [routerLink]="['/solicitud/'+alumno?.id]">
+            Enviar Solicitud
+        </button>
+
     </div>
 
-    <div class="d-flex justify-content-center align-items-center">
-        <form class="col-md-6" name="formPersonalData" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="bg-info text-center py-3 my-3">
+        <div class="d-flex justify-content-center align-items-center">
+            <h2>Expediente académico</h2>
+        </div>
 
-            <!--DNI-->
-            <div class="form-group p-2">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="fa-solid fa-id-card text-primary"></i>
-                    </span>
-                    <span class="input-group-text fw-bold">
-                        DNI:
-                    </span>
-                    <input type="dni" class="form-control" id="dni" name="dni" [(ngModel)]="formPersonalData.dni"
-                        disabled [value]="alumno?.dni" #dni="ngModel">
-                </div>
-            </div>
-
-            <!--EMAIL-->
-            <div class="form-group p-2">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="fa-solid fa-envelope text-primary"></i>
-                    </span>
-                    <span class="input-group-text fw-bold">
-                        Email:
-                    </span>
-                    <input type="email" class="form-control" id="email" name="email"
-                        [(ngModel)]="formPersonalData.email" disabled [value]="alumno?.email">
-                </div>
-            </div>
-
-            <!--TELEFONO-->
-            <div class="form-group p-2">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="fa-solid fa-phone text-primary"></i>
-                    </span>
-                    <span class="input-group-text fw-bold">
-                        Tlf:
-                    </span>
-                    <input type="telefono" class="form-control" id="telefono" name="telefono"
-                        [(ngModel)]="formPersonalData.telefono" [value]="alumno?.telefono" #telefono="ngModel">
-                </div>
-            </div>
-
-            <!--DIRECCIÓN-->
-            <div class="form-group p-2">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="fa-solid fa-location-dot text-primary"></i>
-                    </span>
-                    <span class="input-group-text fw-bold">
-                        Dirección:
-                    </span>
-                    <input type="direccion" class="form-control" id="direccion" name="direccion"
-                        [(ngModel)]="formPersonalData.direccion" [value]="alumno?.direccion" #direccion="ngModel">
-                </div>
-            </div>
-            <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
-                Guardar Cambios
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn bg-white">
+                <i class="fa-solid fa-eye"></i>
+                Ver expediente
             </button>
-        </form>
+        </div>
     </div>
 
-    <button *ngIf="rol === 'empresa' || rol === 'administrador'" class="btn bg-primary text-white"
-        [routerLink]="['/solicitud/'+alumno?.id]">
-        Enviar Solicitud
-    </button>
+    <div class="bg-info text-center py-3 my-3">
+        <div class="d-flex justify-content-center align-items-center">
+            <h2>Idiomas</h2>
+        </div>
 
-</div>
+        <div class="d-flex justify-content-center align-items-center p-3">
+            <div class="col-md-6">
+                <em *ngIf="alumno?.idiomas?.length === 0">No hay idiomas que mostrar</em>
+                <div class="form-group p-2" *ngFor="let idiomaAlumno of alumno?.idiomas; let i = index">
+                    <div class="input-group">
+                        <div class="form-control text-start">
+                            <span class="me-3">
+                                <i class="fa-solid fa-language text-primary"></i>
+                            </span>
+                            <span class="me-1">
+                                {{idiomaAlumno.idioma.nombre}}:
+                            </span>
+                            <em>{{returnNivelIdiomaLowerCase(idiomaAlumno.nivel)}}</em>
 
-<div class="bg-info text-center py-3 my-3">
-    <div class="d-flex justify-content-center align-items-center">
-        <h2>Expediente académico</h2>
-    </div>
+                            <p>
+                                <em>{{idiomaAlumno.descripcion}}</em>
+                            </p>
 
-    <div class="d-flex justify-content-center align-items-center">
-        <button class="btn bg-white">
-            <i class="fa-solid fa-eye"></i>
-            Ver expediente
+                            <a href="#" *ngIf="idiomaAlumno.pathDiploma != undefined">Ver diploma</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button [routerLink]="['/addIdioma/'+alumno?.id]" *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
+            Añadir idioma
         </button>
     </div>
-</div>
 
-<div class="bg-info text-center py-3 my-3">
-    <div class="d-flex justify-content-center align-items-center">
-        <h2>Currículum Vitae</h2>
-    </div>
 
-    <div class="d-flex justify-content-center align-items-center">
-        <button class="btn bg-white">
-            <i class="fa-solid fa-eye"></i>
-            Ver Currículum
-        </button>
-    </div>
-</div>
 
-<div class="bg-info text-center py-3 my-3">
-    <div class="d-flex justify-content-center align-items-center">
-        <h2>Datos de interés</h2>
-    </div>
+    <div class="bg-info text-center py-3 my-3">
+        <div class="d-flex justify-content-center align-items-center">
+            <h2>Currículum Vitae</h2>
+        </div>
 
-    <div class="d-flex justify-content-center align-items-center">
-        <form class="col-md-6" name="formPersonalData" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-            <!-- CARNET -->
-            <div class="form-group p-2">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="fa-solid fa-id-badge text-primary"></i>
-                    </span>
-                    <span class="input-group-text fw-bold">
-                        Carnet:
-                    </span>
-                    <select class="form-select" id="carnetConducir" name="carnetConducir"
-                        [disabled]="rol === 'empresa' || rol === 'profesor'"
-                        [(ngModel)]="formPersonalData.carnetConducir">
-                        <option [ngValue]="1">Sí</option>
-                        <option [ngValue]="0">No</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- VEHICULO -->
-            <div class="form-group p-2">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="fa-solid fa-car text-primary"></i>
-                    </span>
-                    <span class="input-group-text fw-bold">
-                        Vehículo propio:
-                    </span>
-                    <select class="form-select" id="vehiculoPropio" name="vehiculoPropio"
-                        [disabled]="rol === 'empresa' || rol === 'profesor'"
-                        [(ngModel)]="formPersonalData.vehiculoPropio">
-                        <option [ngValue]="1">Sí</option>
-                        <option [ngValue]="0">No</option>
-                    </select>
-                </div>
-            </div>
-
-            <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
-                Guardar Cambios
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn bg-white">
+                <i class="fa-solid fa-eye"></i>
+                Ver Currículum
             </button>
-        </form>
+        </div>
+    </div>
+
+    <div class="bg-info text-center py-3 my-3">
+        <div class="d-flex justify-content-center align-items-center">
+            <h2>Datos de interés</h2>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+            <form class="col-md-6" name="formPersonalData" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                novalidate>
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-id-badge text-primary"></i>
+                        </span>
+                        <span class="input-group-text fw-bold">
+                            Carnet:
+                        </span>
+                        <select class="form-select" id="carnetConducir" name="carnetConducir"
+                            [disabled]="rol === 'empresa' || rol === 'profesor'"
+                            [(ngModel)]="formPersonalData.carnetConducir">
+                            <option [ngValue]="1">Sí</option>
+                            <option [ngValue]="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-car text-primary"></i>
+                        </span>
+                        <span class="input-group-text fw-bold">
+                            Vehículo propio:
+                        </span>
+                        <select class="form-select" id="vehiculoPropio" name="vehiculoPropio"
+                            [disabled]="rol === 'empresa' || rol === 'profesor'"
+                            [(ngModel)]="formPersonalData.vehiculoPropio">
+                            <option [ngValue]="1">Sí</option>
+                            <option [ngValue]="0">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
+                    Guardar Cambios
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="rol === 'empresa' || rol==='administrador'" class="bg-info text-center py-3 my-3">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="col-md-6 col-lg-4">
+                <h2>Profesor Asociado</h2>
+                <div *ngIf="tutorPracticas === undefined">
+                    <em>No hay profesor asociado</em>
+                </div>
+                <div *ngIf="tutorPracticas != undefined" class="card p-3 m-1 bg-primary text-white">
+                    <div class="text-center">
+                        <img width="100" [src]="tutorPracticas.pathFoto" alt="Foto profesor">
+                        <div>
+                            <h4>{{tutorPracticas.nombre}} {{tutorPracticas.apellido1}} {{tutorPracticas.apellido2}}
+                            </h4>
+                        </div>
+                        <a class="btn btn-warning text-white m-2" [routerLink]="['/profesor', tutorPracticas.id]">
+                            Ver perfil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

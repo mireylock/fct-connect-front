@@ -19,6 +19,6 @@ export interface Alumno {
     carnetConducir?: number;
     vehiculoPropio?: number;
     formacion?: Formacion;
-    idiomas?:Idioma[];
+    idiomas?:AlumnoHablaIdioma[];
     profesorTutorizaAlumnos: ProfesorTutorizaAlumno[];
 }

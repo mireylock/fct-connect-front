@@ -8,7 +8,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { AuthService } from '../../../service/auth.service';
 import { Solicitud } from '../../../interfaces/solicitud';
 import { SolicitudService } from '../../../service/solicitud.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Modal } from 'bootstrap';
 
 @Component({
@@ -22,6 +22,7 @@ import { Modal } from 'bootstrap';
     FooterComponent,
     NgIf,
     NgFor,
+    RouterLink
   ],
   templateUrl: './list-solicitudes.component.html',
   styleUrl: './list-solicitudes.component.scss',

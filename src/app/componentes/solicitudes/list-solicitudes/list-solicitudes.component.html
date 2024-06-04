@@ -18,12 +18,12 @@
             <li *ngFor="let solicitud of section.data" class="list-group-item">
               <div *ngIf="rol=='empresa'" class="d-flex align-items-center">
                 <img width="50px" [src]="solicitud.alumno.pathFoto" alt="foto perfil solicitante" class="me-2">
-                <h5 class="mb-0">{{solicitud.alumno.nombre}}</h5>
+                <h5 class="mb-0"><a [routerLink]="['/alumno/',solicitud.alumno.id]">{{solicitud.alumno.nombre}}</a></h5>
               </div>
 
               <div *ngIf="rol=='alumno'" class="d-flex align-items-center">
                 <img width="50px" [src]="solicitud.empresa.pathFoto" alt="foto perfil solicitante" class="me-2">
-                <h5 class="mb-0">{{solicitud.empresa.nombre}}</h5>
+                <h5 class="mb-0"><a [routerLink]="['/empresa/',solicitud.empresa.id]">{{solicitud.empresa.nombre}}</a></h5>
               </div>
               <p>{{solicitud.descripcion}}</p>
 
@@ -61,7 +61,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">¡Solicitud Aceptada!</h5>
+        <h5 class="modal-title">¡Solicitud Rechazada!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-footer d-flex justify-content-center">

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AlumnoHablaIdiomaDTO } from '../interfaces/alumno-habla-idioma-dto';
 
 
@@ -59,6 +59,12 @@ export class IdiomaService {
       JSON.stringify(creado),
       HTTPOPTIONS
     );
+  }
+
+  deleteAlumnoHablaIdioma(id:number):Observable<any>{
+    const url = `${URL_IDIOMAS}/aluIdioma/${id}`;
+    return this.http.delete<AlumnoHablaIdiomaDTO>(url, HTTPOPTIONS)
+    .pipe(catchError(this.handleError));
   }
 
 

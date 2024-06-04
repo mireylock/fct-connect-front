@@ -5,14 +5,15 @@ import { HeaderEmpresaComponent } from '../../headers/header-empresa/header-empr
 import { HeaderProfesorComponent } from '../../headers/header-profesor/header-profesor.component';
 import { HeaderAdministradorComponent } from '../../headers/header-administrador/header-administrador.component';
 import { FooterComponent } from '../../footer/footer.component';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgIf, NgClass, NgFor, Location } from '@angular/common';
 import { Alumno } from '../../../interfaces/alumno';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlumnoDTO } from '../../../interfaces/alumno-dto';
 import { HeaderAlumnoComponent } from '../../headers/header-alumno/header-alumno.component';
 import { Profesor } from '../../../interfaces/profesor';
-import { ListTotalAlumnosComponent } from '../../listas-totales/list-total-alumnos/list-total-alumnos.component';
+import { Modal } from 'bootstrap';
+import { IdiomaService } from '../../../service/idioma.service';
 
 @Component({
   selector: 'app-perfil-alumno',
@@ -38,6 +39,7 @@ export class PerfilAlumnoComponent implements OnInit {
   alumno: Alumno | undefined;
   alumnoDTO: AlumnoDTO | undefined;
   tutorPracticas: Profesor | undefined;
+  modalCambiosRealizados = 'modalCambiosRealizados';
 
   formPersonalData: any = {
     id: this.getId(),
@@ -48,9 +50,11 @@ export class PerfilAlumnoComponent implements OnInit {
   };
 
   constructor(
+    private location: Location,
     private userService: UserService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private idiomaService: IdiomaService
   ) {}
 
   onSubmit() {
@@ -67,7 +71,7 @@ export class PerfilAlumnoComponent implements OnInit {
 
     this.userService.updateAlumno(alumnoDTO).subscribe({
       next: () => {
-        window.location.reload;
+        this.abrirModal(this.modalCambiosRealizados);
       },
       error: (error) => {
         console.log(error);
@@ -75,6 +79,32 @@ export class PerfilAlumnoComponent implements OnInit {
     });
   }
 
+  eliminarIdioma(id:number) {
+    this.idiomaService.deleteAlumnoHablaIdioma(id).subscribe({
+      next: () => {
+        window.location.reload();
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+    
+  }
+
+  abrirModal(modalId:string): void {
+    const modalElement = document.getElementById(modalId);
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  
+  goBack(): void {
+    this.location.back();
+  }
+
+  
   ngOnInit(): void {
     this.rol = this.authService.getRol();
     this.getAlumno(this.id);

@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Observable, catchError, map, take, throwError } from 'rxjs';
 import { AlumnoDTO } from '../interfaces/alumno-dto';
 import { Modal } from 'bootstrap';
+import { Empresa } from '../interfaces/empresa';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
@@ -59,6 +60,7 @@ export class UserService {
 
 
   getBusquedaAlumnos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number):Observable<Object> {
+    console.log('IDIOMA'+ idioma);
     return this.http.get(URL_ALUMNOS+'?nombre='+nombre+'&idioma='+idioma+'&vehiculoPropio='+vehiculoPropio+'&pagina='+pagina+'&tamanio='+tamanio);
   }
   
@@ -105,6 +107,11 @@ export class UserService {
 
   getEmpresasPaginacion(pagina:number, tamanio:number):Observable<Object>{
     return this.http.get(URL_EMPRESAS+'?pagina='+pagina+'&tamanio='+tamanio);
+  }
+
+  updateEmpresa(empresa:Empresa):Observable<Object>{
+    const url = `${URL_EMPRESAS}/${empresa.id}`;
+    return this.http.put<AlumnoDTO>(url, empresa, HTTPOPTIONS);
   }
 
 

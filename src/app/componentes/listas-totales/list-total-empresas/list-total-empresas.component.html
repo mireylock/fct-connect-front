@@ -75,47 +75,45 @@
 
 
         <div class="row justify-content-center">
+            <div class="col-md-4 bg-info card card-container m-3" *ngFor="let empresa of empresas">
+                <div class="card-body text-center ">
+                    <div class="d-flex align-items-center justify-content-center my-3">
+                        <img width="50" class="me-2" src={{empresa.pathFoto}} alt="Foto del empresa">
+                        <h5 class="card-title mt-3">{{empresa.nombre}}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush text-start">
+                        <li *ngIf="empresa.inglesSolicitado" class="list-group-item my-1"><i
+                                class="fa-solid fa-language me-2 text-primary"></i>
+                            Inglés:
+                            <em *ngIf="empresa.inglesSolicitado == inglesSolicitadoValue[0]">Imprescindible</em>
+                            <em *ngIf="empresa.inglesSolicitado == inglesSolicitadoValue[1]">Importante</em>
+                            <em *ngIf="empresa.inglesSolicitado == inglesSolicitadoValue[2]">No necesario</em>
 
-            <div class="col-md-6">
-                <div class="card card-container my-4" *ngFor="let empresa of empresas">
-                    <div class="card-body text-center bg-info">
-                        <div class="d-flex align-items-center justify-content-center my-3">
-                            <img width="50" class="me-2" src={{empresa.pathFoto}} alt="Foto del empresa">
-                            <h5 class="card-title mt-3">{{empresa.nombre}}</h5>
-                        </div>
-                        <ul class="list-group list-group-flush text-start">
-                            <li *ngIf="empresa.inglesSolicitado" class="list-group-item my-1"><i class="fa-solid fa-language me-2 text-primary"></i>
-                                Inglés:
-                                <em *ngIf="empresa.inglesSolicitado == inglesSolicitadoValue[0]">Imprescindible</em>
-                                <em *ngIf="empresa.inglesSolicitado == inglesSolicitadoValue[1]">Importante</em>
-                                <em *ngIf="empresa.inglesSolicitado == inglesSolicitadoValue[2]">No necesario</em>
+                        </li>
 
-                            </li>
-
-                            <li *ngIf="empresa.modalidadesTrabajo?.length" class="list-group-item my-1"><i
-                                    class="fa-solid fa-briefcase text-primary"></i>
-                                Modalidades de trabajo:
-                                <ul *ngFor="let modalidad of modalidadesTrabajo">
-                                    <em>{{modalidad}}</em>
-                                    <i class="fa-solid ms-1" [ngClass]="{
+                        <li *ngIf="empresa.modalidadesTrabajo?.length" class="list-group-item my-1"><i
+                                class="fa-solid fa-briefcase text-primary"></i>
+                            Modalidades de trabajo:
+                            <ul *ngFor="let modalidad of modalidadesTrabajo">
+                                <em>{{modalidad}}</em>
+                                <i class="fa-solid ms-1" [ngClass]="{
                                             'fa-square-check text-success': isModalidadPresente(empresa.modalidadesTrabajo, modalidad),
                                             'fa-square-xmark text-danger': !isModalidadPresente(empresa.modalidadesTrabajo, modalidad)
                                         }">
-                                    </i>
-                                </ul>
-                            </li>
+                                </i>
+                            </ul>
+                        </li>
 
 
-                            <li *ngIf="empresa.tecnologias?.length" class="list-group-item my-1"><i
-                                    class="fa-solid fa-laptop-code me-2 text-primary"></i>
-                                Tecnologías:
-                                <ul *ngFor="let tecnologia of empresa.tecnologias">
-                                    <em>{{tecnologia.nombre}}</em>
-                                </ul>
-                            </li>
-                        </ul>
-                        <a class="btn btn-primary text-white m-2" [routerLink]="['/empresa/'+empresa.id]">Ver más</a>
-                    </div>
+                        <li *ngIf="empresa.tecnologias?.length" class="list-group-item my-1"><i
+                                class="fa-solid fa-laptop-code me-2 text-primary"></i>
+                            Tecnologías:
+                            <ul *ngFor="let tecnologia of empresa.tecnologias">
+                                <em>{{tecnologia.nombre}}</em>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a class="btn btn-primary text-white m-2" [routerLink]="['/empresa/'+empresa.id]">Ver más</a>
                 </div>
             </div>
         </div>

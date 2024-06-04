@@ -22,7 +22,7 @@
                     <label for="idiomaAlumno" class="form-label text-white">Idioma</label>
                     <select class="form-select" id="idiomaAlumno" [(ngModel)]="idioma" name="idioma">
                         <option value="">Todos los idiomas</option>
-                        <option *ngFor="let idioma of idiomas" [value]="idioma.nombre">{{idioma.nombre}}</option>
+                        <option *ngFor="let idioma of idiomas" [value]="idioma.id">{{idioma.nombre}}</option>
                     </select>
                 </div>
 
@@ -66,38 +66,38 @@
         </div>
 
 
+
+
         <div class="row justify-content-center">
-
-            <div class="col-md-6">                
-                <div class="card card-container my-4" *ngFor="let alumno of alumnos">
-                    <div class="card-body text-center bg-info">
-                        <div class="d-flex align-items-center justify-content-center my-3">
-                            <img width="50" class="me-2" src={{alumno.pathFoto}} alt="Foto del alumno">
-                            <h5 class="card-title mt-3">{{alumno.nombre}} {{alumno.apellido1}} {{alumno.apellido2}}</h5>
-                        </div>
-                        <ul class="list-group list-group-flush text-start">
-                            <li class="list-group-item my-1"><i
-                                    class="fa-solid fa-graduation-cap me-2 text-primary"></i>{{alumno.formacion?.nivel}}:
-                                <em>{{alumno.formacion?.nombre}}</em>
-                            </li>
-
-                            <li *ngIf="alumno.idiomas?.length" class="list-group-item my-1"><i
-                                    class="fa-solid fa-language me-2 text-primary"></i>
-                                Idiomas:
-                                <ul *ngFor="let idiomaALumno of alumno.idiomas">
-                                    <span>{{idiomaALumno.idioma.nombre}}: <em>{{returnNivelIdiomaLowerCase(idiomaALumno.nivel)}}</em></span>
-                                </ul>
-                            </li>
-
-                            <li class="list-group-item my-1"><i class="fa-solid fa-car me-2 text-primary"></i>Vehículo
-                                propio: <em>{{alumno.vehiculoPropio==1?'Sí ':'No'}}</em>
-                                <i class="fa-solid ms-1"
-                                    [ngClass]="{'fa-square-check text-success': alumno.vehiculoPropio == 1, 'fa-square-xmark text-danger': alumno.vehiculoPropio != 1}">
-                                </i>
-                            </li>
-                        </ul>
-                        <a class="btn btn-primary text-white m-2"  [routerLink]="['/alumno/'+alumno.id]">Ver más</a>
+            <div class="col-md-4 bg-info card card-container m-3" *ngFor="let alumno of alumnos">
+                <div class="card-body text-center">
+                    <div class="d-flex align-items-center justify-content-center my-3">
+                        <img width="50" class="me-2" src={{alumno.pathFoto}} alt="Foto del alumno">
+                        <h5 class="card-title mt-3">{{alumno.nombre}} {{alumno.apellido1}} {{alumno.apellido2}}</h5>
                     </div>
+                    <ul class="list-group list-group-flush text-start">
+                        <li class="list-group-item my-1"><i
+                                class="fa-solid fa-graduation-cap me-2 text-primary"></i>{{alumno.formacion?.nivel}}:
+                            <em>{{alumno.formacion?.nombre}}</em>
+                        </li>
+
+                        <li *ngIf="alumno.idiomas?.length" class="list-group-item my-1"><i
+                                class="fa-solid fa-language me-2 text-primary"></i>
+                            Idiomas:
+                            <ul *ngFor="let idiomaALumno of alumno.idiomas">
+                                <span>{{idiomaALumno.idioma.nombre}}:
+                                    <em>{{returnNivelIdiomaLowerCase(idiomaALumno.nivel)}}</em></span>
+                            </ul>
+                        </li>
+
+                        <li class="list-group-item my-1"><i class="fa-solid fa-car me-2 text-primary"></i>Vehículo
+                            propio: <em>{{alumno.vehiculoPropio==1?'Sí ':'No'}}</em>
+                            <i class="fa-solid ms-1"
+                                [ngClass]="{'fa-square-check text-success': alumno.vehiculoPropio == 1, 'fa-square-xmark text-danger': alumno.vehiculoPropio != 1}">
+                            </i>
+                        </li>
+                    </ul>
+                    <a class="btn btn-primary text-white m-2" [routerLink]="['/alumno/'+alumno.id]">Ver más</a>
                 </div>
             </div>
         </div>

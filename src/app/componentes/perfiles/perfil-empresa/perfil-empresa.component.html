@@ -1,1 +1,182 @@
-<p>perfil-empresa works!</p>
+<div *ngIf="rol=='empresa'">
+    <app-header-empresa></app-header-empresa>
+</div>
+<div *ngIf="rol=='profesor'">
+    <app-header-profesor></app-header-profesor>
+</div>
+<div *ngIf="rol=='administrador'">
+    <app-header-administrador></app-header-administrador>
+</div>
+<div *ngIf="rol=='alumno'">
+    <app-header-alumno></app-header-alumno>
+</div>
+
+<div class="container">
+    <div class="bg-primary p-3">
+        <div class="d-flex align-items-center justify-content-center my-3 text-white">
+            <img width="150" class="me-2 profile-photo" src="{{empresa?.pathFoto}}" alt="Foto del empresa">
+            <div class="profile-info">
+                <h2 class="profile-name">{{empresa?.nombre}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-info text-center py-3 my-3">
+        <div class="row justify-content-center">
+            <h2>Perfil solicitado</h2>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="d-flex justify-content-center align-items-center">
+                <form class="col-md-6" name="formPersonalData" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                    novalidate>
+                    <div class="form-group p-2">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-id-badge text-primary"></i>
+                            </span>
+                            <span class="input-group-text fw-bold">
+                                Inglés:
+                            </span>
+                            <select class="form-select" id="inglesSolicitado" name="inglesSolicitado"
+                                [disabled]="rol != 'empresa'" [(ngModel)]="form.inglesSolicitado">
+                                <option [ngValue]="'IMPRESCINDIBLE'">Imprescindible</option>
+                                <option [ngValue]="'IMPORTANTE'">Importante</option>
+                                <option [ngValue]="'NO_NECESARIO'">No necesario</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="rol=='empresa'" class="list-group list-group-flush text-start">
+                        <div class="form-group p-2">
+                            <div class="list-group-item my-1 fw-bold">
+                                <p class="d-flex align-items-center">
+                                    <i class="fa-solid fa-briefcase text-primary me-2"></i>
+                                    Modalidades de trabajo:
+                                </p>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="hibrido"
+                                        [checked]="form.modalidadesTrabajo.includes('HIBRIDO')"
+                                        (change)="onCheckboxChange($event, 'HIBRIDO')">
+                                    <label class="form-check-label fst-italic" for="hibrido">Híbrido</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="online"
+                                        [checked]="form.modalidadesTrabajo.includes('ONLINE')"
+                                        (change)="onCheckboxChange($event, 'ONLINE')">
+                                    <label class="form-check-label fst-italic" for="online">Online</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="presencial"
+                                        [checked]="form.modalidadesTrabajo.includes('PRESENCIAL')"
+                                        (change)="onCheckboxChange($event, 'PRESENCIAL')">
+                                    <label class="form-check-label fst-italic" for="presencial">Presencial</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="rol !='empresa'" class="list-group list-group-flush text-start">
+                        <div class="form-group p-2 fw-bold">
+                            <div *ngIf="empresa?.modalidadesTrabajo?.length" class="list-group-item my-1">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-briefcase text-primary me-2"></i>
+                                    <span>Modalidades de trabajo:</span>
+                                </div>
+                                <div class="ms-4">
+                                    <div *ngFor="let modalidad of empresa?.modalidadesTrabajo"
+                                        class="d-flex align-items-center my-1">
+                                        <em>{{returnModalidadFirstLetterUpper(modalidad)}}</em>
+                                        <i class="fa-solid ms-1"
+                                            [ngClass]="{
+                                                'fa-square-check text-success': isModalidadPresente(empresa?.modalidadesTrabajo, modalidad),
+                                                'fa-square-xmark text-danger': !isModalidadPresente(empresa?.modalidadesTrabajo, modalidad)}">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button *ngIf="rol === 'empresa'" class="btn bg-primary text-white">
+                        Guardar cambios
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <app-tecnologia></app-tecnologia>
+
+    <div class="bg-info text-center py-3 my-3">
+        <div class="row justify-content-center">
+            <h2>Resumen</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <form class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="resumen" name="resumen" [(ngModel)]="form.resumen"
+                            [value]="empresa?.resumen" #resumen="ngModel" [disabled]="rol!='empresa'">
+                    </div>
+                </div>
+
+                <button *ngIf="rol === 'empresa' || rol === 'administrador'" class="btn bg-primary text-white">
+                    Guardar Cambios
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-info text-center py-3 my-3">
+        <div class="row justify-content-center">
+            <h2>Sitio web</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <form class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="sitioWeb" name="sitioWeb"
+                            [(ngModel)]="form.pathSitioWeb" [value]="empresa?.pathSitioWeb" [disabled]="rol!='empresa'"
+                            #pathSitioWeb="ngModel">
+
+
+                    </div>
+                </div>
+
+                <div class="form-group p-2">
+                    <div class="input-group">
+                        <a href="{{empresa?.pathSitioWeb}}">{{empresa?.pathSitioWeb}}</a>
+                    </div>
+                </div>
+
+                <button *ngIf="rol=='empresa'" class="btn bg-primary text-white">
+                    Guardar Cambios
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCambiosRealizados" tabindex="-1" aria-labelledby="modalCambiosRealizados"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">¡Cambios guardados!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<app-footer></app-footer>

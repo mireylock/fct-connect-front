@@ -66,7 +66,8 @@
                             Tlf:
                         </span>
                         <input type="telefono" class="form-control" id="telefono" name="telefono"
-                            [(ngModel)]="formPersonalData.telefono" [value]="alumno?.telefono" #telefono="ngModel">
+                            [(ngModel)]="formPersonalData.telefono" [value]="alumno?.telefono" #telefono="ngModel"
+                            [disabled]="rol != 'alumno'">
                     </div>
                 </div>
 
@@ -79,7 +80,8 @@
                             Dirección:
                         </span>
                         <input type="direccion" class="form-control" id="direccion" name="direccion"
-                            [(ngModel)]="formPersonalData.direccion" [value]="alumno?.direccion" #direccion="ngModel">
+                            [(ngModel)]="formPersonalData.direccion" [value]="alumno?.direccion" #direccion="ngModel"
+                            [disabled]="rol != 'alumno'">
                     </div>
                 </div>
                 <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
@@ -108,59 +110,7 @@
         </div>
     </div>
 
-    <div class="bg-info text-center py-3">
-        <h2>Idiomas</h2>
-
-        <div class="d-flex justify-content-center align-items-center py-3">
-            <div class="col-md-6">
-                <em *ngIf="alumno?.idiomas?.length === 0">No hay idiomas que mostrar</em>
-                <div class="form-group p-2" *ngFor="let idiomaAlumno of alumno?.idiomas; let i = index">
-                    <div class="input-group">
-                        <div class="form-control text-start d-flex justify-content-between">
-                            <div>
-                                <span class="me-3">
-                                    <i class="fa-solid fa-language text-primary"></i>
-                                </span>
-                                <span class="me-1">
-                                    {{idiomaAlumno.idioma.nombre}}:
-                                </span>
-                                <em>{{returnNivelIdiomaLowerCase(idiomaAlumno.nivel)}}</em>
-
-                                <p>
-                                    <em>{{idiomaAlumno.descripcion}}</em>
-                                </p>
-                                <a href="#" *ngIf="idiomaAlumno.pathDiploma != undefined">Ver diploma</a>
-                            </div>
-                            <i (click)="abrirModal('modalEliminarIdioma')" class="fa-solid fa-xmark"></i>
-
-                            <div class="modal fade" id="modalEliminarIdioma" tabindex="-1"
-                                aria-labelledby="modalEliminarIdioma" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">¿Desea eliminar el idioma?</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-footer d-flex justify-content-center">
-                                            <button class="btn btn-primary btn-block"
-                                                (click)="eliminarIdioma(idiomaAlumno.id)">Aceptar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button [routerLink]="['/addIdioma/'+alumno?.id]" *ngIf="rol === 'alumno' || rol === 'administrador'"
-            class="btn bg-primary text-white">
-            Añadir idioma
-        </button>
-    </div>
-
+    <app-idioma></app-idioma>
 
 
     <div class="bg-info text-center py-3 my-3">
@@ -193,8 +143,7 @@
                             Carnet:
                         </span>
                         <select class="form-select" id="carnetConducir" name="carnetConducir"
-                            [disabled]="rol === 'empresa' || rol === 'profesor'"
-                            [(ngModel)]="formPersonalData.carnetConducir">
+                            [(ngModel)]="formPersonalData.carnetConducir" [disabled]="rol != 'alumno'">
                             <option [ngValue]="1">Sí</option>
                             <option [ngValue]="0">No</option>
                         </select>

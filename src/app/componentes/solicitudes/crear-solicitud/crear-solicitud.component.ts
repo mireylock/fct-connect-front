@@ -9,6 +9,7 @@ import { SolicitudService } from '../../../service/solicitud.service';
 import { Empresa } from '../../../interfaces/empresa';
 import { Alumno } from '../../../interfaces/alumno';
 import { Modal } from 'bootstrap';
+import { UtilsService } from '../../../service/utils.service';
 
 @Component({
   selector: 'app-crear-solicitud',
@@ -34,7 +35,8 @@ export class CrearSolicitudComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private solicitudService: SolicitudService
+    private solicitudService: SolicitudService, 
+    private utilsService:UtilsService
   ) {}
 
   ngOnInit(): void {
@@ -111,11 +113,9 @@ export class CrearSolicitudComponent implements OnInit {
     return 4000 - this.descripcion.length;
   }
 
+  modalSolicitudEnviada:string='modalSolicitudEnviada';
+
   abrirModal(): void {
-    const modalElement = document.getElementById('modalSolicitudEnviada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudEnviada);
   }
 }

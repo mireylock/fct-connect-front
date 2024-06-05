@@ -1,0 +1,50 @@
+<div class="bg-info text-center py-3">
+    <h2>Tecnologías</h2>
+
+    <div class="d-flex justify-content-center align-items-center py-3">
+        <div class="col-md-6">
+            <em *ngIf="empresa?.tecnologias?.length === 0">No hay tecnologías que mostrar</em>
+            <div class="form-group p-2" *ngFor="let tecnologia of empresa?.tecnologias; let i = index">
+                <div class="input-group">
+                    <div class="form-control text-start d-flex justify-content-between">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="me-2">
+                                <i class="fa-solid fa-laptop-code text-primary"></i>
+                            </div>
+                            <div>
+                                {{tecnologia.nombre}}
+                                <div>
+                                    <em>{{tecnologia.descripcion}}</em>
+                                </div>
+                            </div>
+                        </div>
+
+                        <i *ngIf="rol=='empresa'" (click)="abrirModal(tecnologia.id)" class="fa-solid fa-xmark"></i>
+
+                        <div class="modal fade" id="modalEliminarTecnologia{{tecnologia.id}}" tabindex="-1"
+                            aria-labelledby="modalEliminarTecnologia" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">¿Desea eliminar la tecnología?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button class="btn btn-primary btn-block"
+                                            (click)="eliminarTecnologia(tecnologia.id)">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <button [routerLink]="['/addTecnologia/'+empresa?.id]" *ngIf="rol === 'empresa' || rol === 'administrador'"
+        class="btn bg-primary text-white">
+        Añadir Tecnología
+    </button>
+</div>

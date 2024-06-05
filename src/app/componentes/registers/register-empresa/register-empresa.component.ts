@@ -5,8 +5,8 @@ import { UserService } from '../../../service/user.service';
 import { NgFor, NgIf } from '@angular/common';
 import { EmpresaRequest } from '../../../interfaces/empresaRequest';
 import { AuthService } from '../../../service/auth.service';
-import { Modal } from 'bootstrap';
 import { RouterLink } from '@angular/router';
+import { UtilsService } from '../../../service/utils.service';
 
 @Component({
   selector: 'app-register-empresa',
@@ -22,7 +22,7 @@ export class RegisterEmpresaComponent {
   pathFoto:string = "../../../../assets/img/profile.png";
   errorAceptar:boolean=false;
   
-  constructor(private userService:UserService, private authService:AuthService){
+  constructor(private userService:UserService, private authService:AuthService, private utilsService:UtilsService){
     this.userService.getRequestEmpresas().subscribe({
       next: (data) => {
         this.empresasRequest = data as EmpresaRequest[];
@@ -66,28 +66,20 @@ export class RegisterEmpresaComponent {
 
   }
 
+  modalSolicitudAceptada:string='modalSolicitudAceptada';
+  modalSolicitudErronea:string='modalSolicitudErronea';
+  modalSolicitudRechazada:string='modalSolicitudRechazada';
+
   abrirModalAceptada(): void {
-    const modalElement = document.getElementById('modalSolicitudAceptada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudAceptada);
   }
 
   abrirModalErronea(): void {
-    const modalElement = document.getElementById('modalSolicitudErronea');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudErronea);
   }
 
   abrirModalRechazada(): void {
-    const modalElement = document.getElementById('modalSolicitudRechazada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudRechazada);
   }
 
   reload() {

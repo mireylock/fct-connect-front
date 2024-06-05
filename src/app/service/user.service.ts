@@ -5,6 +5,7 @@ import { Observable, catchError, map, take, throwError } from 'rxjs';
 import { AlumnoDTO } from '../interfaces/alumno-dto';
 import { Modal } from 'bootstrap';
 import { Empresa } from '../interfaces/empresa';
+import { EmpresaDto } from '../interfaces/empresa-dto';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
@@ -109,9 +110,9 @@ export class UserService {
     return this.http.get(URL_EMPRESAS+'?pagina='+pagina+'&tamanio='+tamanio);
   }
 
-  updateEmpresa(empresa:Empresa):Observable<Object>{
-    const url = `${URL_EMPRESAS}/${empresa.id}`;
-    return this.http.put<AlumnoDTO>(url, empresa, HTTPOPTIONS);
+  updateEmpresa(empresaDto:EmpresaDto):Observable<Object>{
+    const url = `${URL_EMPRESAS}/${empresaDto.id}`;
+    return this.http.put<AlumnoDTO>(url, empresaDto, HTTPOPTIONS);
   }
 
 

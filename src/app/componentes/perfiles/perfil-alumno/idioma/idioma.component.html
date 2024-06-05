@@ -1,0 +1,56 @@
+<div class="bg-info text-center py-3">
+    <h2>Idiomas</h2>
+
+    <div class="d-flex justify-content-center align-items-center py-3">
+        <div class="col-md-6">
+            <em *ngIf="alumno?.idiomas?.length === 0">No hay idiomas que mostrar</em>
+            <div class="form-group p-2" *ngFor="let idiomaAlumno of alumno?.idiomas">
+                <div class="input-group">
+                    <div class="form-control text-start d-flex justify-content-between">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="me-2">
+                                <i class="fa-solid fa-language text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="mb-1">
+                                    {{idiomaAlumno.idioma.nombre}}: 
+                                    <em>{{returnNivelIdiomaFirstLetterUpper(idiomaAlumno.nivel)}}</em>
+                                </p>
+                                <div>
+                                    <em>{{idiomaAlumno.descripcion}}</em>
+                                </div>
+                                <div>
+                                    <a href="#" *ngIf="idiomaAlumno.pathDiploma != undefined">Ver diploma</a>
+                                </div>
+                            </div>
+                        </div>
+                        <i *ngIf="rol == 'alumno'" (click)="abrirModal(idiomaAlumno.id)" class="fa-solid fa-xmark"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="modal fade" id="modalEliminarIdioma{{idiomaAlumno.id}}" tabindex="-1" aria-labelledby="modalEliminarIdioma"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">¿Desea eliminar el idioma {{idiomaAlumno.id}}?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button *ngIf="rol=='alumno'" class="btn btn-primary btn-block"
+                                    (click)="eliminarIdioma(idiomaAlumno.id)">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button [routerLink]="['/addIdioma/'+alumno?.id]" *ngIf="rol === 'alumno' || rol === 'administrador'"
+        class="btn bg-primary text-white">
+        Añadir idioma
+    </button>
+</div>

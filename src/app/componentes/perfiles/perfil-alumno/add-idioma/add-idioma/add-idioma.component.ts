@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Idioma } from '../../../../../interfaces/idioma';
 import { ActivatedRoute } from '@angular/router';
 import { IdiomaService } from '../../../../../service/idioma.service';
-import { Modal } from 'bootstrap';
-import { Location, NgFor } from '@angular/common';
+import { Location, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Alumno } from '../../../../../interfaces/alumno';
 import { UserService } from '../../../../../service/user.service';
 import { SubidaArchivoComponent } from '../../../../subida-archivo/subida-archivo.component';
+import { UtilsService } from '../../../../../service/utils.service';
 
 @Component({
   selector: 'app-add-idioma',
   standalone: true,
-  imports: [FormsModule, NgFor, SubidaArchivoComponent],
+  imports: [FormsModule, NgFor, SubidaArchivoComponent, NgIf],
   templateUrl: './add-idioma.component.html',
   styleUrl: './add-idioma.component.scss',
 })
@@ -22,10 +22,11 @@ export class AddIdiomaComponent implements OnInit {
   nivel: any = '';
   pathDiploma: any;
   descripcion: any = '';
-  idiomaId:any = '';
+  idiomaId: any = '';
   alumnoId: any;
 
   niveles: string[] = ['PRINCIPIANTE', 'MEDIO', 'AVANZADO', 'NATIVO'];
+  modalIdiomaAdded: string = 'modalIdiomaAdded';
 
   //subir archivo
   selectedFile: File | null = null;
@@ -35,20 +36,17 @@ export class AddIdiomaComponent implements OnInit {
   }
   //////
 
-
   constructor(
     private location: Location,
     private route: ActivatedRoute,
     private idiomaService: IdiomaService,
-    private userService: UserService
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit(): void {
     this.getAllIdiomas();
     this.alumnoId = this.getId();
-    
   }
-
 
   getId() {
     this.route.paramMap.subscribe((params) => {
@@ -76,7 +74,6 @@ export class AddIdiomaComponent implements OnInit {
     }
     ///////////////
 
-
     this.idiomaService
       .crearAlumnoHablaIdioma(
         this.nivel,
@@ -100,15 +97,10 @@ export class AddIdiomaComponent implements OnInit {
   }
 
   abrirModal(): void {
-    const modalElement = document.getElementById('modalSolicitudEnviada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalIdiomaAdded);
   }
 
   getCaracteresRestantes(): number {
     return 300 - this.descripcion.length;
   }
-
 }

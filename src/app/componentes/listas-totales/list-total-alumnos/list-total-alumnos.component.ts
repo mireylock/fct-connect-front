@@ -18,6 +18,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { HeaderEmpresaComponent } from '../../headers/header-empresa/header-empresa.component';
+import { UtilsService } from '../../../service/utils.service';
 
 @Component({
   selector: 'app-list-total-alumnos',
@@ -45,7 +46,7 @@ export class ListTotalAlumnosComponent implements OnInit {
   idioma: string = '';
   vehiculoPropio: string = '';
   
-  constructor(private userService:UserService, private idiomaService:IdiomaService, public authService:AuthService){}
+  constructor(private userService:UserService, private idiomaService:IdiomaService, public authService:AuthService, private utilsService:UtilsService){}
 
   ngOnInit(): void {
     this.rol = this.authService.getRol();
@@ -121,8 +122,7 @@ export class ListTotalAlumnosComponent implements OnInit {
   }
 
   returnNivelIdiomaFirstLetterUpper(nivelIdioma:string) {
-    if (!nivelIdioma) return "";
-    return nivelIdioma[0].toUpperCase() + nivelIdioma.slice(1).toLowerCase();
+    return this.utilsService.returnFirstLetterUpper(nivelIdioma);
   }
 
 }

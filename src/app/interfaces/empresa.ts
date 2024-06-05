@@ -6,9 +6,9 @@ export interface Empresa {
     password: string;
     nombre: string;
     pathFoto:string;
-    resumen:string;
-    pathSitioWeb:string;
     inglesSolicitado:string;
     modalidadesTrabajo:string[];
+    resumen:string;
+    pathSitioWeb:string;
     tecnologias:Tecnologia[];
 }

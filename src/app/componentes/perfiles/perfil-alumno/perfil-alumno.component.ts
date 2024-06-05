@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { AlumnoDTO } from '../../../interfaces/alumno-dto';
 import { HeaderAlumnoComponent } from '../../headers/header-alumno/header-alumno.component';
 import { Profesor } from '../../../interfaces/profesor';
-import { Modal } from 'bootstrap';
-import { IdiomaService } from '../../../service/idioma.service';
+import { UtilsService } from '../../../service/utils.service';
+import { IdiomaComponent } from './idioma/idioma.component';
 
 @Component({
   selector: 'app-perfil-alumno',
@@ -31,6 +31,7 @@ import { IdiomaService } from '../../../service/idioma.service';
     HeaderProfesorComponent,
     HeaderAdministradorComponent,
     FooterComponent,
+    IdiomaComponent
   ],
 })
 export class PerfilAlumnoComponent implements OnInit {
@@ -54,8 +55,14 @@ export class PerfilAlumnoComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private route: ActivatedRoute, 
-    private idiomaService: IdiomaService
+    private utilsService: UtilsService
   ) {}
+
+  ngOnInit(): void {
+    this.rol = this.authService.getRol();
+    this.getAlumno(this.id);
+    console.log(this.formPersonalData);
+  }
 
   onSubmit() {
     const { id, telefono, direccion, carnetConducir, vehiculoPropio } =
@@ -71,7 +78,7 @@ export class PerfilAlumnoComponent implements OnInit {
 
     this.userService.updateAlumno(alumnoDTO).subscribe({
       next: () => {
-        this.abrirModal(this.modalCambiosRealizados);
+        this.utilsService.abrirModal(this.modalCambiosRealizados);
       },
       error: (error) => {
         console.log(error);
@@ -79,36 +86,9 @@ export class PerfilAlumnoComponent implements OnInit {
     });
   }
 
-  eliminarIdioma(id:number) {
-    this.idiomaService.deleteAlumnoHablaIdioma(id).subscribe({
-      next: () => {
-        window.location.reload();
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-    
-  }
 
-  abrirModal(modalId:string): void {
-    const modalElement = document.getElementById(modalId);
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
-  }
-
-  
   goBack(): void {
     this.location.back();
-  }
-
-  
-  ngOnInit(): void {
-    this.rol = this.authService.getRol();
-    this.getAlumno(this.id);
-    console.log(this.formPersonalData);
   }
 
   getId() {
@@ -147,8 +127,5 @@ export class PerfilAlumnoComponent implements OnInit {
     };
   }
 
-  returnNivelIdiomaLowerCase(nivelIdioma:string) {
-    if (!nivelIdioma) return "";
-    return nivelIdioma[0].toUpperCase() + nivelIdioma.slice(1).toLowerCase();
-  }
+
 }

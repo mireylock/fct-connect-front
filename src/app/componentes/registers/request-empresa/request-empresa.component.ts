@@ -7,7 +7,7 @@ import { AuthService } from '../../../service/auth.service';
 import { RouterLink } from '@angular/router';
 import { MailServiceService } from '../../../service/mail-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Modal } from 'bootstrap'; 
+import { UtilsService } from '../../../service/utils.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class RequestEmpresaComponent {
   errorMessage: any;
   solicitudEnviada:boolean=false;
 
-  constructor(private authService:AuthService, private cdr: ChangeDetectorRef, private mailService:MailServiceService){}
+  constructor(private authService:AuthService, private cdr: ChangeDetectorRef, private mailService:MailServiceService, private utilsService:UtilsService){}
 
   onSubmit(): void {
     const { email, password, nombre, pathFoto } = this.form;
@@ -49,12 +49,10 @@ export class RequestEmpresaComponent {
     });
   } 
 
+  modalSolicitudEnviada:string='modalSolicitudEnviada';
+
   abrirModal(): void {
-    const modalElement = document.getElementById('modalSolicitudEnviada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudEnviada);
   }
 
   enviarMensaje() {

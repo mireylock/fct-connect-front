@@ -10,10 +10,11 @@
         </div>
 
         <div class="mb-3">
-            <select class="form-select" id="niveles" name="niveles" [(ngModel)]="nivel">
+            <select class="form-select" id="niveles" name="niveles" [(ngModel)]="nivel" required>
                 <option value="">Elija el nivel</option>
                 <option *ngFor="let nivel of niveles" [ngValue]="nivel">{{nivel}}</option>
             </select>
+            <div *ngIf="nivel!='PRINCIPIANTE' || nivel!='MEDIO' || nivel!='AVANZADO' || nivel!='NATIVO'" class="text-danger">El nivel es obligatorio.</div>
         </div>
 
         <div class="mb-3">
@@ -37,7 +38,7 @@
 
 
 
-    <div class="modal fade" id="modalSolicitudEnviada" tabindex="-1" aria-labelledby="modalSolicitudEnviada"
+    <div class="modal fade" id="modalIdiomaAdded" tabindex="-1" aria-labelledby="modalIdiomaAdded"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

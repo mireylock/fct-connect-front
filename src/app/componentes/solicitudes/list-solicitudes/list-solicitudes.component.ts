@@ -9,7 +9,7 @@ import { AuthService } from '../../../service/auth.service';
 import { Solicitud } from '../../../interfaces/solicitud';
 import { SolicitudService } from '../../../service/solicitud.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Modal } from 'bootstrap';
+import { UtilsService } from '../../../service/utils.service';
 
 @Component({
   selector: 'app-list-solicitudes',
@@ -45,7 +45,8 @@ export class ListSolicitudesComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private solicitudService: SolicitudService
+    private solicitudService: SolicitudService, 
+    private utilsService:UtilsService
   ) {}
 
   ngOnInit(): void {
@@ -237,20 +238,15 @@ export class ListSolicitudesComponent implements OnInit {
     });
   }
 
+  modalSolicitudAceptada:string='modalSolicitudAceptada';
+  modalSolicitudRechazada:string='modalSolicitudRechazada'
+  
   abrirModalAceptada(): void {
-    const modalElement = document.getElementById('modalSolicitudAceptada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudAceptada)
   }
 
   abrirModalRechazada(): void {
-    const modalElement = document.getElementById('modalSolicitudRechazada');
-    if (modalElement) {
-      const modal = new Modal(modalElement);
-      modal.show();
-    }
+    this.utilsService.abrirModal(this.modalSolicitudRechazada)
   }
 
   reload() {

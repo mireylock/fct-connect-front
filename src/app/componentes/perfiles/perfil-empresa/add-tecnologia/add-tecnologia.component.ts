@@ -1,4 +1,4 @@
-import { NgFor, Location, NgIf } from '@angular/common';
+import { NgFor, Location, NgIf, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from '../../../../service/auth.service';
 @Component({
   selector: 'app-add-tecnologia',
   standalone: true,
-  imports: [NgFor, FormsModule, NgIf],
+  imports: [NgFor, FormsModule, NgIf, NgClass],
   templateUrl: './add-tecnologia.component.html',
   styleUrl: './add-tecnologia.component.scss',
 })
@@ -18,7 +18,7 @@ export class AddTecnologiaComponent implements OnInit{
   rol: string | undefined;
   idEmpresa:any;
   tecnologiaId:any;
-  nombre:any = ' ';
+  nombre: string = '';   
   descripcion: any = '';
 
   tecnologias:Tecnologia[] | undefined;

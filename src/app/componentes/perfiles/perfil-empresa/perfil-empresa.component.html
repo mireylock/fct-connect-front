@@ -137,20 +137,12 @@
         </div>
 
         <div class="row justify-content-center">
-            <form class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <form *ngIf="rol=='empresa'" class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                 <div class="form-group p-2">
                     <div class="input-group">
                         <input type="text" class="form-control" id="sitioWeb" name="sitioWeb"
-                            [(ngModel)]="form.pathSitioWeb" [value]="empresa?.pathSitioWeb" [disabled]="rol!='empresa'"
+                            [(ngModel)]="form.pathSitioWeb" [value]="empresa?.pathSitioWeb"
                             #pathSitioWeb="ngModel">
-
-
-                    </div>
-                </div>
-
-                <div class="form-group p-2">
-                    <div class="input-group">
-                        <a href="{{empresa?.pathSitioWeb}}">{{empresa?.pathSitioWeb}}</a>
                     </div>
                 </div>
 
@@ -158,6 +150,16 @@
                     Guardar Cambios
                 </button>
             </form>
+
+            <div *ngIf="rol!='empresa'" class="col-md-6">
+                <div class="form-group p-2 text-start">
+                    <div class="input-group">
+                        <div class="form-control">
+                        <a href="{{empresa?.pathSitioWeb}}">{{empresa?.pathSitioWeb}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 </div>

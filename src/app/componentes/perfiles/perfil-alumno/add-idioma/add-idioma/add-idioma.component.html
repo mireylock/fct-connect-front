@@ -3,18 +3,29 @@
         <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
         <h3 class="text-center">Añadir idioma</h3>
         <div class="mb-3">
-            <select class="form-select" id="idiomas" name="idiomas" [(ngModel)]="idiomaId">
+            <select class="form-select" id="idiomas" name="idiomas" [(ngModel)]="idiomaId" required #idiomaIdModel="ngModel"
+                [ngClass]="{ 'is-invalid': idiomaIdModel.invalid && idiomaIdModel.touched }">
                 <option value="">Elija un idioma</option>
                 <option *ngFor="let idioma of idiomas" [ngValue]="idioma.id">{{idioma.nombre}}</option>
             </select>
+            <div *ngIf="idiomaIdModel.invalid && idiomaIdModel.touched" class="invalid-feedback">
+                <ul>
+                    <li *ngIf="idiomaIdModel.errors?.['required']">El idioma es requerido.</li>
+                </ul>
+            </div>
         </div>
-
+        
         <div class="mb-3">
-            <select class="form-select" id="niveles" name="niveles" [(ngModel)]="nivel" required>
+            <select class="form-select" id="niveles" name="niveles" [(ngModel)]="nivel" required #nivelModel="ngModel"
+                [ngClass]="{ 'is-invalid': nivelModel.invalid && nivelModel.touched }">
                 <option value="">Elija el nivel</option>
                 <option *ngFor="let nivel of niveles" [ngValue]="nivel">{{nivel}}</option>
             </select>
-            <div *ngIf="nivel!='PRINCIPIANTE' || nivel!='MEDIO' || nivel!='AVANZADO' || nivel!='NATIVO'" class="text-danger">El nivel es obligatorio.</div>
+            <div *ngIf="nivelModel.invalid && nivelModel.touched" class="invalid-feedback">
+                <ul>
+                    <li *ngIf="nivelModel.errors?.['required']">El nivel es requerido.</li>
+                </ul>
+            </div>
         </div>
 
         <div class="mb-3">
@@ -50,6 +61,8 @@
                     <p>Enhorabuena, el idioma se ha añadido correctamente a tu perfil</p>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-primary btn-block" data-bs-dismiss="modal"
+                        >Añadir otro</button>
                     <button class="btn btn-primary btn-block" data-bs-dismiss="modal"
                         (click)="goBack()">Aceptar</button>
                 </div>

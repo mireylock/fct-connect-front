@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Idioma } from '../../../../../interfaces/idioma';
 import { ActivatedRoute } from '@angular/router';
 import { IdiomaService } from '../../../../../service/idioma.service';
-import { Location, NgFor, NgIf } from '@angular/common';
+import { Location, NgClass, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Alumno } from '../../../../../interfaces/alumno';
 import { UserService } from '../../../../../service/user.service';
@@ -12,7 +12,7 @@ import { UtilsService } from '../../../../../service/utils.service';
 @Component({
   selector: 'app-add-idioma',
   standalone: true,
-  imports: [FormsModule, NgFor, SubidaArchivoComponent, NgIf],
+  imports: [FormsModule, NgFor, SubidaArchivoComponent, NgIf, NgClass],
   templateUrl: './add-idioma.component.html',
   styleUrl: './add-idioma.component.scss',
 })

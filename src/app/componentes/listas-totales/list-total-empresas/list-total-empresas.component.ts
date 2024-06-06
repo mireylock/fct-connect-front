@@ -22,7 +22,7 @@ export class ListTotalEmpresasComponent {
   rol: string | undefined;
 
   pagina:number=0;
-  tamanio:number=5;
+  tamanio:number=6;
   totalItems:number=0;
   totalPages:number=0;
   currentPage:number=0;

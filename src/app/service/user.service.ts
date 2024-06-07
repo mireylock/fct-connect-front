@@ -135,7 +135,7 @@ export class UserService {
   }
 
 
-  ////// ADMINISTRADOER //////
+  ////// ADMINISTRADOR //////
   getAdministrador(id:number):Observable<Object>{
     return this.http.get(URL_ADMINISTRADORES+'/'+id);
   }

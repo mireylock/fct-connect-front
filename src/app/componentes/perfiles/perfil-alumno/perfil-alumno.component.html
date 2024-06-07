@@ -22,6 +22,10 @@
         </div>
     </div>
 
+    <div *ngIf="rol==='administrador'"  class="bg-info text-center py-3 my-3">
+        <app-admin-alu-index></app-admin-alu-index>
+    </div>
+
     <div class="bg-info text-center py-3 my-3">
         <div class="d-flex justify-content-center align-items-center">
             <h2>Datos Personales</h2>
@@ -84,13 +88,13 @@
                             [disabled]="rol != 'alumno'">
                     </div>
                 </div>
-                <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
+                <button *ngIf="rol === 'alumno'" class="btn bg-primary text-white">
                     Guardar Cambios
                 </button>
             </form>
         </div>
 
-        <button *ngIf="rol === 'empresa' || rol === 'administrador'" class="btn bg-primary text-white"
+        <button *ngIf="rol === 'empresa'" class="btn bg-primary text-white"
             [routerLink]="['/solicitud/'+alumno?.id]">
             Enviar Solicitud
         </button>
@@ -159,7 +163,7 @@
                             Vehículo propio:
                         </span>
                         <select class="form-select" id="vehiculoPropio" name="vehiculoPropio"
-                            [disabled]="rol === 'empresa' || rol === 'profesor'"
+                            [disabled]="rol !='alumno'"
                             [(ngModel)]="formPersonalData.vehiculoPropio">
                             <option [ngValue]="1">Sí</option>
                             <option [ngValue]="0">No</option>
@@ -167,7 +171,7 @@
                     </div>
                 </div>
 
-                <button *ngIf="rol === 'alumno' || rol === 'administrador'" class="btn bg-primary text-white">
+                <button *ngIf="rol === 'alumno'" class="btn bg-primary text-white">
                     Guardar Cambios
                 </button>
             </form>

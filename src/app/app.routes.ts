@@ -22,6 +22,7 @@ import { PerfilProfesorComponent } from './componentes/perfiles/perfil-profesor/
 import { PerfilAdministradorComponent } from './componentes/perfiles/perfil-administrador/perfil-administrador.component';
 import { AddIdiomaComponent } from './componentes/perfiles/perfil-alumno/add-idioma/add-idioma/add-idioma.component';
 import { AddTecnologiaComponent } from './componentes/perfiles/perfil-empresa/add-tecnologia/add-tecnologia.component';
+import { TutoriaComponent } from './componentes/administracion/admin-alumno/tutoria/tutoria.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -46,6 +47,8 @@ export const routes: Routes = [
     {path: 'administrador/:id', component:PerfilAdministradorComponent},
     {path: 'addIdioma/:id', component:AddIdiomaComponent},
     {path: 'addTecnologia/:id', component:AddTecnologiaComponent},
+    {path: 'tutoria/:id', component:TutoriaComponent},
+
 
 
 

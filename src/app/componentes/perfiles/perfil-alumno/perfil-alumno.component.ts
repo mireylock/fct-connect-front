@@ -14,6 +14,7 @@ import { HeaderAlumnoComponent } from '../../headers/header-alumno/header-alumno
 import { Profesor } from '../../../interfaces/profesor';
 import { UtilsService } from '../../../service/utils.service';
 import { IdiomaComponent } from './idioma/idioma.component';
+import { AdminAluIndexComponent } from '../../administracion/admin-alumno/admin-alu-index/admin-alu-index.component';
 
 @Component({
   selector: 'app-perfil-alumno',
@@ -31,7 +32,8 @@ import { IdiomaComponent } from './idioma/idioma.component';
     HeaderProfesorComponent,
     HeaderAdministradorComponent,
     FooterComponent,
-    IdiomaComponent
+    IdiomaComponent, 
+    AdminAluIndexComponent
   ],
 })
 export class PerfilAlumnoComponent implements OnInit {

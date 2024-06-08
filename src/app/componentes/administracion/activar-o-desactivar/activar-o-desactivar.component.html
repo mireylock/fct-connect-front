@@ -1,0 +1,17 @@
+<button class="btn btn-primary m-1" *ngIf="isActivo" (click)="changeActivation()">Desactivar cuenta</button>
+<button class="btn btn-primary m-1" *ngIf="!isActivo" (click)="changeActivation()">Activar cuenta</button>
+
+<div class="modal fade" id="modalEstadoCuenta" tabindex="-1" aria-labelledby="modalEstadoCuenta" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="isActivo" class="modal-title">¡Cuenta desactivada!</h5>
+                <h5 *ngIf="!isActivo" class="modal-title">¡Cuenta activada!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-primary btn-block" (click)="reload()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,12 +6,14 @@ import { AlumnoDTO } from '../interfaces/alumno-dto';
 import { Modal } from 'bootstrap';
 import { Empresa } from '../interfaces/empresa';
 import { EmpresaDto } from '../interfaces/empresa-dto';
+import { UsuarioDto } from '../interfaces/usuario-dto';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
 const URL_PROFESORES="http://localhost:8080/v1/api/profesores";
 const URL_ADMINISTRADORES="http://localhost:8080/v1/api/administradores";
 const URL_REQUEST_EMPRESAS="http://localhost:8080/v1/api/auth/request-empresa";
+const URL_USERS="http://localhost:8080/v1/api/users";
 
 
 
@@ -42,6 +44,16 @@ export class UserService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
+  /////// USUARIOS /////////
+  getUserActivationStatus(id:number):Observable<Object>{
+    return this.http.get(URL_USERS+'/'+id);
+  }
+
+  changeUserActivation(usuarioDTO:UsuarioDto):Observable<Object>{
+    const url = `${URL_USERS}/${usuarioDTO.id}`;
+    return this.http.put<UsuarioDto>(url, usuarioDTO, HTTPOPTIONS);
+  }
+
   /////// ALUMNOS /////////
   getAllAlumnos():Observable<Object>{
     return this.http.get(URL_ALUMNOS);
@@ -59,10 +71,17 @@ export class UserService {
     return this.http.get(URL_ALUMNOS+'?pagina='+pagina+'&tamanio='+tamanio);
   }
 
+  getAlumnosInactivosPaginacion(pagina:number, tamanio:number):Observable<Object>{
+    return this.http.get(URL_ALUMNOS+'/inactivos?pagina='+pagina+'&tamanio='+tamanio);
+  }
+
 
   getBusquedaAlumnos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number):Observable<Object> {
-    console.log('IDIOMA'+ idioma);
     return this.http.get(URL_ALUMNOS+'?nombre='+nombre+'&idioma='+idioma+'&vehiculoPropio='+vehiculoPropio+'&pagina='+pagina+'&tamanio='+tamanio);
+  }
+
+  getBusquedaAlumnosInactivos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number):Observable<Object> {
+    return this.http.get(URL_ALUMNOS+'/inactivos?nombre='+nombre+'&idioma='+idioma+'&vehiculoPropio='+vehiculoPropio+'&pagina='+pagina+'&tamanio='+tamanio);
   }
   
   getAlumno(id:number):Observable<Object>{
@@ -73,6 +92,7 @@ export class UserService {
     const url = `${URL_ALUMNOS}/${alumnoDTO.id}`;
     return this.http.put<AlumnoDTO>(url, alumnoDTO, HTTPOPTIONS);
   }
+
 
   
   /////// EMPRESAS /////////
@@ -106,8 +126,18 @@ export class UserService {
     return this.http.get(URL_EMPRESAS+'?nombre='+nombre+'&modalidadTrabajo='+modadliadTrabajo+'&inglesSolicitado='+inglesSolicitado+'&tecnologia='+tecnologia+'&pagina='+pagina+'&tamanio='+tamanio);
   }
 
+  
+  getBusquedaEmpresasInactivas(nombre: string, modadliadTrabajo:string, inglesSolicitado:string, tecnologia:string, pagina:number, tamanio:number):Observable<Object>  {
+    return this.http.get(URL_EMPRESAS+'/inactivas?nombre='+nombre+'&modalidadTrabajo='+modadliadTrabajo+'&inglesSolicitado='+inglesSolicitado+'&tecnologia='+tecnologia+'&pagina='+pagina+'&tamanio='+tamanio);
+  }
+
+
   getEmpresasPaginacion(pagina:number, tamanio:number):Observable<Object>{
     return this.http.get(URL_EMPRESAS+'?pagina='+pagina+'&tamanio='+tamanio);
+  }
+
+  getEmpresasInactivasPaginacion(pagina:number, tamanio:number):Observable<Object>{
+    return this.http.get(URL_EMPRESAS+'/inactivas?pagina='+pagina+'&tamanio='+tamanio);
   }
 
   updateEmpresa(empresaDto:EmpresaDto):Observable<Object>{

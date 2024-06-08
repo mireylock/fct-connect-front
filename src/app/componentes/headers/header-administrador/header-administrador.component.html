@@ -15,51 +15,43 @@
           <a class="nav-link active" aria-current="page" [routerLink]="['/index']">Inicio</a>
         </li>
 
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li><button class="dropdown-item" type="button">Something else here</button></li>
-          </ul>
-        </div>
-
-
-        <li class="dropdown-menu">
-          <a class="dropdown-item" href="#" id="alumnosDropdown" role="button" data-bs-toggle="dropdown"
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="alumnosDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Alumnos
           </a>
           <ul class="dropdown-menu" aria-labelledby="alumnosDropdown">
             <li><a class="dropdown-item" [routerLink]="['/alumnos']">Activos</a></li>
-            <li><a class="dropdown-item" href="#">Inactivos</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/alumnos-inact']">Inactivos</a></li>
           </ul>
         </li>
-        <li class="dropdown-menu">
-          <a class="dropdown-item" href="#" id="empresasDropdown" role="button" data-bs-toggle="dropdown"
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="empresasDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Empresas
           </a>
           <ul class="dropdown-menu" aria-labelledby="empresasDropdown">
             <li><a class="dropdown-item" [routerLink]="['/empresas']">Activos</a></li>
-            <li><a class="dropdown-item" href="#">Inactivos</a></li>
+            <li><a class="dropdown-item"[routerLink]="['/empresas-inact']">Inactivos</a></li>
           </ul>
         </li>
-        <li class="dropdown-menu">
-          <a class="dropdown-item" href="#" id="profesoresDropdown" role="button" data-bs-toggle="dropdown"
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="profesoresDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Profesores
           </a>
           <ul class="dropdown-menu" aria-labelledby="profesoresDropdown">
             <li><a class="dropdown-item" [routerLink]="['/profesores']">Activos</a></li>
-            <li><a class="dropdown-item" href="#">Inactivos</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/profesores-inact']">Inactivos</a></li>
           </ul>
         </li>
+       
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#quienesSomos">Sobre nosotros</a>
         </li>
+       
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLink]="['/politica-privacidad']">Política de
             privacidad</a>

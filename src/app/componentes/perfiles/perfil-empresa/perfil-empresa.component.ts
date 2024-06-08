@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { UtilsService } from '../../../service/utils.service';
 import { EmpresaDto } from '../../../interfaces/empresa-dto';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
+import { ActivarODesactivarComponent } from '../../administracion/activar-o-desactivar/activar-o-desactivar.component';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -28,7 +29,8 @@ import { TecnologiaComponent } from './tecnologia/tecnologia.component';
     NgFor,
     FooterComponent,
     RouterLink, 
-    TecnologiaComponent
+    TecnologiaComponent, 
+    ActivarODesactivarComponent
   ],
   templateUrl: './perfil-empresa.component.html',
   styleUrl: './perfil-empresa.component.scss',

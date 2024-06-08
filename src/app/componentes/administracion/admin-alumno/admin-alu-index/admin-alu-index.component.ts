@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-o-desactivar.component';
 
 @Component({
   selector: 'app-admin-alu-index',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ActivarODesactivarComponent],
   templateUrl: './admin-alu-index.component.html',
   styleUrl: './admin-alu-index.component.scss',
 })
@@ -23,4 +24,5 @@ export class AdminAluIndexComponent implements OnInit{
     });
     return this.id;
   }
+
 }

@@ -23,6 +23,9 @@ import { PerfilAdministradorComponent } from './componentes/perfiles/perfil-admi
 import { AddIdiomaComponent } from './componentes/perfiles/perfil-alumno/add-idioma/add-idioma/add-idioma.component';
 import { AddTecnologiaComponent } from './componentes/perfiles/perfil-empresa/add-tecnologia/add-tecnologia.component';
 import { TutoriaComponent } from './componentes/administracion/admin-alumno/tutoria/tutoria.component';
+import { ListAlumnosInactivosComponent } from './componentes/list-inactivos/list-alumnos-inactivos/list-alumnos-inactivos.component';
+import { ListEmpresasInactivosComponent } from './componentes/list-inactivos/list-empresas-inactivos/list-empresas-inactivos.component';
+import { ListProfesoresInactivosComponent } from './componentes/list-inactivos/list-profesores-inactivos/list-profesores-inactivos.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -48,6 +51,10 @@ export const routes: Routes = [
     {path: 'addIdioma/:id', component:AddIdiomaComponent},
     {path: 'addTecnologia/:id', component:AddTecnologiaComponent},
     {path: 'tutoria/:id', component:TutoriaComponent},
+    {path: 'alumnos-inact', component:ListAlumnosInactivosComponent},
+    {path: 'empresas-inact', component:ListEmpresasInactivosComponent},
+    {path: 'profesores-inact', component:ListProfesoresInactivosComponent}, 
+
 
 
 

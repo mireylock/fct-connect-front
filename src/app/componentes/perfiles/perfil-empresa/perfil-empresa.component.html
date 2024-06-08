@@ -21,6 +21,10 @@
         </div>
     </div>
 
+    <div *ngIf="rol==='administrador'" class="bg-info text-center py-3 my-3">
+        <app-activar-o-desactivar></app-activar-o-desactivar>
+    </div>
+
     <div class="bg-info text-center py-3 my-3">
         <div class="row justify-content-center">
             <h2>Perfil solicitado</h2>

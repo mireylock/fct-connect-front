@@ -42,11 +42,11 @@ export class ListAlumnosInactivosComponent {
 
   ngOnInit(): void {
     this.getIdiomas();
-    this.getAlumnosPaginacion(0, this.tamanio);
+    this.getBusquedaAlumnosInactivos('', '', '', 0, this.tamanio);
   }
 
   buscar() {  
-    this.getBusquedaAlumnos(this.nombre, this.idioma, this.vehiculoPropio, this.pagina, this.tamanio);
+    this.getBusquedaAlumnosInactivos(this.nombre, this.idioma, this.vehiculoPropio, this.pagina, this.tamanio);
   }
 
   getIdiomas() {
@@ -60,7 +60,7 @@ export class ListAlumnosInactivosComponent {
     })
   }
 
-  getBusquedaAlumnos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number) {
+  getBusquedaAlumnosInactivos(nombre:string, idioma:string, vehiculoPropio:string, pagina:number, tamanio:number) {
     this.userService.getBusquedaAlumnosInactivos(nombre, idioma, vehiculoPropio, pagina, tamanio).subscribe({
       next: (data) => {
         this.alumnosPaginacion = data as AlumnosPaginacion;
@@ -76,45 +76,26 @@ export class ListAlumnosInactivosComponent {
     })
   }
 
-
-
-  getAlumnosPaginacion(pagina:number, tamanio:number) {
-    this.userService.getAlumnosInactivosPaginacion(pagina, tamanio).subscribe({
-      next: (data) => {
-        this.alumnosPaginacion = data as AlumnosPaginacion;
-        this.alumnos = this.alumnosPaginacion.alumnos;
-        this.totalItems = this.alumnosPaginacion.totalItems;
-        this.totalPages = this.alumnosPaginacion.totalPages;
-        this.currentPage = this.alumnosPaginacion.currentPage;
-        this.repeticionesArray = Array(this.totalPages).fill(0).map((x, i) => i);
-      }, 
-      error: (err) => {
-        console.log(err+'ALUMNOS');
-      }
-    })
-  }
-
   avanzarPagina() {
     if(this.currentPage < this.totalPages -1) {
       this.currentPage++;
-      this.getAlumnosPaginacion(this.currentPage, this.tamanio);
+      this.getBusquedaAlumnosInactivos(this.nombre, this.idioma, this.vehiculoPropio, this.currentPage, this.tamanio);
     }
   }
 
   retrocederPagina() {
     if(this.currentPage > 0) {
       this.currentPage=this.currentPage-1;
-      this.getAlumnosPaginacion(this.currentPage, this.tamanio);
+      this.getBusquedaAlumnosInactivos(this.nombre, this.idioma, this.vehiculoPropio, this.currentPage, this.tamanio);
     }
   }
 
   irAPagina(numeroPagina:number) {
-    this.getAlumnosPaginacion(numeroPagina, this.tamanio);
+    this.getBusquedaAlumnosInactivos(this.nombre, this.idioma, this.vehiculoPropio, numeroPagina, this.tamanio);
   }
 
   returnNivelIdiomaFirstLetterUpper(nivelIdioma:string) {
     return this.utilsService.returnFirstLetterUpper(nivelIdioma);
   }
-
 
 }

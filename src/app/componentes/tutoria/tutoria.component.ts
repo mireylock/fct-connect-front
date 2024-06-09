@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Alumno } from '../../../../interfaces/alumno';
-import { UserService } from '../../../../service/user.service';
+import { Alumno } from '../../interfaces/alumno';
+import { UserService } from '../../service/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { ProfesorTutorizaAlumno } from '../../../../interfaces/profesor-tutoriza-alumno';
+import { ProfesorTutorizaAlumno } from '../../interfaces/profesor-tutoriza-alumno';
 import { NgFor } from '@angular/common';
-import { HeaderAdministradorComponent } from '../../../headers/header-administrador/header-administrador.component';
-import { FooterComponent } from '../../../footer/footer.component';
-import { Profesor } from '../../../../interfaces/profesor';
+import { HeaderAdministradorComponent } from '../headers/header-administrador/header-administrador.component';
+import { FooterComponent } from '../footer/footer.component';
+import { Profesor } from '../../interfaces/profesor';
 import { FormsModule } from '@angular/forms';
-import { TutoriaService } from '../../../../service/tutoria.service';
-import { UtilsService } from '../../../../service/utils.service';
+import { TutoriaService } from '../../service/tutoria.service';
+import { UtilsService } from '../../service/utils.service';
 
 @Component({
   selector: 'app-tutoria',

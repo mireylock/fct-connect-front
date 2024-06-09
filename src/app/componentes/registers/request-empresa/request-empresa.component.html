@@ -33,10 +33,10 @@
                 [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
               <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
                 <div *ngIf="password.errors['required']">
-                  La password es requerida
+                  La contraseña es requerida
                 </div>
                 <div *ngIf="password.errors['minlength']">
-                  La password debe ser de al menos 6 caracteres
+                  La contraseña debe ser de al menos 6 caracteres
                 </div>
               </div>
               <div *ngIf="errorMessage" style="color:#F10F0F">

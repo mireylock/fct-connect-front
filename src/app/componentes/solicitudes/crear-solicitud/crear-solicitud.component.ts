@@ -8,7 +8,6 @@ import { Solicitud } from '../../../interfaces/solicitud';
 import { SolicitudService } from '../../../service/solicitud.service';
 import { Empresa } from '../../../interfaces/empresa';
 import { Alumno } from '../../../interfaces/alumno';
-import { Modal } from 'bootstrap';
 import { UtilsService } from '../../../service/utils.service';
 
 @Component({

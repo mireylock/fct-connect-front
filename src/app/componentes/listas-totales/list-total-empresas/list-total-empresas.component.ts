@@ -46,7 +46,7 @@ export class ListTotalEmpresasComponent {
 
   ngOnInit(): void {
     this.rol = this.authService.getRol();
-    this.getEmpresasPaginacion(0, this.tamanio);     
+    this.getBusquedaEmpresas('', '', '', '', 0, this.tamanio);     
   }
 
   isModalidadPresente(modalidadesTrabajo:string[], modalidad: string): boolean {
@@ -78,40 +78,21 @@ export class ListTotalEmpresasComponent {
 
 
 
-  getEmpresasPaginacion(pagina:number, tamanio:number) {
-    this.userService.getEmpresasPaginacion(pagina, tamanio).subscribe({
-      next: (data) => {
-        this.empresasPaginacion = data as EmpresasPaginacion;
-        this.empresas = this.empresasPaginacion.empresas;
-        this.totalItems = this.empresasPaginacion.totalItems;
-        this.totalPages = this.empresasPaginacion.totalPages;
-        this.currentPage = this.empresasPaginacion.currentPage;
-        this.repeticionesArray = Array(this.totalPages).fill(0).map((x, i) => i);
-        console.log(this.empresasPaginacion);
-
-      }, 
-      error: (err) => {
-        console.log(err+'EMPRESAS');
-      }
-    })
-  }
-
   avanzarPagina() {
     if(this.currentPage < this.totalPages -1) {
       this.currentPage++;
-      this.getEmpresasPaginacion(this.currentPage, this.tamanio);
+      this.getBusquedaEmpresas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, this.currentPage, this.tamanio);
     }
   }
 
   retrocederPagina() {
     if(this.currentPage > 0) {
       this.currentPage=this.currentPage-1;
-      this.getEmpresasPaginacion(this.currentPage, this.tamanio);
+      this.getBusquedaEmpresas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, this.currentPage, this.tamanio);
     }
   }
 
   irAPagina(numeroPagina:number) {
-    this.getEmpresasPaginacion(numeroPagina, this.tamanio);
+    this.getBusquedaEmpresas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, numeroPagina, this.tamanio);
   }
-
 }

@@ -14,7 +14,7 @@ import { HeaderAlumnoComponent } from '../../headers/header-alumno/header-alumno
 import { Profesor } from '../../../interfaces/profesor';
 import { UtilsService } from '../../../service/utils.service';
 import { IdiomaComponent } from './idioma/idioma.component';
-import { AdminAluIndexComponent } from '../../administracion/admin-alumno/admin-alu-index/admin-alu-index.component';
+import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-o-desactivar.component';
 
 @Component({
   selector: 'app-perfil-alumno',
@@ -32,8 +32,8 @@ import { AdminAluIndexComponent } from '../../administracion/admin-alumno/admin-
     HeaderProfesorComponent,
     HeaderAdministradorComponent,
     FooterComponent,
-    IdiomaComponent, 
-    AdminAluIndexComponent
+    IdiomaComponent,
+    ActivarODesactivarComponent
   ],
 })
 export class PerfilAlumnoComponent implements OnInit {
@@ -56,7 +56,7 @@ export class PerfilAlumnoComponent implements OnInit {
     private location: Location,
     private userService: UserService,
     private authService: AuthService,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private utilsService: UtilsService
   ) {}
 
@@ -87,7 +87,6 @@ export class PerfilAlumnoComponent implements OnInit {
       },
     });
   }
-
 
   goBack(): void {
     this.location.back();
@@ -128,6 +127,4 @@ export class PerfilAlumnoComponent implements OnInit {
       vehiculoPropio: this.alumno?.vehiculoPropio,
     };
   }
-
-
 }

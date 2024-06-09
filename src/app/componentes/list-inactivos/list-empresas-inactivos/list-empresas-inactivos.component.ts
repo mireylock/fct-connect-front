@@ -42,7 +42,7 @@ export class ListEmpresasInactivosComponent {
   constructor(private userService:UserService){}
 
   ngOnInit(): void {
-    this.getEmpresasPaginacion(0, this.tamanio);     
+    this.getBusquedaEmpresasInactivas('', '', '', '', 0, this.tamanio);     
   }
 
   isModalidadPresente(modalidadesTrabajo:string[], modalidad: string): boolean {
@@ -52,10 +52,10 @@ export class ListEmpresasInactivosComponent {
 
 
   buscar() {   
-    this.getBusquedaEmpresas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, this.pagina, this.tamanio);
+    this.getBusquedaEmpresasInactivas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, this.pagina, this.tamanio);
   }
 
-  getBusquedaEmpresas(nombre:string, modadliadTrabajo:string, inglesSolicitado:string, tecnologia:string, pagina:number, tamanio:number ) {
+  getBusquedaEmpresasInactivas(nombre:string, modadliadTrabajo:string, inglesSolicitado:string, tecnologia:string, pagina:number, tamanio:number ) {
 
     this.userService.getBusquedaEmpresasInactivas(nombre, modadliadTrabajo, inglesSolicitado, tecnologia, pagina, tamanio).subscribe({
       next: (data) => {
@@ -74,40 +74,22 @@ export class ListEmpresasInactivosComponent {
 
 
 
-  getEmpresasPaginacion(pagina:number, tamanio:number) {
-    this.userService.getEmpresasInactivasPaginacion(pagina, tamanio).subscribe({
-      next: (data) => {
-        this.empresasPaginacion = data as EmpresasPaginacion;
-        this.empresas = this.empresasPaginacion.empresas;
-        this.totalItems = this.empresasPaginacion.totalItems;
-        this.totalPages = this.empresasPaginacion.totalPages;
-        this.currentPage = this.empresasPaginacion.currentPage;
-        this.repeticionesArray = Array(this.totalPages).fill(0).map((x, i) => i);
-        console.log(this.empresasPaginacion);
-
-      }, 
-      error: (err) => {
-        console.log(err+'EMPRESAS');
-      }
-    })
-  }
-
   avanzarPagina() {
     if(this.currentPage < this.totalPages -1) {
       this.currentPage++;
-      this.getEmpresasPaginacion(this.currentPage, this.tamanio);
+      this.getBusquedaEmpresasInactivas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, this.currentPage, this.tamanio);
     }
   }
 
   retrocederPagina() {
     if(this.currentPage > 0) {
       this.currentPage=this.currentPage-1;
-      this.getEmpresasPaginacion(this.currentPage, this.tamanio);
+      this.getBusquedaEmpresasInactivas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, this.currentPage, this.tamanio);
     }
   }
 
   irAPagina(numeroPagina:number) {
-    this.getEmpresasPaginacion(numeroPagina, this.tamanio);
+    this.getBusquedaEmpresasInactivas(this.nombre, this.modalidadTrabajo, this.ingles, this.tecnologia, numeroPagina, this.tamanio);
   }
 
 }

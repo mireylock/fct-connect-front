@@ -23,7 +23,8 @@
     </div>
 
     <div *ngIf="rol==='administrador'"  class="bg-info text-center py-3 my-3">
-        <app-admin-alu-index></app-admin-alu-index>
+        <button class="btn btn-primary m-1" [routerLink]="['/tutoria/'+id]">Tutorias</button>
+        <app-activar-o-desactivar></app-activar-o-desactivar>
     </div>
 
     <div class="bg-info text-center py-3 my-3">
@@ -148,8 +149,8 @@
                         </span>
                         <select class="form-select" id="carnetConducir" name="carnetConducir"
                             [(ngModel)]="formPersonalData.carnetConducir" [disabled]="rol != 'alumno'">
-                            <option [ngValue]="1">Sí</option>
-                            <option [ngValue]="0">No</option>
+                            <option [ngValue]="true">Sí</option>
+                            <option [ngValue]="false">No</option>
                         </select>
                     </div>
                 </div>
@@ -165,8 +166,8 @@
                         <select class="form-select" id="vehiculoPropio" name="vehiculoPropio"
                             [disabled]="rol !='alumno'"
                             [(ngModel)]="formPersonalData.vehiculoPropio">
-                            <option [ngValue]="1">Sí</option>
-                            <option [ngValue]="0">No</option>
+                            <option [ngValue]="true">Sí</option>
+                            <option [ngValue]="false">No</option>
                         </select>
                     </div>
                 </div>

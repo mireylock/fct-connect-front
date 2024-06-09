@@ -1,1 +1,97 @@
-<p>list-total-profesores works!</p>
+<div *ngIf="rol=='administrador'">
+    <app-header-administrador></app-header-administrador>
+</div>
+
+<section class="bg-primary">
+    <div class="container-xxl py-5">
+        <div class="d-flex justify-content-around align-items-center flex-column flex-md-row">
+            <form class="row g-3 align-items-end mb-4">
+                <div class="col-12 col-md-8">
+                    <label for="nombreProfesor" class="form-label text-white">Nombre</label>
+                    <input type="text" class="form-control" id="nombreProfesor" placeholder="Nombre" [(ngModel)]="nombre"
+                        name="nombre">
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <button type="button" class="btn btn-warning w-100 text-white" (click)="buscar()">Buscar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="d-flex justify-content-around align-items-center flex-column flex-md-row">
+            <nav aria-label="Page navigation example" class="mb-3 mb-md-0">
+                <ul class="pagination m-0">
+                    <li class="page-item" (click)="retrocederPagina()">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let i of repeticionesArray" (click)="irAPagina(i)">
+                        <a class="page-link">{{i+1}}</a>
+                    </li>
+                    <li class="page-item" (click)="avanzarPagina()">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="d-flex justify-content-around align-items-center flex-column flex-md-row">
+            <em class="p-5 text-white" *ngIf="profesores.length==0">No hay profesores que mostrar</em>
+        </div>
+
+
+
+
+        <div class="row justify-content-center">
+            <div class="col-md-4 bg-info card card-container m-3" *ngFor="let profesor of profesores">
+                <div class="card-body text-center">
+                    <div class="d-flex align-items-center justify-content-center my-3">
+                        <img width="50" class="me-2" src={{profesor.pathFoto}} alt="Foto del profesor">
+                        <h5 class="card-title mt-3">{{profesor.nombre}} {{profesor.apellido1}} {{profesor.apellido2}}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush text-start">
+                        <li class="list-group-item my-1"><i
+                                class="fa-solid fa-building me-2 text-primary"></i>{{profesor.departamento}}
+                        </li>
+
+                        <li *ngIf="profesor.asignaturas?.length" class="list-group-item my-1"><i
+                                class="fa-solid fa-chalkboard-user me-2 text-primary"></i>
+                            Asignaturas que imparte:
+                            <ul *ngFor="let asignatura of profesor.asignaturas">
+                                <span>{{asignatura.nombre}} ({{asignatura.curso}} {{asignatura.grupo}})</span>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a class="btn btn-primary text-white m-2" [routerLink]="['/profesor/'+profesor.id]">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" (click)="retrocederPagina()">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item" *ngFor="let i of repeticionesArray" (click)="irAPagina(i)">
+                        <a class="page-link">{{i+1}}</a>
+                    </li>
+
+                    <li class="page-item" (click)="avanzarPagina()">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../../service/user.service';
 import { NgIf } from '@angular/common';
-import { UtilsService } from '../../../service/utils.service';
+import { UserService } from '../../service/user.service';
+import { UtilsService } from '../../service/utils.service';
 
 @Component({
   selector: 'app-activar-o-desactivar',

@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { UtilsService } from '../../../service/utils.service';
 import { EmpresaDto } from '../../../interfaces/empresa-dto';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
-import { ActivarODesactivarComponent } from '../../administracion/activar-o-desactivar/activar-o-desactivar.component';
+import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-o-desactivar.component';
 
 @Component({
   selector: 'app-perfil-empresa',

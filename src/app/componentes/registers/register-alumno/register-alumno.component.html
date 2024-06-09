@@ -4,6 +4,7 @@
     <div class="col-md-5">
       <div class="card bg-white bg-opacity-75">
         <div class="card-body">
+          <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
           <h5 class="card-title text-center">Registro de alumnos</h5>
           <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group p-2">
@@ -86,6 +87,20 @@
               </div>
             </div>
 
+            <div class="form-group p-2">
+              <label for="formaciones">Formación:</label>
+              <select class="form-select" id="formaciones" name="formaciones" [(ngModel)]="formacion" required
+                #formacionesModel="ngModel"
+                [ngClass]="{ 'is-invalid': formacionesModel.invalid && formacionesModel.touched }">
+                <option value="">Elija la formación</option>
+                <option *ngFor="let formacion of formaciones" [ngValue]="formacion">{{formacion.nombre}} ({{formacion.nivel}})</option>
+              </select>
+              <div *ngIf="formacionesModel.invalid && formacionesModel.touched" class="invalid-feedback">
+                <ul>
+                  <li *ngIf="formacionesModel.errors?.['required']">La formación es requerida.</li>
+                </ul>
+              </div>
+            </div>
             <div class="text-center py-4 px-2">
               <button class="btn btn-primary btn-block">Registrar Alumno</button>
             </div>
@@ -96,4 +111,18 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade" id="modalRegistrado" tabindex="-1" aria-labelledby="modalSolicitudEnviada" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¡Alumno registrado!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <app-footer></app-footer>

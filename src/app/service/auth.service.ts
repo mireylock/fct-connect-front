@@ -11,6 +11,7 @@ import { Empresa } from '../interfaces/empresa';
 import { Profesor } from '../interfaces/profesor';
 import { Administrador } from '../interfaces/administrador';
 import { UserService } from './user.service';
+import { Formacion } from '../interfaces/formacion';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,6 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
-    private userService: UserService
   ) {}
 
   getRol(): string | undefined {
@@ -121,7 +121,8 @@ export class AuthService {
     dni: string,
     pathFoto: string, 
     carnetConducir:number,
-    vehiculoPropio:number
+    vehiculoPropio:number, 
+    formacion:Formacion
   ): Observable<any> {
     let registerRequest = {
       email: email,
@@ -133,8 +134,11 @@ export class AuthService {
       dni: dni,
       pathFoto: pathFoto,
       carnetConducir: carnetConducir, 
-      vehiculoPropio: vehiculoPropio
+      vehiculoPropio: vehiculoPropio, 
+      formacion:formacion
     };
+
+    console.log(JSON.stringify(registerRequest));
 
     return this.httpClient.post(
       this.apiAuthURL + 'register',

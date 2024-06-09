@@ -1,3 +1,4 @@
+import { Asignatura } from "./asignatura";
 import { ProfesorTutorizaAlumno } from "./profesor-tutoriza-alumno";
 
 export interface Profesor {
@@ -12,4 +13,5 @@ export interface Profesor {
     pathFoto:string;
     direccion:string;
     departamento:string;
+    asignaturas:Asignatura[];
 }

@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center vh-100 ">
+<div class="d-flex justify-content-center align-items-center p-5 vh-100 ">
     <div class="container p-4 col-md-6 col-lg-6 bg-info">
         <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
         <h3 class="text-center">Añadir idioma</h3>
@@ -8,7 +8,7 @@
                 <option value="">Elija un idioma</option>
                 <option *ngFor="let idioma of idiomas" [ngValue]="idioma.id">{{idioma.nombre}}</option>
             </select>
-            <div *ngIf="idiomaIdModel.invalid && idiomaIdModel.touched" class="invalid-feedback">
+            <div *ngIf="idiomaIdModel.invalid && idiomaIdModel.touched || idiomaIdModel.invalid" class="invalid-feedback">
                 <ul>
                     <li *ngIf="idiomaIdModel.errors?.['required']">El idioma es requerido.</li>
                 </ul>

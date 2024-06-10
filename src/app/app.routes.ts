@@ -27,6 +27,7 @@ import { ListAlumnosInactivosComponent } from './componentes/list-inactivos/list
 import { ListEmpresasInactivosComponent } from './componentes/list-inactivos/list-empresas-inactivos/list-empresas-inactivos.component';
 import { ListProfesoresInactivosComponent } from './componentes/list-inactivos/list-profesores-inactivos/list-profesores-inactivos.component';
 import { ListTotalAlumnosTutoriaComponent } from './componentes/listas-totales/list-total-alumnos-tutoria/list-total-alumnos-tutoria.component';
+import { MediaComponent } from './componentes/media/media.component';
 
 export const routes: Routes = [
     {path:'', component:MainLandingComponent}, 
@@ -56,6 +57,8 @@ export const routes: Routes = [
     {path: 'empresas-inact', component:ListEmpresasInactivosComponent},
     {path: 'profesores-inact', component:ListProfesoresInactivosComponent}, 
     {path: 'alumnos-tutoria', component:ListTotalAlumnosTutoriaComponent}, 
+    {path: 'media/:id', component:MediaComponent}, 
+
 
 
 

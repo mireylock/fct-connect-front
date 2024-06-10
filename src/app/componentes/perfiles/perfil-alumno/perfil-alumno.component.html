@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div *ngIf="rol==='administrador'"  class="bg-info text-center py-3 my-3">
+    <div *ngIf="rol==='administrador'" class="bg-info text-center py-3 my-3">
         <button class="btn btn-primary m-1" [routerLink]="['/tutoria/'+id]">Tutorias</button>
         <app-activar-o-desactivar></app-activar-o-desactivar>
     </div>
@@ -95,8 +95,7 @@
             </form>
         </div>
 
-        <button *ngIf="rol === 'empresa'" class="btn bg-primary text-white"
-            [routerLink]="['/solicitud/'+alumno?.id]">
+        <button *ngIf="rol === 'empresa'" class="btn bg-primary text-white" [routerLink]="['/solicitud/'+alumno?.id]">
             Enviar Solicitud
         </button>
 
@@ -107,11 +106,40 @@
             <h2>Expediente académico</h2>
         </div>
 
-        <div class="d-flex justify-content-center align-items-center">
-            <button class="btn bg-white">
+        <div *ngIf="rol==='profesor'" class=" d-flex justify-content-center align-items-center">
+            <div *ngIf="!alumno?.pathExpediente" class="card mb-3 mt-3">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <input type="file" class="form-control" id="fileInput" (change)="uploadExpediente($event)">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-primary" (click)="onSubmit()">
+                            <i class="fa-solid fa-arrow-up-from-bracket text-white"></i>
+                            Subir Expediente
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="alumno?.pathExpediente" class="d-flex justify-content-center align-items-center">
+                <a href="{{alumno?.pathExpediente}}" class="btn bg-white me-2">
+                    <i class="fa-solid fa-eye"></i>
+                    Ver Expediente
+                </a>
+
+                <a (click)="eliminarExpediente()" class="btn bg-primary text-white">
+                    <i class="fa-solid fa-trash-can-arrow-up"></i>
+                    Eliminar Expediente
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="rol!=='profesor'" class="d-flex justify-content-center align-items-center">
+            <a href="{{alumno?.pathExpediente}}" class="btn bg-white me-2">
                 <i class="fa-solid fa-eye"></i>
-                Ver expediente
-            </button>
+                Ver Expediente
+            </a>
+            <em *ngIf="!alumno?.pathExpediente && rol!='profesor'">No hay expedientes que mostrar</em>
         </div>
     </div>
 
@@ -123,11 +151,42 @@
             <h2>Currículum Vitae</h2>
         </div>
 
-        <div class="d-flex justify-content-center align-items-center">
-            <button class="btn bg-white">
+        <div *ngIf="rol==='alumno'" class=" d-flex justify-content-center align-items-center">
+            <div *ngIf="!alumno?.pathCV" class="card mb-3 mt-3">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <input type="file" class="form-control" id="fileInput" (change)="uploadCV($event)">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-primary" (click)="onSubmit()">
+                            <i class="fa-solid fa-arrow-up-from-bracket text-white"></i>
+                            Subir Currículum
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="alumno?.pathCV" class="d-flex justify-content-center align-items-center">
+                <a href="{{alumno?.pathCV}}" class="btn bg-white me-2">
+                    <i class="fa-solid fa-eye"></i>
+                    Ver Currículum
+                </a>
+
+                <a (click)="eliminarCv()" class="btn bg-primary text-white">
+                    <i class="fa-solid fa-trash-can-arrow-up"></i>
+                    Eliminar CV
+                </a>
+            </div>
+
+            <em *ngIf="!alumno?.pathCV && rol!='alumno'">No hay currículumns que mostrar</em>
+        </div>
+
+        <div *ngIf="rol!=='alumno'" class="d-flex justify-content-center align-items-center">
+            <a href="{{alumno?.pathCV}}" class="btn bg-white me-2">
                 <i class="fa-solid fa-eye"></i>
                 Ver Currículum
-            </button>
+            </a>
+            <em *ngIf="!alumno?.pathCV">No hay currículumns que mostrar</em>
         </div>
     </div>
 
@@ -164,8 +223,7 @@
                             Vehículo propio:
                         </span>
                         <select class="form-select" id="vehiculoPropio" name="vehiculoPropio"
-                            [disabled]="rol !='alumno'"
-                            [(ngModel)]="formPersonalData.vehiculoPropio">
+                            [disabled]="rol !='alumno'" [(ngModel)]="formPersonalData.vehiculoPropio">
                             <option [ngValue]="true">Sí</option>
                             <option [ngValue]="false">No</option>
                         </select>
@@ -212,7 +270,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Aceptar</button>
+                <button class="btn btn-primary btn-block" data-bs-dismiss="modal" (click)="reload()">Aceptar</button>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ import { NgFor, NgIf } from '@angular/common';
   styleUrl: './idioma.component.scss',
 })
 export class IdiomaComponent implements OnInit {
+
   rol: string | undefined;
   alumno: Alumno | undefined;
   modalEliminarIdioma = 'modalEliminarIdioma';
@@ -25,7 +26,7 @@ export class IdiomaComponent implements OnInit {
     private utilsService: UtilsService,
     private authService: AuthService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
   ) {}
 
   ngOnInit(): void {

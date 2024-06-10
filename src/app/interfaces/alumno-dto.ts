@@ -4,4 +4,6 @@ export interface AlumnoDTO {
     direccion?: string;
     carnetConducir?: number;
     vehiculoPropio?: number;
+    pathCV?:string;
+    pathExpediente?:string;
 }

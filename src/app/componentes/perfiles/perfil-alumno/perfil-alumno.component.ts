@@ -15,6 +15,7 @@ import { Profesor } from '../../../interfaces/profesor';
 import { UtilsService } from '../../../service/utils.service';
 import { IdiomaComponent } from './idioma/idioma.component';
 import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-o-desactivar.component';
+import { MediaService } from '../../../service/media.service';
 
 @Component({
   selector: 'app-perfil-alumno',
@@ -33,7 +34,7 @@ import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-
     HeaderAdministradorComponent,
     FooterComponent,
     IdiomaComponent,
-    ActivarODesactivarComponent
+    ActivarODesactivarComponent,
   ],
 })
 export class PerfilAlumnoComponent implements OnInit {
@@ -42,6 +43,9 @@ export class PerfilAlumnoComponent implements OnInit {
   alumno: Alumno | undefined;
   alumnoDTO: AlumnoDTO | undefined;
   tutorPracticas: Profesor | undefined;
+  pathCv: string | undefined;
+  pathExpediente: string | undefined;
+  
   modalCambiosRealizados = 'modalCambiosRealizados';
 
   formPersonalData: any = {
@@ -49,7 +53,7 @@ export class PerfilAlumnoComponent implements OnInit {
     telefono: null,
     direccion: null,
     carnetConducir: null,
-    vehiculoPropio: null,
+    vehiculoPropio: null
   };
 
   constructor(
@@ -57,18 +61,28 @@ export class PerfilAlumnoComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
     this.rol = this.authService.getRol();
     this.getAlumno(this.id);
-    console.log(this.formPersonalData);
   }
 
   onSubmit() {
-    const { id, telefono, direccion, carnetConducir, vehiculoPropio } =
-      this.formPersonalData;
+    const {
+      id,
+      telefono,
+      direccion,
+      carnetConducir,
+      vehiculoPropio
+    } = this.formPersonalData;
+
+    const pathCV = this.pathCv;
+    const pathExpediente = this.pathExpediente;
+
+    console.log(this.formPersonalData);
 
     const alumnoDTO: AlumnoDTO = {
       id,
@@ -76,6 +90,8 @@ export class PerfilAlumnoComponent implements OnInit {
       direccion,
       carnetConducir,
       vehiculoPropio,
+      pathCV, 
+      pathExpediente
     };
 
     this.userService.updateAlumno(alumnoDTO).subscribe({
@@ -111,6 +127,9 @@ export class PerfilAlumnoComponent implements OnInit {
           this.tutorPracticas = profesorPracticas.profesor;
         }
         this.initializeFormPersonalData();
+
+        this.pathCv = this.alumno?.pathCV;
+        this.pathExpediente = this.alumno.pathExpediente;
       },
       error: (err) => {
         console.log(err + 'ALUMNO');
@@ -124,7 +143,117 @@ export class PerfilAlumnoComponent implements OnInit {
       telefono: this.alumno?.telefono,
       direccion: this.alumno?.direccion,
       carnetConducir: this.alumno?.carnetConducir,
-      vehiculoPropio: this.alumno?.vehiculoPropio,
+      vehiculoPropio: this.alumno?.vehiculoPropio
     };
+  }
+
+  uploadCV(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      this.mediaService.uploadFile(formData).subscribe({
+        next: (data) => {
+          this.pathCv = data.url;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  uploadExpediente(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      this.mediaService.uploadFile(formData).subscribe({
+        next: (data) => {
+          this.pathExpediente = data.url;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  eliminarCv() {
+    const {
+      id,
+      telefono,
+      direccion,
+      carnetConducir,
+      vehiculoPropio
+    } = this.formPersonalData;
+
+    const pathCV = undefined;
+    const pathExpediente = this.pathExpediente;
+
+    console.log(this.formPersonalData);
+
+    const alumnoDTO: AlumnoDTO = {
+      id,
+      telefono,
+      direccion,
+      carnetConducir,
+      vehiculoPropio,
+      pathCV, 
+      pathExpediente
+    };
+
+    this.userService.updateAlumno(alumnoDTO).subscribe({
+      next: () => {
+        this.utilsService.abrirModal(this.modalCambiosRealizados);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  eliminarExpediente() {
+    const {
+      id,
+      telefono,
+      direccion,
+      carnetConducir,
+      vehiculoPropio
+    } = this.formPersonalData;
+
+    const pathCV = this.pathCv;
+    const pathExpediente = undefined;
+
+    console.log(this.formPersonalData);
+
+    const alumnoDTO: AlumnoDTO = {
+      id,
+      telefono,
+      direccion,
+      carnetConducir,
+      vehiculoPropio,
+      pathCV, 
+      pathExpediente
+    };
+
+    this.userService.updateAlumno(alumnoDTO).subscribe({
+      next: () => {
+        this.utilsService.abrirModal(this.modalCambiosRealizados);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  reload() {
+    window.location.reload();
   }
 }

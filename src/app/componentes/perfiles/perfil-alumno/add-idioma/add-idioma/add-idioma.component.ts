@@ -8,6 +8,7 @@ import { Alumno } from '../../../../../interfaces/alumno';
 import { UserService } from '../../../../../service/user.service';
 import { SubidaArchivoComponent } from '../../../../subida-archivo/subida-archivo.component';
 import { UtilsService } from '../../../../../service/utils.service';
+import { MediaService } from '../../../../../service/media.service';
 
 @Component({
   selector: 'app-add-idioma',
@@ -28,19 +29,13 @@ export class AddIdiomaComponent implements OnInit {
   niveles: string[] = ['PRINCIPIANTE', 'MEDIO', 'AVANZADO', 'NATIVO'];
   modalIdiomaAdded: string = 'modalIdiomaAdded';
 
-  //subir archivo
-  selectedFile: File | null = null;
-
-  onFileSelected(file: File): void {
-    this.selectedFile = file;
-  }
-  //////
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
     private idiomaService: IdiomaService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService, 
+    private mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
@@ -66,13 +61,29 @@ export class AddIdiomaComponent implements OnInit {
     });
   }
 
-  addIdioma() {
-    //subir archivo
-    if (this.selectedFile) {
+  upload(event:any) {
+    const file = event.target.files[0];
+
+    if (file) {
       const formData = new FormData();
-      formData.append('file', this.selectedFile, this.selectedFile.name);
+
+      formData.append('file', file);
+
+      this.mediaService.uploadFile(formData).subscribe({
+        next: (data) => {
+          this.pathDiploma = data.url;
+          console.log('pathDiploma: '+this.pathDiploma);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      })
     }
-    ///////////////
+  }
+
+
+
+  addIdioma() {
 
     this.idiomaService
       .crearAlumnoHablaIdioma(

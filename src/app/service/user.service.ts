@@ -7,6 +7,7 @@ import { Modal } from 'bootstrap';
 import { Empresa } from '../interfaces/empresa';
 import { EmpresaDto } from '../interfaces/empresa-dto';
 import { UsuarioDto } from '../interfaces/usuario-dto';
+import { ProfesorDto } from '../interfaces/profesor-dto';
 
 const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
 const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
@@ -156,6 +157,10 @@ export class UserService {
     return this.http.get(URL_PROFESORES+'/'+id);
   }
 
+  updateProfesor(profesorDto:ProfesorDto):Observable<Object>{
+    const url = `${URL_PROFESORES}/${profesorDto.id}`;
+    return this.http.put<AlumnoDTO>(url, profesorDto, HTTPOPTIONS);
+  }
 
   ////// ADMINISTRADOR //////
   getAdministrador(id:number):Observable<Object>{

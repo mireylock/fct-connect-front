@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subida-archivo',
@@ -10,6 +11,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class SubidaArchivoComponent {
 
   @Output() fileSelected = new EventEmitter<File>();
+
+  constructor(private router:Router){}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

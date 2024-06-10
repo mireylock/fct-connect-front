@@ -59,4 +59,12 @@ export class TutoriaService {
     return this.http.delete<TutoriaDto>(url, HTTPOPTIONS)
     .pipe(catchError(this.handleError));
   }
+
+  getAlumnosTutoriaProfesor(idProfesor:number):Observable<any>{
+    return this.http.get(URL_TUTORIAS+'/'+idProfesor);
+  }
+
+  getBusquedaAlumnosTutoriaProfesor(idProfesor:number, nombreAlumno:string, pagina:number, tamanio:number):Observable<any>{
+    return this.http.get(URL_TUTORIAS+'/search/'+idProfesor+"?nombre="+nombreAlumno+'&pagina='+pagina+'&tamanio='+tamanio);
+  }
 }

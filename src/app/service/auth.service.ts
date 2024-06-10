@@ -92,6 +92,7 @@ export class AuthService {
     apellido2: string,
     dni: string,
     pathFoto: string, 
+    departamento:string,
   ): Observable<any> {
     let registerRequest = {
       email: email,
@@ -102,6 +103,7 @@ export class AuthService {
       apellido2: apellido2,
       dni: dni,
       pathFoto: pathFoto,
+      departamento: departamento,
     };
 
     return this.httpClient.post(

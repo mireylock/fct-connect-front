@@ -4,6 +4,7 @@
     <div class="col-md-5">
       <div class="card bg-white bg-opacity-75">
         <div class="card-body">
+          <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
           <h5 class="card-title text-center">Registro de adminisitradores</h5>
           <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group p-2">

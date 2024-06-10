@@ -4,6 +4,7 @@
     <div class="col-md-5">
       <div class="card bg-white bg-opacity-75">
         <div class="card-body">
+          <i class="fa-solid fa-chevron-left" (click)="goBack()"></i>
           <h5 class="card-title text-center">Registro de Profesores</h5>
           <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group p-2">
@@ -82,6 +83,17 @@
                 <ul>
                   <li *ngIf="password.errors['required']">La contraseña es requerida.</li>
                   <li *ngIf="password.errors['minlength']">La contraseña debe tener al menos 6 caracteres.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-group p-2">
+              <label for="departamento">Departamento:</label>
+              <input type="departamento" class="form-control" id="departamento" name="departamento" [(ngModel)]="form.departamento"
+                required #departamento="ngModel" [ngClass]="{ 'is-invalid': f.submitted && departamento.errors }">
+              <div *ngIf="departamento.errors && f.submitted" class="invalid-feedback">
+                <ul>
+                  <li *ngIf="departamento.errors['required']">El deparamento es requerido.</li>
                 </ul>
               </div>
             </div>

@@ -1,12 +1,12 @@
 <section [ngClass]="{
-    'bg-primary': rol === 'administrador',
+    'bg-primary': rol === 'administrador' || rol=== 'profesor',
     'bg-info': rol === 'alumno'}">
     <div class="container-xxl">
         <div class="col text-center p-5">
             <h1 [ngClass]="{
-                'text-white': rol === 'administrador'}">Empresas</h1>
+                'text-white': rol === 'administrador' || rol === 'profesor'}">Empresas</h1>
             <div id="empresasCarousel" class="carousel" [ngClass]="{
-                'slide': rol === 'administrador',
+                'slide': rol === 'administrador' || rol === 'profesor',
                 'carousel-dark slide': rol === 'alumno'}" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item" *ngFor="let slide of slides; let i = index"
@@ -15,7 +15,7 @@
                             <div class="col-md-6 col-lg-4" *ngFor="let empresa of slide">
                                 <div class="card p-3 m-1" [ngClass]="{
                                     'bg-primary': rol === 'alumno',
-                                    'bg-info': rol === 'administrador'}" [routerLink]="['/empresa', empresa.id]">
+                                    'bg-info': rol === 'administrador' || rol === 'profesor'}" [routerLink]="['/empresa', empresa.id]">
                                     <div class="d-flex align-items-center justify-content-center my-3">
                                         <img width="50" src={{empresa.pathFoto}}>
                                         <h3 class="m-1" [ngClass]="{
@@ -39,7 +39,7 @@
             </div>
             <div class="p-3">
                 <a class='btn text-white m-2' [ngClass]="{
-                    'btn-warning': rol === 'administrador', 
+                    'btn-warning': rol === 'administrador' || rol === 'profesor', 
                     'btn-primary': rol === 'alumno'}" [routerLink]="['/empresas']">
                     Ver Todas
                 </a>

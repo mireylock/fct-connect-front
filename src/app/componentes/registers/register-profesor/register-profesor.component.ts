@@ -3,7 +3,7 @@ import { AuthService } from '../../../service/auth.service';
 import { HeaderAdministradorComponent } from '../../headers/header-administrador/header-administrador.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, Location } from '@angular/common';
 
 @Component({
   selector: 'app-register-profesor',
@@ -13,6 +13,7 @@ import { NgClass, NgIf } from '@angular/common';
   styleUrl: './register-profesor.component.scss'
 })
 export class RegisterProfesorComponent {
+
   form: any = {
     nombre:null, 
     apellido1:null, 
@@ -20,16 +21,17 @@ export class RegisterProfesorComponent {
     email: null,
     password: null, 
     pathFoto: "../../../../assets/img/profile.png",
+    departamento:null,
     rol:"profesor"
   };
   errorMessage: any;
 
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService, private location: Location){}
   
   onSubmit(): void {
-    const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
+    const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto, departamento } = this.form;
 
-    this.authService.registerProfesor(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
+    this.authService.registerProfesor(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto, departamento).subscribe({
       next: () => {
         alert("Profesor registrado!");
         window.location.reload();
@@ -39,4 +41,9 @@ export class RegisterProfesorComponent {
       }
     });
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }

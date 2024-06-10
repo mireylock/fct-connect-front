@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../service/auth.service';
 import { HeaderAdministradorComponent } from '../../headers/header-administrador/header-administrador.component';
 import { FooterComponent } from '../../footer/footer.component';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,7 @@ export class RegisterAdminComponent {
   };
   errorMessage: any;
 
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService, private location:Location){}
   
   onSubmit(): void {
     const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
@@ -39,6 +39,10 @@ export class RegisterAdminComponent {
         this.errorMessage = err.error.message;
       }
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

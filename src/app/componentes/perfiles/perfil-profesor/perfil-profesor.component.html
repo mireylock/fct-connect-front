@@ -14,7 +14,7 @@
 <div class="container">
     <div class="bg-primary p-3">
         <div class="d-flex align-items-center justify-content-center my-3 text-white">
-            <img width="150" class="me-2 profile-photo" src="{{profesor?.pathFoto}}" alt="Foto del profesor">
+            <img  width="150" height="150" class="me-4 profile-photo rounded-circle" src="{{profesor?.pathFoto}}" alt="Foto del profesor">
             <div class="profile-info">
                 <h2 class="profile-name">{{profesor?.nombre}} {{profesor?.apellido1}} {{profesor?.apellido2}}</h2>
             </div>
@@ -22,6 +22,7 @@
     </div>
 
     <div *ngIf="rol==='administrador'" class="bg-info text-center py-3 my-3">
+        <h2>Adminisitración</h2>
         <app-activar-o-desactivar></app-activar-o-desactivar>
     </div>
 

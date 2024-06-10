@@ -14,7 +14,8 @@
 <div class="container">
     <div class="bg-primary p-3">
         <div class="d-flex align-items-center justify-content-center my-3 text-white">
-            <img width="150" class="me-2 profile-photo" src="{{empresa?.pathFoto}}" alt="Foto del empresa">
+            <img width="150" height="150" class="me-4 profile-photo rounded-circle" src="{{empresa?.pathFoto}}"
+                alt="Foto del empresa">
             <div class="profile-info">
                 <h2 class="profile-name">{{empresa?.nombre}}</h2>
             </div>
@@ -22,6 +23,7 @@
     </div>
 
     <div *ngIf="rol==='administrador'" class="bg-info text-center py-3 my-3">
+        <h2>Adminisitración</h2>
         <app-activar-o-desactivar></app-activar-o-desactivar>
     </div>
 
@@ -127,7 +129,8 @@
         </div>
 
         <div class="row justify-content-center">
-            <form class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <form *ngIf="empresa?.resumen" class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm" novalidate>
                 <div class="form-group p-2">
                     <div class="input-group">
                         <input type="text" class="form-control" id="resumen" name="resumen" [(ngModel)]="form.resumen"
@@ -135,10 +138,12 @@
                     </div>
                 </div>
 
-                <button *ngIf="rol === 'empresa' || rol === 'administrador'" class="btn bg-primary text-white">
+                <button *ngIf="rol === 'empresa'" class="btn bg-primary text-white">
                     Guardar Cambios
                 </button>
             </form>
+
+            <em *ngIf="!empresa?.resumen && rol!=='empresa'">No hay resumen que mostrar</em>
         </div>
     </div>
 
@@ -148,29 +153,30 @@
         </div>
 
         <div class="row justify-content-center">
-            <form *ngIf="rol=='empresa'" class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <form *ngIf="empresa?.pathSitioWeb" class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm" novalidate>
                 <div class="form-group p-2">
                     <div class="input-group">
                         <input type="text" class="form-control" id="sitioWeb" name="sitioWeb"
-                            [(ngModel)]="form.pathSitioWeb" [value]="empresa?.pathSitioWeb"
-                            #pathSitioWeb="ngModel">
+                            [(ngModel)]="form.pathSitioWeb" [value]="empresa?.pathSitioWeb" #pathSitioWeb="ngModel">
                     </div>
                 </div>
 
-                <button *ngIf="rol=='empresa'" class="btn bg-primary text-white">
+                <button *ngIf="rol==='empresa'" class="btn bg-primary text-white">
                     Guardar Cambios
                 </button>
             </form>
 
             <div *ngIf="rol!='empresa'" class="col-md-6">
-                <div class="form-group p-2 text-start">
+                <div *ngIf="empresa?.pathSitioWeb" class="form-group p-2 text-start">
                     <div class="input-group">
                         <div class="form-control">
-                        <a href="{{empresa?.pathSitioWeb}}">{{empresa?.pathSitioWeb}}</a>
+                            <a href="{{empresa?.pathSitioWeb}}">{{empresa?.pathSitioWeb}}</a>
+                        </div>
                     </div>
-                </div>
+                    </div>
+                <em *ngIf="!empresa?.pathSitioWeb && rol!=='empresa'">No hay sitio web que mostrar</em>
             </div>
-        </div>
         </div>
     </div>
 </div>

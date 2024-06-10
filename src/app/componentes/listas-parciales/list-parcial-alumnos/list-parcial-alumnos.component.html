@@ -9,7 +9,7 @@
                             <div class="col-md-6 col-lg-4" *ngFor="let alumno of slide">
                                 <div class="card p-3 m-1 bg-primary text-white">
                                     <div class="text-center">
-                                        <img width="100" [src]="alumno.pathFoto" alt="{{alumno.nombre}}">
+                                        <img width="100" height="100" class="m-3 profile-photo rounded-circle" [src]="alumno.pathFoto" alt="{{alumno.nombre}}">
                                         <h4>{{alumno.nombre}} {{alumno.apellido1}} {{alumno.apellido2}}</h4>
                                         <p class="fst-italic">{{alumno.formacion?.nombre}}</p>
                                         <a class="btn btn-warning text-white m-2" [routerLink]="['/alumno', alumno.id]">Ver perfil</a>

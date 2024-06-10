@@ -26,7 +26,7 @@
             <a class="nav-link active" aria-current="page" [routerLink]="['/politica-privacidad']">Política de privacidad</a>
           </li>
           <li class="nav-item d-flex justify-content-center align-items-center">
-            <img (click)="toggleModal($event)" width="50px" src="{{user?.pathFoto}}" alt="mi perfil">
+            <img (click)="toggleModal($event)" width="50" height="50" class="profile-photo rounded-circle" src="{{user?.pathFoto}}" alt="mi perfil">
             <app-profile-modal></app-profile-modal>
           </li>
         </ul>

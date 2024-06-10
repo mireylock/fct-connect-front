@@ -93,7 +93,8 @@
                 #formacionesModel="ngModel"
                 [ngClass]="{ 'is-invalid': formacionesModel.invalid && formacionesModel.touched }">
                 <option value="">Elija la formación</option>
-                <option *ngFor="let formacion of formaciones" [ngValue]="formacion">{{formacion.nombre}} ({{formacion.nivel}})</option>
+                <option *ngFor="let formacion of formaciones" [ngValue]="formacion">{{formacion.nombre}}
+                  ({{formacion.nivel}})</option>
               </select>
               <div *ngIf="formacionesModel.invalid && formacionesModel.touched" class="invalid-feedback">
                 <ul>

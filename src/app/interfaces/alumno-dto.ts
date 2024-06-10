@@ -1,3 +1,5 @@
+import { Formacion } from "./formacion";
+
 export interface AlumnoDTO {
     id:number;
     telefono?: string;
@@ -6,4 +8,6 @@ export interface AlumnoDTO {
     vehiculoPropio?: number;
     pathCV?:string;
     pathExpediente?:string;
+    formacion:Formacion;
+    pathFoto:string;
 }

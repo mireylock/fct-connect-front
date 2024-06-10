@@ -10,7 +10,7 @@
                             <div class="col-md-6 col-lg-4" *ngFor="let profesor of slide">
                                 <div class="card p-3 m-1 bg-primary text-white">
                                     <div class="text-center">
-                                        <img width="100" [src]="profesor.pathFoto" alt="{{profesor.nombre}}">
+                                        <img width="100" height="100" class="m-3 profile-photo rounded-circle" [src]="profesor.pathFoto" alt="{{profesor.nombre}}">
                                         <h4>{{profesor.nombre}} {{profesor.apellido1}} {{profesor.apellido2}}</h4>
                                         <a class="btn btn-warning text-white m-2"
                                             [routerLink]="['/profesor', profesor.id]">Ver perfil</a>

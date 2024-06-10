@@ -16,6 +16,8 @@ import { UtilsService } from '../../../service/utils.service';
 import { IdiomaComponent } from './idioma/idioma.component';
 import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-o-desactivar.component';
 import { MediaService } from '../../../service/media.service';
+import { Formacion } from '../../../interfaces/formacion';
+import { FormacionService } from '../../../service/formacion.service';
 
 @Component({
   selector: 'app-perfil-alumno',
@@ -45,7 +47,10 @@ export class PerfilAlumnoComponent implements OnInit {
   tutorPracticas: Profesor | undefined;
   pathCv: string | undefined;
   pathExpediente: string | undefined;
-  
+  formaciones: Formacion[] | undefined;
+  formacion: any = '';
+  pathFoto: any = '';
+
   modalCambiosRealizados = 'modalCambiosRealizados';
 
   formPersonalData: any = {
@@ -53,7 +58,7 @@ export class PerfilAlumnoComponent implements OnInit {
     telefono: null,
     direccion: null,
     carnetConducir: null,
-    vehiculoPropio: null
+    vehiculoPropio: null,
   };
 
   constructor(
@@ -62,25 +67,32 @@ export class PerfilAlumnoComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private formacionService: FormacionService
   ) {}
 
   ngOnInit(): void {
     this.rol = this.authService.getRol();
     this.getAlumno(this.id);
+    this.formacionService.getFormaciones().subscribe({
+      next: (data) => {
+        this.formaciones = data as Formacion[];
+        console.log(this.formaciones);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   onSubmit() {
-    const {
-      id,
-      telefono,
-      direccion,
-      carnetConducir,
-      vehiculoPropio
-    } = this.formPersonalData;
+    const { id, telefono, direccion, carnetConducir, vehiculoPropio } =
+      this.formPersonalData;
 
     const pathCV = this.pathCv;
     const pathExpediente = this.pathExpediente;
+    const formacion = this.formacion;
+    const pathFoto = this.pathFoto;
 
     console.log(this.formPersonalData);
 
@@ -90,8 +102,10 @@ export class PerfilAlumnoComponent implements OnInit {
       direccion,
       carnetConducir,
       vehiculoPropio,
-      pathCV, 
-      pathExpediente
+      pathCV,
+      pathExpediente,
+      formacion,
+      pathFoto,
     };
 
     this.userService.updateAlumno(alumnoDTO).subscribe({
@@ -130,6 +144,8 @@ export class PerfilAlumnoComponent implements OnInit {
 
         this.pathCv = this.alumno?.pathCV;
         this.pathExpediente = this.alumno.pathExpediente;
+        this.formacion = this.alumno.formacion;
+        this.pathFoto = this.alumno.pathFoto;
       },
       error: (err) => {
         console.log(err + 'ALUMNO');
@@ -143,7 +159,7 @@ export class PerfilAlumnoComponent implements OnInit {
       telefono: this.alumno?.telefono,
       direccion: this.alumno?.direccion,
       carnetConducir: this.alumno?.carnetConducir,
-      vehiculoPropio: this.alumno?.vehiculoPropio
+      vehiculoPropio: this.alumno?.vehiculoPropio,
     };
   }
 
@@ -186,16 +202,13 @@ export class PerfilAlumnoComponent implements OnInit {
   }
 
   eliminarCv() {
-    const {
-      id,
-      telefono,
-      direccion,
-      carnetConducir,
-      vehiculoPropio
-    } = this.formPersonalData;
+    const { id, telefono, direccion, carnetConducir, vehiculoPropio } =
+      this.formPersonalData;
 
     const pathCV = undefined;
     const pathExpediente = this.pathExpediente;
+    const formacion = this.formacion;
+    const pathFoto = this.pathFoto;
 
     console.log(this.formPersonalData);
 
@@ -205,8 +218,10 @@ export class PerfilAlumnoComponent implements OnInit {
       direccion,
       carnetConducir,
       vehiculoPropio,
-      pathCV, 
-      pathExpediente
+      pathCV,
+      pathExpediente,
+      formacion,
+      pathFoto,
     };
 
     this.userService.updateAlumno(alumnoDTO).subscribe({
@@ -220,16 +235,13 @@ export class PerfilAlumnoComponent implements OnInit {
   }
 
   eliminarExpediente() {
-    const {
-      id,
-      telefono,
-      direccion,
-      carnetConducir,
-      vehiculoPropio
-    } = this.formPersonalData;
+    const { id, telefono, direccion, carnetConducir, vehiculoPropio } =
+      this.formPersonalData;
 
     const pathCV = this.pathCv;
     const pathExpediente = undefined;
+    const formacion = this.formacion;
+    const pathFoto = this.pathFoto;
 
     console.log(this.formPersonalData);
 
@@ -239,8 +251,10 @@ export class PerfilAlumnoComponent implements OnInit {
       direccion,
       carnetConducir,
       vehiculoPropio,
-      pathCV, 
-      pathExpediente
+      pathCV,
+      pathExpediente,
+      formacion,
+      pathFoto,
     };
 
     this.userService.updateAlumno(alumnoDTO).subscribe({
@@ -251,6 +265,57 @@ export class PerfilAlumnoComponent implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  onEditIconClick(): void {
+    const fileInput = document.getElementById('fileInputFoto') as HTMLInputElement;
+    console.log(fileInput);
+    fileInput.click();
+  }
+
+  uploadFoto(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      this.mediaService.uploadFile(formData).subscribe({
+        next: (data) => {
+          const pathFoto = data.url;
+          const { id, telefono, direccion, carnetConducir, vehiculoPropio } =
+            this.formPersonalData;
+          const pathCV = this.pathCv;
+          const pathExpediente = this.pathExpediente;
+          const formacion = this.formacion;
+
+          const alumnoDTO: AlumnoDTO = {
+            id,
+            telefono,
+            direccion,
+            carnetConducir,
+            vehiculoPropio,
+            pathCV,
+            pathExpediente,
+            formacion,
+            pathFoto,
+          };
+
+          this.userService.updateAlumno(alumnoDTO).subscribe({
+            next: () => {
+              window.location.reload();
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   reload() {

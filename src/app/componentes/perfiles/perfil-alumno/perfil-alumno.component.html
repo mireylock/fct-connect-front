@@ -14,7 +14,13 @@
 <div class="container">
     <div class="bg-primary p-3">
         <div class="d-flex align-items-center justify-content-center my-3 text-white">
-            <img width="150" class="me-2 profile-photo" src="{{alumno?.pathExpediente}}" alt="Foto del alumno">
+            <div class="foto-container">
+                <img width="150" height="150" class="me-4 profile-photo rounded-circle" src="{{alumno?.pathFoto}}"
+                    alt="Foto del alumno">
+                <i *ngIf="rol==='alumno'" class="fa-solid fa-square-pen fs-4" (click)="onEditIconClick()"></i>
+            </div>
+            <input type="file" id="fileInputFoto" (change)="uploadFoto($event)">
+
             <div class="profile-info">
                 <h2 class="profile-name">{{alumno?.nombre}} {{alumno?.apellido1}} {{alumno?.apellido2}}</h2>
                 <h5 class="profile-education">{{alumno?.formacion?.nivel}}, {{alumno?.formacion?.nombre}}</h5>
@@ -23,8 +29,26 @@
     </div>
 
     <div *ngIf="rol==='administrador'" class="bg-info text-center py-3 my-3">
+        <h2>Adminisitración</h2>
         <button class="btn btn-primary m-1" [routerLink]="['/tutoria/'+id]">Tutorias</button>
         <app-activar-o-desactivar></app-activar-o-desactivar>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="form-group p-2">
+                <select class="form-select" id="formaciones" name="formaciones" [(ngModel)]="formacion" required
+                    #formacionesModel="ngModel"
+                    [ngClass]="{ 'is-invalid': formacionesModel.invalid && formacionesModel.touched }">
+                    <option value="">Elija la nueva formación</option>
+                    <option *ngFor="let formacion of formaciones" [ngValue]="formacion">{{formacion.nombre}}
+                        ({{formacion.nivel}})</option>
+                </select>
+                <div *ngIf="formacionesModel.invalid && formacionesModel.touched" class="invalid-feedback">
+                    <ul>
+                        <li *ngIf="formacionesModel.errors?.['required']">La formación es requerida.</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" (click)="onSubmit()">Actualizar</button>
+        </div>
     </div>
 
     <div *ngIf="rol==='empresa'" class="bg-info text-center py-3 my-3">
@@ -140,7 +164,7 @@
         </div>
 
         <div *ngIf="rol!=='profesor'" class="d-flex justify-content-center align-items-center">
-            <a href="{{alumno?.pathExpediente}}" class="btn bg-white me-2">
+            <a *ngIf="alumno?.pathExpediente" href="{{alumno?.pathExpediente}}" class="btn bg-white me-2">
                 <i class="fa-solid fa-eye"></i>
                 Ver Expediente
             </a>
@@ -187,7 +211,7 @@
         </div>
 
         <div *ngIf="rol!=='alumno'" class="d-flex justify-content-center align-items-center">
-            <a href="{{alumno?.pathCV}}" class="btn bg-white me-2">
+            <a *ngIf="alumno?.pathCV" href="{{alumno?.pathCV}}" class="btn bg-white me-2">
                 <i class="fa-solid fa-eye"></i>
                 Ver Currículum
             </a>

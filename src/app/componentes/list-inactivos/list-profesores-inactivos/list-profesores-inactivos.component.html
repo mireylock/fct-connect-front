@@ -40,14 +40,11 @@
             <em class="p-5 text-white" *ngIf="profesores.length==0">No hay profesores que mostrar</em>
         </div>
 
-
-
-
         <div class="row justify-content-center">
             <div class="col-md-4 bg-info card card-container m-3" *ngFor="let profesor of profesores">
                 <div class="card-body text-center">
                     <div class="d-flex align-items-center justify-content-center my-3">
-                        <img width="50" class="me-2" src={{profesor.pathFoto}} alt="Foto del profesor">
+                        <img width="80" height="80" class="me-2 profile-photo rounded-circle" src={{profesor.pathFoto}} alt="Foto del profesor">
                         <h5 class="card-title mt-3">{{profesor.nombre}} {{profesor.apellido1}} {{profesor.apellido2}}
                         </h5>
                     </div>

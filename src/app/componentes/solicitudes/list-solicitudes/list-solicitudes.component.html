@@ -7,36 +7,48 @@
 
 <section class="bg-primary py-5">
   <div class="row justify-content-center" *ngFor="let section of getSections()">
-    <div class="col-md-8 bg-info p-4 my-2">
-      <h3>{{section.title}}</h3>
-      <div class="card custom-card my-4">
-        <ul class="list-group list-group-flush text-start">
-          <li *ngIf="section.data.length === 0" class="list-group-item">
+    <div class="col-md-8 bg-info p-4 m-4">
+      <h3 class="m-4">{{section.title}}</h3>
+      <div class="card m-4">
+        <div class="list-group list-group-flush text-start">
+          <div *ngIf="section.data.length === 0" class="list-group-item">
             <em>No hay nada que mostrar</em>
-          </li>
+          </div>
           <div *ngIf="section.data.length > 0">
-            <li *ngFor="let solicitud of section.data" class="list-group-item">
-              <div *ngIf="rol=='empresa'" class="d-flex align-items-center">
-                <img width="50px" [src]="solicitud.alumno.pathFoto" alt="foto perfil solicitante" class="me-2">
-                <h5 class="mb-0"><a [routerLink]="['/alumno/',solicitud.alumno.id]">{{solicitud.alumno.nombre}}</a></h5>
+            <div *ngFor="let solicitud of section.data" class="list-group-item">
+              <div *ngIf="rol == 'empresa'" class="d-flex align-items-center mb-2">
+                <img width="100" height="100" class="me-3 profile-photo rounded-circle"
+                  [src]="solicitud.alumno.pathFoto" alt="foto perfil solicitante">
+                <div>
+                  <h5 class="mb-1">
+                    <a [routerLink]="['/alumno/', solicitud.alumno.id]">{{solicitud.alumno.nombre}}</a>
+                  </h5>
+                  <p class="mb-0">{{solicitud.descripcion}}</p>
+                </div>
               </div>
 
-              <div *ngIf="rol=='alumno'" class="d-flex align-items-center">
-                <img width="50px" [src]="solicitud.empresa.pathFoto" alt="foto perfil solicitante" class="me-2">
-                <h5 class="mb-0"><a [routerLink]="['/empresa/',solicitud.empresa.id]">{{solicitud.empresa.nombre}}</a></h5>
+              <div *ngIf="rol == 'alumno'" class="d-flex align-items-start mb-2">
+                <img width="100" height="100" class="me-3 profile-photo rounded-circle"
+                  [src]="solicitud.empresa.pathFoto" alt="foto perfil solicitante">
+                <div>
+                  <h5 class="mb-1">
+                    <a [routerLink]="['/empresa/', solicitud.empresa.id]">{{solicitud.empresa.nombre}}</a>
+                  </h5>
+                  <p class="mb-0">{{solicitud.descripcion}}</p>
+                </div>
               </div>
-              <p>{{solicitud.descripcion}}</p>
-
-              <div *ngIf="(rol=='alumno' && solicitud.tipo == 'EMPRESA_A_ALUMNO' && solicitud.estado == 'ENVIADA') 
-              || (rol=='empresa' && solicitud.tipo == 'ALUMNO_A_EMPRESA' && solicitud.estado == 'ENVIADA')"
+              <div
+                *ngIf="(rol == 'alumno' && solicitud.tipo == 'EMPRESA_A_ALUMNO' && solicitud.estado == 'ENVIADA') 
+                                || (rol == 'empresa' && solicitud.tipo == 'ALUMNO_A_EMPRESA' && solicitud.estado == 'ENVIADA')"
                 class="mt-2 d-flex justify-content-end">
                 <button class="btn btn-primary me-2" (click)="aceptarSolicitud(solicitud.id)">Aceptar</button>
                 <button class="btn btn-outline-dark" (click)="rechazarSolicitud(solicitud.id)">Rechazar</button>
               </div>
-            </li>
+            </div>
           </div>
-        </ul>
+        </div>
       </div>
+
     </div>
   </div>
 </section>

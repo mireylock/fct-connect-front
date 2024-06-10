@@ -34,6 +34,10 @@ export class AddTecnologiaComponent implements OnInit{
     this.location.back();
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   getId() {
     this.route.paramMap.subscribe((params) => {
       this.idEmpresa = params.get('id');

@@ -208,11 +208,11 @@ export class ListSolicitudesComponent implements OnInit {
 
   rechazarSolicitud(id: number) {
     const estado = 'RECHAZADA';
-    const solicitudDTO = {
+    const solicitudEstadoDTO = {
       id,
       estado,
     };
-    this.solicitudService.updateSolicitud(solicitudDTO).subscribe({
+    this.solicitudService.updateSolicitud(solicitudEstadoDTO).subscribe({
       next: () => {
         this.abrirModalRechazada();
       },
@@ -224,11 +224,11 @@ export class ListSolicitudesComponent implements OnInit {
 
   aceptarSolicitud(id: number) {
     const estado = 'ACEPTADA';
-    const solicitudDTO = {
+    const solicitudEstadoDTO = {
       id,
       estado,
     };
-    this.solicitudService.updateSolicitud(solicitudDTO).subscribe({
+    this.solicitudService.updateSolicitud(solicitudEstadoDTO).subscribe({
       next: () => {
         this.abrirModalAceptada();
       },

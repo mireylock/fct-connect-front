@@ -114,4 +114,8 @@ export class AddIdiomaComponent implements OnInit {
   getCaracteresRestantes(): number {
     return 300 - this.descripcion.length;
   }
+
+  reload() {
+    window.location.reload();
+  }
 }

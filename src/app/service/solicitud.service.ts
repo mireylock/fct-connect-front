@@ -8,7 +8,8 @@ import { Observable, throwError } from 'rxjs';
 import { Solicitud } from '../interfaces/solicitud';
 import { Alumno } from '../interfaces/alumno';
 import { Empresa } from '../interfaces/empresa';
-import { SolicitudDTO } from '../interfaces/solicitud-dto';
+import { SolicitudEstadoDTO } from '../interfaces/solicitud-estado-dto';
+import { SolicitudCrearDto } from '../interfaces/solicitud-crear-dto';
 
 const URL_SOLICITUDES = 'http://localhost:8080/v1/api/solicitudes';
 const URL_SOLICITUDES_ALUMNO = 'http://localhost:8080/v1/api/solicitudes/alu';
@@ -48,18 +49,18 @@ export class SolicitudService {
     descripcion: string,
     tipo: string,
     estado: string,
-    alumno: Alumno,
-    empresa: Empresa
+    idAlumno: number,
+    idEmpresa: number
   ): Observable<any> {
     let solicitudRecibida = {
       descripcion: descripcion,
       tipo: tipo,
       estado: estado,
-      alumno: alumno,
-      empresa: empresa,
+      idAlumno: idAlumno,
+      idEmpresa: idEmpresa,
     };
 
-    return this.http.post<Solicitud>(
+    return this.http.post<SolicitudCrearDto>(
       URL_SOLICITUDES,
       JSON.stringify(solicitudRecibida),
       HTTPOPTIONS
@@ -99,8 +100,8 @@ export class SolicitudService {
     );
   }
 
-  updateSolicitud(solicitudDTO: SolicitudDTO): Observable<Object> {
-    const url = `${URL_SOLICITUDES}/${solicitudDTO.id}`;
-    return this.http.put<SolicitudDTO>(url, solicitudDTO, HTTPOPTIONS);
+  updateSolicitud(solicitudEstadoDTO: SolicitudEstadoDTO): Observable<Object> {
+    const url = `${URL_SOLICITUDES}/${solicitudEstadoDTO.id}`;
+    return this.http.put<SolicitudEstadoDTO>(url, solicitudEstadoDTO, HTTPOPTIONS);
   }
 }

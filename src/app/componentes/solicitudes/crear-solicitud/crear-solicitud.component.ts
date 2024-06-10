@@ -21,8 +21,6 @@ export class CrearSolicitudComponent implements OnInit {
   descripcion: string = '';
   tipoSolicitud: string = 'empresa';
   estadoSolicitud: string = 'ENVIADA';
-  empresa: any;
-  alumno: any;
   idAlumno: any;
   idEmpresa: any;
   rol = this.authService.getRol();
@@ -32,67 +30,35 @@ export class CrearSolicitudComponent implements OnInit {
   constructor(
     private location: Location,
     private authService: AuthService,
-    private userService: UserService,
     private route: ActivatedRoute,
-    private solicitudService: SolicitudService, 
-    private utilsService:UtilsService
+    private solicitudService: SolicitudService,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit(): void {
     if (this.rol == 'empresa') {
       this.tipoSolicitud = 'EMPRESA_A_ALUMNO';
       this.idEmpresa = this.authService.getUser().id;
-      this.empresa = this.getEmpresa(this.idEmpresa);
       this.route.paramMap.subscribe((params) => {
         this.idAlumno = params.get('id');
       });
-      this.alumno = this.getAlumno(this.idAlumno);
-
     } else if (this.rol == 'alumno') {
       this.tipoSolicitud = 'ALUMNO_A_EMPRESA';
       this.idAlumno = this.authService.getUser().id;
-      this.alumno = this.getAlumno(this.idAlumno);
-      
       this.route.paramMap.subscribe((params) => {
         this.idEmpresa = params.get('id');
       });
-      this.empresa= this.getEmpresa(this.idEmpresa);
-
     }
   }
 
-  getEmpresa(idEmpresa: number) {
-    this.empresa = this.userService
-      .getEmpresa(idEmpresa)
-      .subscribe({
-        next: (data) => {
-          this.empresa = data as Empresa;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-  }
-
-  getAlumno(idAlumno: number) {
-    this.alumno = this.userService.getAlumno(idAlumno).subscribe({
-      next: (data) => {
-        this.alumno = data as Alumno;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-
-  enviarSolicitud(descripcion: string) {
+  enviarSolicitud() {
     this.solicitudService
       .crearSolicitud(
         this.descripcion,
         this.tipoSolicitud,
         this.estadoSolicitud,
-        this.alumno,
-        this.empresa
+        this.idAlumno,
+        this.idEmpresa
       )
       .subscribe({
         next: () => {
@@ -112,7 +78,7 @@ export class CrearSolicitudComponent implements OnInit {
     return 4000 - this.descripcion.length;
   }
 
-  modalSolicitudEnviada:string='modalSolicitudEnviada';
+  modalSolicitudEnviada: string = 'modalSolicitudEnviada';
 
   abrirModal(): void {
     this.utilsService.abrirModal(this.modalSolicitudEnviada);

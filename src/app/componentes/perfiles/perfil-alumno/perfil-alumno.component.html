@@ -14,7 +14,7 @@
 <div class="container">
     <div class="bg-primary p-3">
         <div class="d-flex align-items-center justify-content-center my-3 text-white">
-            <img width="150" class="me-2 profile-photo" src="{{alumno?.pathFoto}}" alt="Foto del alumno">
+            <img width="150" class="me-2 profile-photo" src="{{alumno?.pathExpediente}}" alt="Foto del alumno">
             <div class="profile-info">
                 <h2 class="profile-name">{{alumno?.nombre}} {{alumno?.apellido1}} {{alumno?.apellido2}}</h2>
                 <h5 class="profile-education">{{alumno?.formacion?.nivel}}, {{alumno?.formacion?.nombre}}</h5>
@@ -25,6 +25,13 @@
     <div *ngIf="rol==='administrador'" class="bg-info text-center py-3 my-3">
         <button class="btn btn-primary m-1" [routerLink]="['/tutoria/'+id]">Tutorias</button>
         <app-activar-o-desactivar></app-activar-o-desactivar>
+    </div>
+
+    <div *ngIf="rol==='empresa'" class="bg-info text-center py-3 my-3">
+        <button class="btn bg-primary text-white" [routerLink]="['/solicitud/'+alumno?.id]">
+            <i class="fa-solid fa-comment-dots"></i>
+            Enviar Solicitud
+        </button>
     </div>
 
     <div class="bg-info text-center py-3 my-3">
@@ -95,9 +102,7 @@
             </form>
         </div>
 
-        <button *ngIf="rol === 'empresa'" class="btn bg-primary text-white" [routerLink]="['/solicitud/'+alumno?.id]">
-            Enviar Solicitud
-        </button>
+
 
     </div>
 

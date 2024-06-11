@@ -20,7 +20,7 @@ export class RegisterProfesorComponent {
     apellido2:null,
     email: null,
     password: null, 
-    pathFoto: "../../../../assets/img/profile.png",
+    pathFoto: "http://localhost:8080/v1/api/media/profile.png",
     departamento:null,
     rol:"profesor"
   };

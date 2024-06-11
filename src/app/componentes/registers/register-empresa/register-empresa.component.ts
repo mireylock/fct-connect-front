@@ -19,7 +19,7 @@ export class RegisterEmpresaComponent {
 
   empresasRequest:EmpresaRequest[]=[];
   errorMessage: any;
-  pathFoto:string = "../../../../assets/img/profile.png";
+  pathFoto:string = "http://localhost:8080/v1/api/media/profile.png";
   errorAceptar:boolean=false;
   
   constructor(private userService:UserService, private authService:AuthService, private utilsService:UtilsService){

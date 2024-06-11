@@ -25,7 +25,7 @@ export class RequestEmpresaComponent {
     nombre:null, 
     email: null,
     password: null, 
-    pathFoto: "../../../../assets/img/profile.png"
+    pathFoto: "http://localhost:8080/v1/api/media/profile.png"
   };
 
   errorMessage: any;

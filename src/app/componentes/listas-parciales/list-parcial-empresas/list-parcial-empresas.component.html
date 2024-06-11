@@ -17,7 +17,7 @@
                                     'bg-primary': rol === 'alumno',
                                     'bg-info': rol === 'administrador' || rol === 'profesor'}" [routerLink]="['/empresa', empresa.id]">
                                     <div class="d-flex align-items-center justify-content-center my-3">
-                                        <img width="100" height="100" class="me-2 profile-photo rounded-circle" src={{empresa.pathFoto}}>
+                                        <img width="100" height="100" class="me-2 profile-photo rounded-circle" src={{empresa.pathFoto}} alt="Foto perfil">
                                         <h3 class="m-1" [ngClass]="{
                                             'text-white': rol === 'alumno'}">{{empresa.nombre}}</h3>
                                     </div>

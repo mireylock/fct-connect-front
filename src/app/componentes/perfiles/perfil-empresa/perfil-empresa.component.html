@@ -158,7 +158,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <form *ngIf="empresa?.pathSitioWeb" class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+            <form *ngIf="rol==='empresa'" class="col-md-6" name="form" (ngSubmit)="f.form.valid && onSubmit()"
                 #f="ngForm" novalidate>
                 <div class="form-group p-2">
                     <div class="input-group">

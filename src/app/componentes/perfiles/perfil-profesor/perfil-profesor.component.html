@@ -17,7 +17,7 @@
             <div class="foto-container">
                 <img width="150" height="150" class="me-4 profile-photo rounded-circle" src="{{profesor?.pathFoto}}"
                     alt="Foto perfil">
-                <i *ngIf="rol==='empresa'" class="fa-solid fa-user-pen fs-4 text-warning" (click)="onEditIconClick()"></i>
+                <i *ngIf="rol==='profesor'" class="fa-solid fa-user-pen fs-4 text-warning" (click)="onEditIconClick()"></i>
             </div>
             <div class="profile-info">
                 <h2 class="profile-name">{{profesor?.nombre}} {{profesor?.apellido1}} {{profesor?.apellido2}}</h2>

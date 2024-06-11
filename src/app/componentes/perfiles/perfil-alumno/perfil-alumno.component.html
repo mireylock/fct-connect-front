@@ -275,7 +275,7 @@
                 </div>
                 <div *ngIf="tutorPracticas != undefined" class="card p-3 m-1 bg-primary text-white">
                     <div class="text-center">
-                        <img width="100" [src]="tutorPracticas.pathFoto" alt="Foto profesor">
+                        <img width="100" height="100" class="m-3 profile-photo rounded-circle" [src]="tutorPracticas.pathFoto" alt="Foto profesor">
                         <div>
                             <h4>{{tutorPracticas.nombre}} {{tutorPracticas.apellido1}} {{tutorPracticas.apellido2}}
                             </h4>

@@ -135,8 +135,10 @@ export class PerfilAlumnoComponent implements OnInit {
         this.alumno = data as Alumno;
 
         const profesorPracticas = this.alumno?.profesorTutorizaAlumnos.find(
-          (tutoria) => tutoria.tipoTutoria === 'Practicas'
+          (tutoria) => tutoria.tipoTutoria === 'Prácticas'
         );
+
+        console.log(profesorPracticas);
         if (profesorPracticas != undefined) {
           this.tutorPracticas = profesorPracticas.profesor;
         }

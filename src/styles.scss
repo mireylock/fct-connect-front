@@ -1,37 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'variables';
-@import 'bootstrap/scss/bootstrap';
-
+@import "variables";
+@import "bootstrap/scss/bootstrap";
 
 @font-face {
-    font-family: 'ElMessiri';
-    src: url('assets/fonts/ElMessiri-Bold.ttf') format('truetype');
+  font-family: "ElMessiri";
+  src: url("assets/fonts/ElMessiri-Bold.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: 'tahoma';
-    src: url('assets/fonts/Tahoma\ Gras\ 700.ttf') format('truetype');
+  font-family: "tahoma";
+  src: url("assets/fonts/Tahoma\ Gras\ 700.ttf") format("truetype");
 }
 .navbar {
-    font-family: 'ElMessiri';
+  font-family: "ElMessiri";
 }
 
 .bg-empresa {
-    background-image: url(../src/assets/img/empresa.jpg);
-    background-size: cover;
-    background-position: center;    
-    min-height: calc(100vh - 176px);
+  background-image: url(../src/assets/img/empresa.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: calc(100vh - 176px);
 }
 
-i{
-    cursor: pointer;
+i {
+  cursor: pointer;
 }
 
 .profile-photo {
-    object-fit: cover;
+  object-fit: cover;
 }
 
+.header-profile-photo {
+  border: 2px solid $primary;
+}
 
+#fileInputFoto {
+  display: none;
+}
 
+.foto-container {
+  position: relative;
+}
 
+.fa-user-pen {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
 
+  &:hover {
+    border: 1px solid $warning;
+  }
+}

@@ -13,6 +13,7 @@ import { AuthService } from '../../../service/auth.service';
 import { UserService } from '../../../service/user.service';
 import { UtilsService } from '../../../service/utils.service';
 import { ProfesorDto } from '../../../interfaces/profesor-dto';
+import { MediaService } from '../../../service/media.service';
 
 @Component({
   selector: 'app-perfil-profesor',
@@ -28,18 +29,18 @@ import { ProfesorDto } from '../../../interfaces/profesor-dto';
     HeaderAlumnoComponent,
     HeaderAdministradorComponent,
     FooterComponent,
-    ActivarODesactivarComponent
+    ActivarODesactivarComponent,
   ],
   templateUrl: './perfil-profesor.component.html',
-  styleUrl: './perfil-profesor.component.scss'
+  styleUrl: './perfil-profesor.component.scss',
 })
 export class PerfilProfesorComponent {
-
   rol: string | undefined;
   id: any;
   profesor: Profesor | undefined;
   profesorDTO: ProfesorDto | undefined;
   tutorPracticas: Profesor | undefined;
+  pathFoto: any;
   modalCambiosRealizados = 'modalCambiosRealizados';
 
   formPersonalData: any = {
@@ -50,7 +51,7 @@ export class PerfilProfesorComponent {
 
   formJobData: any = {
     id: this.getId(),
-    departamento:null,
+    departamento: null,
     asignaturas: null,
   };
 
@@ -59,7 +60,8 @@ export class PerfilProfesorComponent {
     private userService: UserService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
@@ -69,13 +71,14 @@ export class PerfilProfesorComponent {
   }
 
   onSubmit() {
-    const { id, telefono, direccion } =
-      this.formPersonalData;
+    const { id, telefono, direccion } = this.formPersonalData;
+    const pathFoto = this.pathFoto;
 
     const profesorDTO: ProfesorDto = {
       id,
       telefono,
-      direccion
+      direccion,
+      pathFoto,
     };
 
     this.userService.updateProfesor(profesorDTO).subscribe({
@@ -88,10 +91,7 @@ export class PerfilProfesorComponent {
     });
   }
 
-  onSubmitJob() {
-
-  }
-
+  onSubmitJob() {}
 
   goBack(): void {
     this.location.back();
@@ -108,8 +108,9 @@ export class PerfilProfesorComponent {
     this.userService.getProfesor(id).subscribe({
       next: (data) => {
         this.profesor = data as Profesor;
+        this.pathFoto = this.profesor.pathFoto;
         this.initializeFormPersonalData();
-        console.log(this.profesor.asignaturas)
+        console.log(this.profesor.asignaturas);
       },
       error: (err) => {
         console.log(err + 'PROFESOR');
@@ -125,4 +126,54 @@ export class PerfilProfesorComponent {
     };
   }
 
+  onEditIconClick(): void {
+    const fileInput = document.getElementById(
+      'fileInputFoto'
+    ) as HTMLInputElement;
+    console.log(fileInput);
+    fileInput.click();
+  }
+
+  uploadFoto(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      this.mediaService.uploadFile(formData).subscribe({
+        next: (data) => {
+          const pathFoto = data.url;
+
+          const { id, telefono, direccion } = this.formPersonalData;
+
+          const profesorDto: ProfesorDto = {
+            id,
+            telefono,
+            direccion,
+            pathFoto,
+          };
+
+          console.log(JSON.stringify(profesorDto));
+
+          this.userService.updateProfesor(profesorDto).subscribe({
+            next: () => {
+              window.location.reload();
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  reload() {
+    window.location.reload();
+  }
 }

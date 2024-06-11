@@ -14,6 +14,7 @@ import { UtilsService } from '../../../service/utils.service';
 import { EmpresaDto } from '../../../interfaces/empresa-dto';
 import { TecnologiaComponent } from './tecnologia/tecnologia.component';
 import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-o-desactivar.component';
+import { MediaService } from '../../../service/media.service';
 
 @Component({
   selector: 'app-perfil-empresa',
@@ -28,9 +29,9 @@ import { ActivarODesactivarComponent } from '../../activar-o-desactivar/activar-
     NgIf,
     NgFor,
     FooterComponent,
-    RouterLink, 
-    TecnologiaComponent, 
-    ActivarODesactivarComponent
+    RouterLink,
+    TecnologiaComponent,
+    ActivarODesactivarComponent,
   ],
   templateUrl: './perfil-empresa.component.html',
   styleUrl: './perfil-empresa.component.scss',
@@ -45,12 +46,11 @@ export class PerfilEmpresaComponent implements OnInit {
   resumen: any;
   pathSitioWeb: any;
   ubicaciones: any;
-
+  pathFoto: any;
 
   inglesSolicitadoValue = ['IMPRESCINDIBLE', 'IMPORTANTE', 'NO_NECESARIO'];
 
   modalCambiosRealizados = 'modalCambiosRealizados';
-
 
   isModalidadPresente(modalidadesTrabajo: any, modalidad: any): boolean {
     let modalidadUpperSinTildes = modalidad
@@ -72,8 +72,9 @@ export class PerfilEmpresaComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private route: ActivatedRoute, 
-    private utilsService: UtilsService, 
+    private route: ActivatedRoute,
+    private utilsService: UtilsService,
+    private mediaService: MediaService
   ) {}
 
   ngOnInit(): void {
@@ -104,6 +105,7 @@ export class PerfilEmpresaComponent implements OnInit {
       next: (data) => {
         this.empresa = data as Empresa;
         this.initializeForm();
+        this.pathFoto = this.empresa.pathFoto;
       },
       error: (err) => {
         console.log(err);
@@ -121,14 +123,11 @@ export class PerfilEmpresaComponent implements OnInit {
     };
   }
 
-  onSubmit() {    
-    const {
-      id,
-      inglesSolicitado,
-      modalidadesTrabajo,
-      resumen,
-      pathSitioWeb,
-    } = this.form;
+  onSubmit() {
+    const { id, inglesSolicitado, modalidadesTrabajo, resumen, pathSitioWeb } =
+      this.form;
+
+    const pathFoto = this.pathFoto;
 
     const empresaDto: EmpresaDto = {
       id,
@@ -136,6 +135,7 @@ export class PerfilEmpresaComponent implements OnInit {
       resumen,
       pathSitioWeb,
       inglesSolicitado,
+      pathFoto,
     };
 
     console.log(JSON.stringify(empresaDto));
@@ -150,8 +150,66 @@ export class PerfilEmpresaComponent implements OnInit {
     });
   }
 
+  onEditIconClick(): void {
+    const fileInput = document.getElementById(
+      'fileInputFoto'
+    ) as HTMLInputElement;
+    console.log(fileInput);
+    fileInput.click();
+  }
 
-  returnModalidadFirstLetterUpper(modalidadTrabajo:string) {
+  uploadFoto(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      this.mediaService.uploadFile(formData).subscribe({
+        next: (data) => {
+          const pathFoto = data.url;
+
+          const {
+            id,
+            inglesSolicitado,
+            modalidadesTrabajo,
+            resumen,
+            pathSitioWeb,
+          } = this.form;
+
+          const empresaDto: EmpresaDto = {
+            id,
+            modalidadesTrabajo,
+            resumen,
+            pathSitioWeb,
+            inglesSolicitado,
+            pathFoto,
+          };
+
+          console.log(JSON.stringify(empresaDto));
+
+          this.userService.updateEmpresa(empresaDto).subscribe({
+            next: () => {
+              window.location.reload();
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  returnModalidadFirstLetterUpper(modalidadTrabajo: string) {
     return this.utilsService.returnFirstLetterUpper(modalidadTrabajo);
+  }
+
+  reload() {
+    window.location.reload();
   }
 }

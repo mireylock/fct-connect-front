@@ -16,8 +16,8 @@
         <div class="d-flex align-items-center justify-content-center my-3 text-white">
             <div class="foto-container">
                 <img width="150" height="150" class="me-4 profile-photo rounded-circle" src="{{alumno?.pathFoto}}"
-                    alt="Foto del alumno">
-                <i *ngIf="rol==='alumno'" class="fa-solid fa-square-pen fs-4" (click)="onEditIconClick()"></i>
+                    alt="Foto perfil">
+                <i *ngIf="rol==='alumno'" class="fa-solid fa-user-pen fs-4 text-warning" (click)="onEditIconClick()"></i>
             </div>
             <input type="file" id="fileInputFoto" (change)="uploadFoto($event)">
 

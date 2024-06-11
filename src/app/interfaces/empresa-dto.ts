@@ -4,4 +4,5 @@ export interface EmpresaDto {
     modalidadesTrabajo:string[];
     resumen:string;
     pathSitioWeb:string;
+    pathFoto:string;
 }

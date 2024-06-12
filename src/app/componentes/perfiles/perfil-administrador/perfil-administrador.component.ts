@@ -57,27 +57,6 @@ export class PerfilAdministradorComponent {
     this.getAdministrador(this.id);
   }
 
-  onSubmit() {
-    const { id, telefono, direccion } =
-      this.formPersonalData;
-
-    // const administradorDTO: AdministradorDto = {
-    //   id,
-    //   telefono,
-    //   direccion
-    // };
-
-    // this.userService.updateAdministrador(administradorDTO).subscribe({
-    //   next: () => {
-    //     this.utilsService.abrirModal(this.modalCambiosRealizados);
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //   },
-    // });
-  }
-
-
   goBack(): void {
     this.location.back();
   }

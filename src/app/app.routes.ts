@@ -40,7 +40,7 @@ export const routes: Routes = [
     {path:'register-empresa', component:RegisterEmpresaComponent,  canActivate: [canActivate]}, 
     {path:'register-profesor', component:RegisterProfesorComponent,  canActivate: [canActivate]}, 
     {path:'register-admin', component:RegisterAdminComponent,  canActivate: [canActivate]}, 
-    {path:'request-empresa', component:RequestEmpresaComponent, canActivate: [canActivate]},
+    {path:'request-empresa', component:RequestEmpresaComponent},
     {path: 'alumnos', component:ListTotalAlumnosComponent, canActivate: [canActivate]}, 
     {path: 'profesores', component:ListTotalProfesoresComponent , canActivate: [canActivate]},
     {path: 'empresas', component:ListTotalEmpresasComponent , canActivate: [canActivate]},

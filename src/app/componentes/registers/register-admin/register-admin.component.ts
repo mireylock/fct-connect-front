@@ -4,6 +4,7 @@ import { HeaderAdministradorComponent } from '../../headers/header-administrador
 import { FooterComponent } from '../../footer/footer.component';
 import { NgClass, NgIf, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UtilsService } from '../../../service/utils.service';
 
 @Component({
   selector: 'app-register-admin',
@@ -24,16 +25,14 @@ export class RegisterAdminComponent {
   };
   errorMessage: any;
 
-  constructor(private authService:AuthService, private location:Location){}
+  constructor(private authService:AuthService, private location:Location, private utilsService:UtilsService){}
   
   onSubmit(): void {
     const { email, password, rol, nombre, apellido1, apellido2, dni, pathFoto } = this.form;
 
     this.authService.registerAdmin(email, password, rol, nombre, apellido1, apellido2, dni, pathFoto).subscribe({
       next: () => {
-
-
-        window.location.reload();
+        this.utilsService.abrirModal('modalRegistrado');
       },
       error: err => {
         this.errorMessage = err.error.message;

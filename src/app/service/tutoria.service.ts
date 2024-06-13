@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable, catchError } from 'rxjs';
 import { TutoriaDto } from '../interfaces/tutoria-dto';
 
-const URL_TUTORIAS = 'https://fctconnect.vercel.app/v1/api/tutorias';
+const URL_TUTORIAS = 'https://fct-connect.onrender.com//v1/api/tutorias';
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

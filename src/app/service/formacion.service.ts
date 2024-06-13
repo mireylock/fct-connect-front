@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 
-const URL_FORMACIONES = 'https://fctconnect.vercel.app/v1/api/formaciones';
+const URL_FORMACIONES = 'https://fct-connect.onrender.com//v1/api/formaciones';
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

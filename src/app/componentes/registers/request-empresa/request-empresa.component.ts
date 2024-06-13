@@ -25,7 +25,7 @@ export class RequestEmpresaComponent {
     nombre:null, 
     email: null,
     password: null, 
-    pathFoto: "https://fctconnect.vercel.app/v1/api/media/profile.png"
+    pathFoto: "https://fct-connect.onrender.com//v1/api/media/profile.png"
   };
 
   errorMessage: any;

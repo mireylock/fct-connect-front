@@ -2,7 +2,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const URL_MEDIA = 'https://fctconnect.vercel.app/v1/api/media/upload';
+const URL_MEDIA = 'https://fct-connect.onrender.com//v1/api/media/upload';
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { Alumno } from '../interfaces/alumno';
 
-const URL_MAIL="https://fctconnect.vercel.app/v1/api/mail/send-mail";
+const URL_MAIL="https://fct-connect.onrender.com//v1/api/mail/send-mail";
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

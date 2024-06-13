@@ -25,7 +25,7 @@ export class RequestEmpresaComponent {
     nombre:null, 
     email: null,
     password: null, 
-    pathFoto: "https://fct-connect.onrender.com/v1/api/media/profile.png"
+    pathFoto: '../../../../assets/img/profile.png'
   };
 
   errorMessage: any;

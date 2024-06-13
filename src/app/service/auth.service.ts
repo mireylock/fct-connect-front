@@ -17,8 +17,8 @@ import { Formacion } from '../interfaces/formacion';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiAuthURL = 'https://fctconnect.vercel.app/v1/api/auth/';
-  private apiMailURL = 'https://fctconnect.vercel.app/v1/api/';
+  private apiAuthURL = 'https://fct-connect.onrender.com/v1/api/auth/';
+  private apiMailURL = 'https://fct-connect.onrender.com/v1/api/';
 
   httpOptions = {
     headers: new HttpHeaders({

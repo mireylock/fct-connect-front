@@ -76,4 +76,8 @@ export class RegisterProfesorComponent {
   goBack(): void {
     this.location.back();
   }
+
+  reload() {
+    window.location.reload();
+  }
 }

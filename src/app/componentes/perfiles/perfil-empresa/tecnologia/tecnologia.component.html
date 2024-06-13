@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <button [routerLink]="['/addTecnologia/'+empresa?.id]" *ngIf="rol === 'empresa' || rol === 'administrador'"
+    <button [routerLink]="['/addTecnologia/'+empresa?.id]" *ngIf="rol === 'empresa'"
         class="btn bg-primary text-white">
         Añadir Tecnología
     </button>

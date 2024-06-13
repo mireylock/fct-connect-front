@@ -11,9 +11,9 @@ import { Empresa } from '../interfaces/empresa';
 import { SolicitudEstadoDTO } from '../interfaces/solicitud-estado-dto';
 import { SolicitudCrearDto } from '../interfaces/solicitud-crear-dto';
 
-const URL_SOLICITUDES = 'https://fct-connect.onrender.com//v1/api/solicitudes';
-const URL_SOLICITUDES_ALUMNO = 'https://fct-connect.onrender.com//v1/api/solicitudes/alu';
-const URL_SOLICITUDES_EMPRESA = 'https://fct-connect.onrender.com//v1/api/solicitudes/emp';
+const URL_SOLICITUDES = 'https://fct-connect.onrender.com/v1/api/solicitudes';
+const URL_SOLICITUDES_ALUMNO = 'https://fct-connect.onrender.com/v1/api/solicitudes/alu';
+const URL_SOLICITUDES_EMPRESA = 'https://fct-connect.onrender.com/v1/api/solicitudes/emp';
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

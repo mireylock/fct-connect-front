@@ -20,7 +20,7 @@ export class RegisterProfesorComponent {
     apellido2:null,
     email: null,
     password: null, 
-    pathFoto: "https://fct-connect.onrender.com//v1/api/media/profile.png",
+    pathFoto: "https://fct-connect.onrender.com/v1/api/media/profile.png",
     departamento:null,
     rol:"profesor"
   };

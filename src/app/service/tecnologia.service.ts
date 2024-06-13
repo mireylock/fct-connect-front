@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { TecnologiaDto } from '../interfaces/tecnologia-dto';
 
-const URL_TECNOLOGIAS = 'https://fct-connect.onrender.com//v1/api/tecnologias';
+const URL_TECNOLOGIAS = 'https://fct-connect.onrender.com/v1/api/tecnologias';
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

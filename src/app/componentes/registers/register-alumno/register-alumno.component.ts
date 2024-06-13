@@ -33,7 +33,7 @@ export class RegisterAlumnoComponent implements OnInit {
     email: null,
     password: null,
     rol: 'alumno',
-    pathFoto: 'http://localhost:8080/v1/api/media/profile.png',
+    pathFoto: 'https://fct-connect.onrender.com/v1/api/media/profile.png',
     carnetConducir: 0,
     vehiculoPropio: 0,
     formacion: null,

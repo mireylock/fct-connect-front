@@ -11,9 +11,9 @@ import { Empresa } from '../interfaces/empresa';
 import { SolicitudEstadoDTO } from '../interfaces/solicitud-estado-dto';
 import { SolicitudCrearDto } from '../interfaces/solicitud-crear-dto';
 
-const URL_SOLICITUDES = 'http://localhost:8080/v1/api/solicitudes';
-const URL_SOLICITUDES_ALUMNO = 'http://localhost:8080/v1/api/solicitudes/alu';
-const URL_SOLICITUDES_EMPRESA = 'http://localhost:8080/v1/api/solicitudes/emp';
+const URL_SOLICITUDES = 'https://fct-connect.onrender.com/v1/api/solicitudes';
+const URL_SOLICITUDES_ALUMNO = 'https://fct-connect.onrender.com/v1/api/solicitudes/alu';
+const URL_SOLICITUDES_EMPRESA = 'https://fct-connect.onrender.com/v1/api/solicitudes/emp';
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({
@@ -67,7 +67,7 @@ export class SolicitudService {
     );
   }
 
-  //http://localhost:8080/v1/api/solicitudes/alu?estado=ENVIADA&tipo=EMPRESA_A_ALUMNO&idAlumno=4
+  //https://fct-connect.onrender.com/v1/api/solicitudes/alu?estado=ENVIADA&tipo=EMPRESA_A_ALUMNO&idAlumno=4
   getSolicitudesAlumno(
     estado: string,
     tipo: string,

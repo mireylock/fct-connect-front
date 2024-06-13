@@ -19,7 +19,7 @@ export class RegisterAdminComponent {
     apellido2:null,
     email: null,
     password: null, 
-    pathFoto: "http://localhost:8080/v1/api/media/profile.png",
+    pathFoto: "https://fct-connect.onrender.com/v1/api/media/profile.png",
     rol:"administrador"
   };
   errorMessage: any;

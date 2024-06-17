@@ -19,6 +19,8 @@
                     alt="Foto perfil">
                 <i *ngIf="rol==='profesor'" class="fa-solid fa-user-pen fs-4 text-warning" (click)="onEditIconClick()"></i>
             </div>
+            <input type="file" id="fileInputFoto" (change)="uploadFoto($event)">
+
             <div class="profile-info">
                 <h2 class="profile-name">{{profesor?.nombre}} {{profesor?.apellido1}} {{profesor?.apellido2}}</h2>
             </div>

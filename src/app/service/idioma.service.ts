@@ -4,7 +4,8 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { AlumnoHablaIdiomaDTO } from '../interfaces/alumno-habla-idioma-dto';
 
 
-const URL_IDIOMAS="https://fct-connect.onrender.com/v1/api/idiomas";
+// const URL_IDIOMAS="https://fct-connect.onrender.com/v1/api/idiomas";
+const URL_IDIOMAS="http://localhost:8080/v1/api/idiomas";
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

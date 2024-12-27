@@ -9,14 +9,19 @@ import { EmpresaDto } from '../interfaces/empresa-dto';
 import { UsuarioDto } from '../interfaces/usuario-dto';
 import { ProfesorDto } from '../interfaces/profesor-dto';
 
-const URL_ALUMNOS="https://fct-connect.onrender.com/v1/api/alumnos";
-const URL_EMPRESAS="https://fct-connect.onrender.com/v1/api/empresas";
-const URL_PROFESORES="https://fct-connect.onrender.com/v1/api/profesores";
-const URL_ADMINISTRADORES="https://fct-connect.onrender.com/v1/api/administradores";
-const URL_REQUEST_EMPRESAS="https://fct-connect.onrender.com/v1/api/auth/request-empresa";
-const URL_USERS="https://fct-connect.onrender.com/v1/api/users";
+// const URL_ALUMNOS="https://fct-connect.onrender.com/v1/api/alumnos";
+// const URL_EMPRESAS="https://fct-connect.onrender.com/v1/api/empresas";
+// const URL_PROFESORES="https://fct-connect.onrender.com/v1/api/profesores";
+// const URL_ADMINISTRADORES="https://fct-connect.onrender.com/v1/api/administradores";
+// const URL_REQUEST_EMPRESAS="https://fct-connect.onrender.com/v1/api/auth/request-empresa";
+// const URL_USERS="https://fct-connect.onrender.com/v1/api/users";
 
-
+const URL_ALUMNOS="http://localhost:8080/v1/api/alumnos";
+const URL_EMPRESAS="http://localhost:8080/v1/api/empresas";
+const URL_PROFESORES="http://localhost:8080/v1/api/profesores";
+const URL_ADMINISTRADORES="http://localhost:8080/v1/api/administradores";
+const URL_REQUEST_EMPRESAS="http://localhost:8080/v1/api/auth/request-empresa";
+const URL_USERS="http://localhost:8080/v1/api/users";
 
 const HTTPOPTIONS = {
   headers: new HttpHeaders({

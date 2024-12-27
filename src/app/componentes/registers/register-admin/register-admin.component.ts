@@ -20,7 +20,8 @@ export class RegisterAdminComponent {
     apellido2:null,
     email: null,
     password: null, 
-    pathFoto: '../../../../assets/img/profile.png',
+    // pathFoto: '../../../../assets/img/profile.png',
+    pathFoto: "http://localhost:8080/v1/api/media/profile.png",
     rol:"administrador"
   };
   errorMessage: any;

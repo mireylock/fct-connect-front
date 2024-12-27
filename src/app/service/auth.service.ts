@@ -17,8 +17,10 @@ import { Formacion } from '../interfaces/formacion';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiAuthURL = 'https://fct-connect.onrender.com/v1/api/auth/';
-  private apiMailURL = 'https://fct-connect.onrender.com/v1/api/';
+  // private apiAuthURL = 'https://fct-connect.onrender.com/v1/api/auth/';
+  // private apiMailURL = 'https://fct-connect.onrender.com/v1/api/';
+  private apiAuthURL = 'http://localhost:8080/v1/api/auth/';
+  private apiMailURL = 'http://localhost:8080/v1/api/';
 
   httpOptions = {
     headers: new HttpHeaders({
